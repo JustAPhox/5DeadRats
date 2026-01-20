@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "MazeControls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "fbc052fe-9d0b-46aa-8919-afc4906495f9",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "365a2b4d-c67e-4fe0-82f2-32792da8a882",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46b68af0-5ae2-4030-aa36-72f4d1b08d3f",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
