@@ -20,13 +20,7 @@ public class MazePlayerController : MonoBehaviour
         Vector2 movement = Movement_Input * Speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
     }
-
-    void LateUpdate()
-    {
-        transform.rotation = Quaternion.Euler(270f, transform.rotation.eulerAngles.y, 0f);
-    }
-
-
+    
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Movement_Input = ctx.ReadValue<Vector2>();
