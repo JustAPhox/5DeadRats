@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,10 +8,16 @@ using UnityEngine.UI;
 public class QuizScript : MonoBehaviour
 {
     public Text questionBox;
-    public Text answerOne;
-    public Text answerTwo;
-    public Text answerThree;
-    public Text answerFour;
+
+
+
+    public Text[] answerBoxes;
+
+    public Text answerCountCorrect;
+    public Text[] answerCounters;
+
+    int[] givenAnswers = {0,0,0,0};
+    int correctAnswer;
 
 
     public Text answerTimeText;
@@ -36,46 +43,44 @@ public class QuizScript : MonoBehaviour
 
     void StartQuestion()
     {
-        string[] questionDetails = findQuestion();
+
+        string[] questionDetails = GetComponent<QuizQuestionPicker>().getQuestion();
+        //string[] questionDetails = findQuestion();
 
         questionBox.text = questionDetails[0];
-        answerOne.text = questionDetails[1];
-        answerTwo.text = questionDetails[2];
-        answerThree.text = questionDetails[3];
-        answerFour.text = questionDetails[4];
+        answerBoxes[0].text = questionDetails[1];
+        answerBoxes[1].text = questionDetails[2];
+        answerBoxes[2].text = questionDetails[3];
+        answerBoxes[3].text = questionDetails[4];
+        correctAnswer = Convert.ToInt32(questionDetails[5]);
 
-
-
+        Debug.Log(correctAnswer);
     }
 
 
-
-
-    string[] findQuestion()
-    {
-        string[] questionDetails = { "What is the inevitable fate of god?", "Consumed by her own creations", "Faded away until its forgotten", "R A T S", "Sealed away by a greater power" };
-
-        return questionDetails;
-    }
 
     public void questionAnswered(int answerGiven)
     {
         currentAnswers++;
+        givenAnswers[answerGiven] += 1;
+
+
+        answerCounters[answerGiven].text = givenAnswers[answerGiven].ToString();
+        answerCountCorrect.text = givenAnswers[correctAnswer].ToString();
+
 
 
         if (currentAnswers == playerCount)
         {
             voteTime();
-
-
-
         }
     }
 
+
     void voteTime()
     {
-        answerTimeText.enabled = false;
-        voteTimeText.enabled = true;
+        answerTimeText.GetComponent<Text>().enabled = false;
+        voteTimeText.GetComponent<Text>().enabled = true;
         currentAnswers = 0;
     }
 
