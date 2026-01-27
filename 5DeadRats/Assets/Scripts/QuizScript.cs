@@ -24,7 +24,7 @@ public class QuizScript : MonoBehaviour
     public Text voteTimeText;
 
 
-    int playerCount = 2;
+    int playerCount = gameManager.getPlayerCount();
     int currentAnswers = 0;
 
 

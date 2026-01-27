@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,8 +31,7 @@ public class MenuLogic : MonoBehaviour
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
 
 
-
-        QuizPlayerCount.value = 2;
+        gameManager.sePlayerCount(Convert.ToInt32(QuizPlayerCount.value));
 
         // Hides title screen
         titleScreen.SetActive(false);
