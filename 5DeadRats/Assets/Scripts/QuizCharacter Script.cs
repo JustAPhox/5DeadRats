@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuizCharacterScript : MonoBehaviour
 {
+    //Set via code when created
     public GameObject QuizMaster;
     public int playerNumber;
 
@@ -21,7 +22,7 @@ public class QuizCharacterScript : MonoBehaviour
     }
 
 
-
+    //Tells QuizScript a player voted
     public void questionAnswered(int answerGiven)
     {
         QuizMaster.GetComponent<QuizScript>().answeredReceived(answerGiven, playerNumber);

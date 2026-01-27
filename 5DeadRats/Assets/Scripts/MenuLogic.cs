@@ -30,8 +30,8 @@ public class MenuLogic : MonoBehaviour
         // Loads the scene
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
 
-
-        gameManager.sePlayerCount(Convert.ToInt32(QuizPlayerCount.value));
+        // Stores the playercount set via the slider
+        gameManager.setPlayerCount(Convert.ToInt32(QuizPlayerCount.value));
 
         // Hides title screen
         titleScreen.SetActive(false);

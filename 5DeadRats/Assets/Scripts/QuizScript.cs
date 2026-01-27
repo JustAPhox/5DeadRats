@@ -7,32 +7,37 @@ using UnityEngine.UI;
 
 public class QuizScript : MonoBehaviour
 {
+    // Used to show the current question
     public Text questionBox;
+    // Shows the current answers
+    public Text[] answerBoxes;
+
     int playerCount = gameManager.getPlayerCount();
 
-
+    // Used for inputting actions without a controller
     public GameObject fakeController;
     public GameObject controllerSpace;
 
-    public Text[] answerBoxes;
-
+    // Debug info
     public Text correctAnswerBox;
-    public Text[] answerCounters;
+    public Text[] currentAnswers;
 
+    // Stores info about answers
     int[] givenAnswers;
     int correctAnswer;
 
-
+    // Shows the current voting type
     public Text answerTimeText;
     public Text voteTimeText;
 
-
-    int currentAnswers = 0;
+    // How many people have answered
+    int currentAnswerCount = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        // Given Answers will always be the same length as number of players
         givenAnswers = new int[playerCount];
 
         SetUpPlayers();
@@ -49,6 +54,7 @@ public class QuizScript : MonoBehaviour
 
     private void SetUpPlayers()
     {
+        // For each player create a fake controller
         for (int i = 0; i < playerCount; i++)
         {
             GameObject characterController;
@@ -65,9 +71,8 @@ public class QuizScript : MonoBehaviour
 
     void StartQuestion()
     {
-
+        // Get a random question and store its info
         string[] questionDetails = GetComponent<QuizQuestionPicker>().getQuestion();
-        //string[] questionDetails = findQuestion();
 
         questionBox.text = questionDetails[0];
         answerBoxes[0].text = questionDetails[1];
@@ -76,27 +81,27 @@ public class QuizScript : MonoBehaviour
         answerBoxes[3].text = questionDetails[4];
         correctAnswer = Convert.ToInt32(questionDetails[5]);
 
-
-        Debug.Log(correctAnswer);
         correctAnswerBox.text = correctAnswer.ToString();
-
     }
 
 
 
     public void answeredReceived(int answerGiven, int playerNumber)
     {
+        // If the person hasn't answered already increment the counter
         if (givenAnswers[playerNumber] == 0)
         {
-            currentAnswers++;
+            currentAnswerCount++;
 
         }
+
+        // Store and show the answer given
         givenAnswers[playerNumber] = answerGiven;
-        answerCounters[playerNumber].text = answerGiven.ToString();
+        currentAnswers[playerNumber].text = answerGiven.ToString();
 
 
-        // Need to check all answers have been given
-        if (currentAnswers == playerCount)
+        // If everyone voted move to next phase
+        if (currentAnswerCount == playerCount)
         {
             voteTime();
         }
@@ -105,18 +110,18 @@ public class QuizScript : MonoBehaviour
 
     void voteTime()
     {
+        // Change which text is shown. (Need to change rest of UI)
         answerTimeText.GetComponent<Text>().enabled = false;
         voteTimeText.GetComponent<Text>().enabled = true;
-        currentAnswers= 0;
 
+        // Reset answer count
+        currentAnswerCount= 0;
+
+        // Each player's answers are removed
         for (int i = 0; i< playerCount; i++)
         {
             givenAnswers[i] = 0;
-            answerCounters[i].text = "0";
-
-
+            currentAnswers[i].text = "0";
         }
-
     }
-
 }

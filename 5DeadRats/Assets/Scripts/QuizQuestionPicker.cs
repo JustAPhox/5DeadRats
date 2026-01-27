@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class QuizQuestionPicker : MonoBehaviour
 {
-    // Start is called before the first frame update
 
 
-
+    // Okay this should be better but like no
+    //2d array of questions
     string[,] questions = {
     { "Question 1", "Wrong", "Correct", "Still Wrong", "More Wrong", "2" },
     { "Question 2", "Correct", "Wrong", "Still Wrong", "More Wrong", "1" },
@@ -16,12 +16,12 @@ public class QuizQuestionPicker : MonoBehaviour
     };
 
 
+    /// <summary>
+    /// Gives a random question as an array.
+    /// </summary>
+    /// <returns>Random Question</returns>
     public string[] getQuestion()
     {
-
-
-
-
         string[] questionGiven = {"Question", "Answer 0", "Answer 1", "Answer 2", "Answer 3", "Correct Answer Number"};
         int wantedQuestion = Random.Range(0, questions.GetLength(0));
 
@@ -31,8 +31,6 @@ public class QuizQuestionPicker : MonoBehaviour
         questionGiven[3] = questions[wantedQuestion, 3];
         questionGiven[4] = questions[wantedQuestion, 4];
         questionGiven[5] = questions[wantedQuestion, 5];
-
-
 
         return questionGiven;
     }

@@ -9,23 +9,22 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public static class gameManager
 {
-    // Stores the current volume settings
+    // Stores the player count
     public static int Main_CurrentPlayers;
 
     /// <summary>
-    /// Changes the affinity of the wanted character
+    /// Sets the player count
     /// </summary>
-    /// <param name="affinitySlot">The number for the character</param>
-    /// <param name="newAffinity">The new affinity</param>
-    public static void sePlayerCount(int playerCount)
+    /// <param name="playerCount"> The current number of players </param>
+    public static void setPlayerCount(int playerCount)
     {
         Main_CurrentPlayers = playerCount;
     }
 
     /// <summary>
-    /// Gets the affinity for the choosen character
+    /// Gives the current player count
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Player Count</returns>
     public static int getPlayerCount()
     {
         return Main_CurrentPlayers;
