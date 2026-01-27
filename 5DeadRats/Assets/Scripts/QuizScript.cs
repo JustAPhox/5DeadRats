@@ -8,15 +8,18 @@ using UnityEngine.UI;
 public class QuizScript : MonoBehaviour
 {
     public Text questionBox;
+    int playerCount = gameManager.getPlayerCount();
 
 
+    public GameObject fakeController;
+    public GameObject controllerSpace;
 
     public Text[] answerBoxes;
 
-    public Text answerCountCorrect;
+    public Text correctAnswerBox;
     public Text[] answerCounters;
 
-    int[] givenAnswers = {0,0,0,0};
+    int[] givenAnswers;
     int correctAnswer;
 
 
@@ -24,20 +27,39 @@ public class QuizScript : MonoBehaviour
     public Text voteTimeText;
 
 
-    int playerCount = gameManager.getPlayerCount();
     int currentAnswers = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        givenAnswers = new int[playerCount];
+
+        SetUpPlayers();
         StartQuestion();
     }
+
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+
+    private void SetUpPlayers()
+    {
+        for (int i = 0; i < playerCount; i++)
+        {
+            GameObject characterController;
+            characterController = Instantiate(fakeController);
+
+            characterController.transform.SetParent(controllerSpace.transform);
+            characterController.GetComponent<RectTransform>().anchoredPosition = new Vector2(110 + 220*i,55);
+            characterController.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
+            characterController.GetComponent<QuizCharacterScript>().playerNumber = i;
+
+        }
     }
 
 
@@ -54,22 +76,26 @@ public class QuizScript : MonoBehaviour
         answerBoxes[3].text = questionDetails[4];
         correctAnswer = Convert.ToInt32(questionDetails[5]);
 
+
         Debug.Log(correctAnswer);
+        correctAnswerBox.text = correctAnswer.ToString();
+
     }
 
 
 
-    public void questionAnswered(int answerGiven)
+    public void answeredReceived(int answerGiven, int playerNumber)
     {
-        currentAnswers++;
-        givenAnswers[answerGiven] += 1;
+        if (givenAnswers[playerNumber] == 0)
+        {
+            currentAnswers++;
+
+        }
+        givenAnswers[playerNumber] = answerGiven;
+        answerCounters[playerNumber].text = answerGiven.ToString();
 
 
-        answerCounters[answerGiven].text = givenAnswers[answerGiven].ToString();
-        answerCountCorrect.text = givenAnswers[correctAnswer].ToString();
-
-
-
+        // Need to check all answers have been given
         if (currentAnswers == playerCount)
         {
             voteTime();
@@ -81,7 +107,16 @@ public class QuizScript : MonoBehaviour
     {
         answerTimeText.GetComponent<Text>().enabled = false;
         voteTimeText.GetComponent<Text>().enabled = true;
-        currentAnswers = 0;
+        currentAnswers= 0;
+
+        for (int i = 0; i< playerCount; i++)
+        {
+            givenAnswers[i] = 0;
+            answerCounters[i].text = "0";
+
+
+        }
+
     }
 
 }

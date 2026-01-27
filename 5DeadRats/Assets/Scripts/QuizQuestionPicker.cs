@@ -9,10 +9,10 @@ public class QuizQuestionPicker : MonoBehaviour
 
 
     string[,] questions = {
-    { "Question 1", "Wrong", "Correct", "Still Wrong", "More Wrong", "1" },
-    { "Question 2", "Correct", "Wrong", "Still Wrong", "More Wrong", "0" },
-    { "Question 3", "Wrong", "Still Wrong", "Correct", "More Wrong", "2" },
-    { "Question 4", "Wrong", "More Wrong", "Still Wrong", "Correct", "3" }
+    { "Question 1", "Wrong", "Correct", "Still Wrong", "More Wrong", "2" },
+    { "Question 2", "Correct", "Wrong", "Still Wrong", "More Wrong", "1" },
+    { "Question 3", "Wrong", "Still Wrong", "Correct", "More Wrong", "3" },
+    { "Question 4", "Wrong", "More Wrong", "Still Wrong", "Correct", "4" }
     };
 
 

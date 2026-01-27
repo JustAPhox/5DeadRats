@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class QuizCharacterScript : MonoBehaviour
 {
+    public GameObject QuizMaster;
+    public int playerNumber;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,12 @@ public class QuizCharacterScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+
+    public void questionAnswered(int answerGiven)
+    {
+        QuizMaster.GetComponent<QuizScript>().answeredReceived(answerGiven, playerNumber);
     }
 }
