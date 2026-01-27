@@ -14,23 +14,31 @@ public class MazePlayerController : MonoBehaviour
     private Rigidbody2D rb;
     [ColorUsageAttribute(true, true)]
     public Color Flash_Colour = Color.red;
-    private float Flash_Time = 0.25f;
+    private float Flash_Time = 1f;
     private SpriteRenderer Sprite_Renderer;
     private Material material;
     private Coroutine Dammage_Flash_Coroutine;
 
-    public float Invincibility_Time = 1f;
+    public float Invincibility_Time = 20.5f;
     private bool Is_Invicible = false;
     private Coroutine Invicibility_Coroutine;
 
+    public float Stun_Time = 20f;
+    private bool Is_Stunned = false;
+    private Coroutine Stun_Coroutine;
+
     public AudioSource Bite_Noise;
     public AudioSource Ouch_Noise;
+
+    public int Max_HP = 12;
+    public int Current_HP;
 
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
     void Awake()
     {
+        Current_HP = Max_HP;
         rb = GetComponent<Rigidbody2D>();
         Sprite_Renderer = GetComponent<SpriteRenderer>();
         material = Sprite_Renderer.material;
@@ -40,22 +48,43 @@ public class MazePlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 movement = Movement_Input * Speed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        if (Is_Stunned == false)
+        {
+            rb.MovePosition(rb.position + movement);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+        if (Current_HP <= 0)
+        {
+            gameObject.layer = 6;
+
+            material.SetFloat("_Transparency", 0.52f);
+        }
+
+        Update_Sprite_Rotation();
     }
-    
+
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        Movement_Input = ctx.ReadValue<Vector2>();
-
-        if (Movement_Input != Vector2.zero)
+        if (Is_Stunned == false)
         {
-            Facing_Direction = Movement_Input.normalized;
+            Movement_Input = ctx.ReadValue<Vector2>();
+            if (Movement_Input != Vector2.zero)
+            {
+                Facing_Direction = Movement_Input.normalized;
+            }
         }
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        Nibble();
+        if (Is_Stunned == false)
+        {
+            Nibble();
+        }
     }
 
     void Nibble()
@@ -96,7 +125,9 @@ public class MazePlayerController : MonoBehaviour
                     if (Script.Is_Invicible == false)
                     {  
                             Script.Play_Ouch_Sound();
+                            Script.Current_HP = Script.Current_HP - 1;
                             Script.Hit_Knockback(Attack_Direction);
+                            Script.Call_Stun_Frames();
                             Script.Call_Dammage_Flash();
                             Script.Call_Invincibilty_Frames();
                     }
@@ -107,10 +138,40 @@ public class MazePlayerController : MonoBehaviour
         }
     }
 
+    public void Take_Dammage(int Dammage_Amount)
+    {
+        if (Current_HP <= Dammage_Amount)
+        {
+            Current_HP = 0;
+        }
+        else
+        {
+            Current_HP = Current_HP - Dammage_Amount;
+        }
+    }
+    
     public void Hit_Knockback(Vector2 Knockback_Direction)
     {
-        rb.AddForce(Knockback_Direction.normalized * 1000f, ForceMode2D.Force);
+        rb.AddForce(Knockback_Direction.normalized * 1500f, ForceMode2D.Force);
     }
+
+    public void Call_Stun_Frames()
+    {
+        Stun_Coroutine = StartCoroutine(Stun_Frames());
+    }
+
+    private IEnumerator Stun_Frames()
+    {
+        //yield return new WaitForSeconds(5f);
+        //Movement_Input = Vector2.zero;
+        //rb.velocity = Vector2.zero;
+        rb.simulated = false;
+        Is_Stunned = true;
+        yield return new WaitForSeconds(Stun_Time);
+        rb.simulated = true;
+        Is_Stunned = false;
+    }
+
     public void Call_Invincibilty_Frames()
     {
         Invicibility_Coroutine = StartCoroutine(Invincibility_Frames());
@@ -146,5 +207,15 @@ public class MazePlayerController : MonoBehaviour
     public void Play_Ouch_Sound()
     {
         Ouch_Noise.Play();
+    }
+
+    public void Update_Sprite_Rotation()
+    {
+        if (Facing_Direction == Vector2.zero)
+            return;
+
+        float Angle = Mathf.Atan2(-Facing_Direction.x, Facing_Direction.y) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, Angle);
     }
 }
