@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3549938438834706820}
   - component: {fileID: 6506292660476253715}
+  - component: {fileID: 8869942517515053490}
   m_Layer: 5
   m_Name: Quiz Fake Controller
   m_TagString: Untagged
@@ -134,6 +135,100 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuizMaster: {fileID: 0}
   playerNumber: 0
+--- !u!114 &8869942517515053490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672979139998605930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 959806c9fc2ae8f4ea50ecfb2ea117b0, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6506292660476253715}
+        m_TargetAssemblyTypeName: QuizCharacterScript, Assembly-CSharp
+        m_MethodName: questionAnswered
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d509afe-c31d-4dcf-ad0b-087be166f510
+    m_ActionName: Gameplay/Answer 1[/XInputControllerWindows/buttonNorth,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6506292660476253715}
+        m_TargetAssemblyTypeName: QuizCharacterScript, Assembly-CSharp
+        m_MethodName: questionAnswered
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10e73fa5-8234-4d35-9468-c84ae714cc48
+    m_ActionName: Gameplay/Answer 2[/XInputControllerWindows/buttonWest,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6506292660476253715}
+        m_TargetAssemblyTypeName: QuizCharacterScript, Assembly-CSharp
+        m_MethodName: questionAnswered
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: de86fe5e-79df-4ccc-afad-cc82e2c2bcb2
+    m_ActionName: Gameplay/Answer 3[/XInputControllerWindows/buttonEast,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6506292660476253715}
+        m_TargetAssemblyTypeName: QuizCharacterScript, Assembly-CSharp
+        m_MethodName: questionAnswered
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 70538c19-f29b-4c57-ad85-633ae74eb67f
+    m_ActionName: Gameplay/Answer 4[/XInputControllerWindows/buttonSouth,/Keyboard/downArrow]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2008740139627546023
 GameObject:
   m_ObjectHideFlags: 0

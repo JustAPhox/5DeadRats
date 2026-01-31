@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 127922955}
   - component: {fileID: 127922954}
   - component: {fileID: 127922956}
+  - component: {fileID: 127922957}
   m_Layer: 0
   m_Name: Quizmaster
   m_TagString: Untagged
@@ -335,11 +336,11 @@ Transform:
   m_GameObject: {fileID: 127922953}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.5, y: 171.02786, z: 0}
+  m_LocalPosition: {x: 566.3257, y: 263.42435, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 331653930}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &127922956
 MonoBehaviour:
@@ -353,6 +354,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf3cb6438c6e054aab0b60564112f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &127922957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127922953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 0
+  m_JoinBehavior: 2
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Join
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f9fd6f23-0f9f-4049-bcb6-7d5683bc811e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 672979139998605930, guid: 5f523038b0c2add428a6eba097eea1d3, type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &138209072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,14 +1050,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 127922955}
+  m_Children: []
   m_Father: {fileID: 2082162179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.0015649452}
   m_AnchorMax: {x: 1, y: 0.282}
-  m_AnchoredPosition: {x: 0, y: 0.2156372}
-  m_SizeDelta: {x: 1, y: -1.0686951}
+  m_AnchoredPosition: {x: 0.3256836, y: -0.045684814}
+  m_SizeDelta: {x: 0.3486, y: -0.546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &357750326
 GameObject:
@@ -1868,8 +1912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.012}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.25, y: -3.184494}
-  m_SizeDelta: {x: 2.5, y: 6.1310005}
+  m_AnchoredPosition: {x: 0.5, y: -3.8934937}
+  m_SizeDelta: {x: 1, y: 7.549}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1009612177
 MonoBehaviour:
@@ -2723,3 +2767,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2082162179}
+  - {fileID: 127922955}
