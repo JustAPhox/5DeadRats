@@ -269,9 +269,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""98d8b2d3-9c76-488b-b3ce-0c424d19f90a"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
                     ""id"": ""8c5c4f66-83fd-4723-bb18-1f3a20b5305e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec531dbf-49ee-463c-bc2b-caede04212bd"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -282,11 +291,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""24616e95-0f3d-41a2-ba4c-c1d509dbfb98"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cefffe71-893f-4246-9dcd-9329181c9851"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -472,7 +492,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Quiz_Answer4 = m_Quiz.FindAction("Answer 4", throwIfNotFound: true);
         // Maze
         m_Maze = asset.FindActionMap("Maze", throwIfNotFound: true);
-        m_Maze_Newaction = m_Maze.FindAction("New action", throwIfNotFound: true);
+        m_Maze_Move = m_Maze.FindAction("Move", throwIfNotFound: true);
+        m_Maze_Attack = m_Maze.FindAction("Attack", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Confirm = m_Menu.FindAction("Confirm", throwIfNotFound: true);
@@ -688,7 +709,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Maze
     private readonly InputActionMap m_Maze;
     private List<IMazeActions> m_MazeActionsCallbackInterfaces = new List<IMazeActions>();
-    private readonly InputAction m_Maze_Newaction;
+    private readonly InputAction m_Maze_Move;
+    private readonly InputAction m_Maze_Attack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Maze".
     /// </summary>
@@ -701,9 +723,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public MazeActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Maze/Newaction".
+        /// Provides access to the underlying input action "Maze/Move".
         /// </summary>
-        public InputAction @Newaction => m_Wrapper.m_Maze_Newaction;
+        public InputAction @Move => m_Wrapper.m_Maze_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/Attack".
+        /// </summary>
+        public InputAction @Attack => m_Wrapper.m_Maze_Attack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -730,9 +756,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MazeActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MazeActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         /// <summary>
@@ -744,9 +773,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="MazeActions" />
         private void UnregisterCallbacks(IMazeActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         /// <summary>
@@ -931,12 +963,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IMazeActions
     {
         /// <summary>
-        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Menu" which allows adding and removing callbacks.

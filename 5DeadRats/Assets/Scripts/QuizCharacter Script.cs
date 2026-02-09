@@ -40,21 +40,28 @@ public class QuizCharacterScript : MonoBehaviour
     }
 
 
-
+    // [IMPORTANT] Sets up the object to store data on the player
     public void initialisePlayer(PlayerConfig config)
     {
         playerConfig = config;
+
+        // Stores and shows the player character (okay just a number but thats like half the work)
         playerCharacter = config.playerCharacter;
         characterText.SetText(playerCharacter.ToString());
+
+        // [IMPORTANT] Adds a way to detect the C# events the players are creating.
         playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
 
     }
 
+    // [IMPORTANT] Triggers whenever this player does an action.
     private void PlayerInput_onActionTriggered(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        // Checks if the action was specifically performed (and not one of 2 other stages that can also fire and mess things up. Def needed for things you want triggered once. Don't know about movement.)
         if (obj.performed)
         {
+            // Checks if action performed is the same as a cirtain action and if so does that function.
             if (obj.action.name == controls.Quiz.Answer1.name)
             {
                 questionAnswered(1);

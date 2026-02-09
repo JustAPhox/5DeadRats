@@ -183,9 +183,18 @@
             "id": "98d8b2d3-9c76-488b-b3ce-0c424d19f90a",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "Move",
+                    "type": "Value",
                     "id": "8c5c4f66-83fd-4723-bb18-1f3a20b5305e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "ec531dbf-49ee-463c-bc2b-caede04212bd",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -196,11 +205,22 @@
                 {
                     "name": "",
                     "id": "24616e95-0f3d-41a2-ba4c-c1d509dbfb98",
-                    "path": "",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cefffe71-893f-4246-9dcd-9329181c9851",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

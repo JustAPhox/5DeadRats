@@ -69,20 +69,23 @@ public class QuizScript : MonoBehaviour
 
     private void SetUpPlayers()
     {
+        // [IMPORTANT] Gets an array of all the players
         var playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
 
+        // Gets the number of players
         playerCount = playerConfigs.Length;
 
 
-
-
-
-
-        // For each player create a fake controller
+        // For each player
         for (int i = 0; i < playerConfigs.Length; i++)
         {
+            // Create an instance for them to control (I'll rename later)
             var player = Instantiate(fakeController, controllerSpace.transform);
+
+            // [IMPORTANT] Give them a player config to initialise with 
             player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
+
+            // Set parent and give them the quizmaster to report back to.
             player.transform.SetParent(controllerSpace.transform);
             player.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
         }
