@@ -14,6 +14,8 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField]
     private int minPlayers = 2;
 
+    [SerializeField]
+    private PlayerInputManager inputManager;
 
     public GameObject readyText;
 
@@ -58,6 +60,7 @@ public class PlayerConfigManager : MonoBehaviour
             // Start Game
             // For now just shows text saying ready
             Debug.Log("Game should start but won't yet");
+            inputManager.DisableJoining();
             readyText.SetActive(true);
         }
 
