@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851708581007014140}
   - component: {fileID: 3029064369576027399}
+  - component: {fileID: 4374874314229314756}
   m_Layer: 0
   m_Name: Player Config
   m_TagString: Untagged
@@ -44,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
-  m_NotificationBehavior: 2
+  m_Actions: {fileID: -944628639613478452, guid: 959806c9fc2ae8f4ea50ecfb2ea117b0, type: 3}
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -56,9 +57,51 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9d509afe-c31d-4dcf-ad0b-087be166f510
+    m_ActionName: Quiz/Answer 1[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 10e73fa5-8234-4d35-9468-c84ae714cc48
+    m_ActionName: Quiz/Answer 2[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de86fe5e-79df-4ccc-afad-cc82e2c2bcb2
+    m_ActionName: Quiz/Answer 3[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70538c19-f29b-4c57-ad85-633ae74eb67f
+    m_ActionName: Quiz/Answer 4[/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8c5c4f66-83fd-4723-bb18-1f3a20b5305e
+    m_ActionName: Maze/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0ffd403c-d465-4770-b592-aded3b0ca674
+    m_ActionName: Menu/Join[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f299d98-6b5e-44fb-a62d-6b938b1eb17b
+    m_ActionName: Menu/Move[/XInputControllerWindows/leftStick,/Keyboard/upArrow,/XInputControllerWindows/dpad/up,/Keyboard/downArrow,/XInputControllerWindows/dpad/down,/Keyboard/leftArrow,/XInputControllerWindows/dpad/left,/Keyboard/rightArrow,/XInputControllerWindows/dpad/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Quiz
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4374874314229314756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259985678724203316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89fddb1a474923479a35fa3d93c0e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSetupMenu: {fileID: 4675700384298354636, guid: 16dad3b209d566e4ba04b493121b76f5, type: 3}
+  input: {fileID: 3029064369576027399}

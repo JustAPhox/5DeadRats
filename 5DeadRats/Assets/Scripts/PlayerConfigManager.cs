@@ -11,8 +11,8 @@ public class PlayerConfigManager : MonoBehaviour
 {
     private List<PlayerConfig> playerConfigList;
 
+    [SerializeField]
     private int minPlayers = 2;
-    private int maxPlayers = 4;
 
 
     public GameObject readyText;
@@ -35,16 +35,25 @@ public class PlayerConfigManager : MonoBehaviour
     }
 
 
+    public List<PlayerConfig> GetPlayerConfigs()
+    {
+        return playerConfigList;
+    }
+
+
     public void setPlayerCharacter(int index, int character)
     {
         playerConfigList[index].playerCharacter = character;
+        Debug.Log($"Player {index} changed to character {character}");
     }
 
     public void playerReady(int index)
     {
         playerConfigList[index].playerReady = true;
+        Debug.Log($"Player {index} readied up");
 
-        if(playerConfigList.Count >= minPlayers && playerConfigList.All(player => player.playerReady == true))
+
+        if (playerConfigList.Count >= minPlayers && (playerConfigList.All(player => player.playerReady == true)) && (playerConfigList.All(player => player.playerCharacter != 0)))
         {
             // Start Game
             // For now just shows text saying ready
@@ -58,7 +67,8 @@ public class PlayerConfigManager : MonoBehaviour
     public void HandlePlayerJoin(PlayerInput playerInput)
     {
         Debug.Log($"Player joined {playerInput.playerIndex}");
-        if(!playerConfigList.Any(player => player.playerIndex == playerInput.playerIndex))
+
+        if (!playerConfigList.Any(player => player.playerIndex == playerInput.playerIndex))
         {
             playerInput.transform.SetParent(transform);
             playerConfigList.Add(new PlayerConfig(playerInput));
