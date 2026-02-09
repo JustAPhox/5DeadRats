@@ -8,39 +8,54 @@ using UnityEngine.UI;
 public class QuizScript : MonoBehaviour
 {
     // Used to show the current question
-    public Text questionBox;
+    [SerializeField]
+    private Text questionBox;
     // Shows the current answers
-    public Text[] answerBoxes;
+    [SerializeField]
+    private Text[] answerBoxes;
 
-    int playerCount = gameManager.getPlayerCount();
+    private int playerCount;
+
 
     // Used for inputting actions without a controller
-    public GameObject fakeController;
-    public GameObject controllerSpace;
+    [SerializeField]
+    private GameObject fakeController;
+    [SerializeField]
+    private GameObject controllerSpace;
 
     // Debug info
-    public Text correctAnswerBox;
-    public Text[] currentAnswers;
+    [SerializeField]
+    private Text correctAnswerBox;
+    [SerializeField]
+    private Text[] currentAnswers;
 
     // Stores info about answers
-    int[] givenAnswers;
-    int correctAnswer;
+    private int[] givenAnswers;
+    private int correctAnswer;
 
     // Shows the current voting type
-    public Text answerTimeText;
-    public Text voteTimeText;
+    [SerializeField]
+    private Text answerTimeText;
+    [SerializeField]
+    private Text voteTimeText;
 
     // How many people have answered
-    int currentAnswerCount = 0;
+    private int currentAnswerCount = 0;
+
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         // Given Answers will always be the same length as number of players
-        givenAnswers = new int[playerCount];
 
         SetUpPlayers();
+
+
+        givenAnswers = new int[playerCount];
+
         StartQuestion();
     }
 
@@ -54,20 +69,24 @@ public class QuizScript : MonoBehaviour
 
     private void SetUpPlayers()
     {
+        var playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
+
+        playerCount = playerConfigs.Length;
+
+
+
+
+
+
         // For each player create a fake controller
-        for (int i = 0; i < playerCount; i++)
+        for (int i = 0; i < playerConfigs.Length; i++)
         {
-            GameObject characterController;
-            characterController = Instantiate(fakeController);
-
-            characterController.transform.SetParent(controllerSpace.transform);
-            characterController.GetComponent<RectTransform>().anchoredPosition = new Vector2(110 + 220*i,55);
-            characterController.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
-            characterController.GetComponent<QuizCharacterScript>().playerNumber = i;
-
+            var player = Instantiate(fakeController, controllerSpace.transform);
+            player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
+            player.transform.SetParent(controllerSpace.transform);
+            player.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
         }
     }
-
 
     void StartQuestion()
     {
@@ -88,13 +107,11 @@ public class QuizScript : MonoBehaviour
 
     public void answeredReceived(int answerGiven, int playerNumber)
     {
-        // If the person hasn't answered already increment the counter
-        if (givenAnswers[playerNumber] == 0)
-        {
-            currentAnswerCount++;
+        // If the person hasn't answered already don't allow it to
+        if (givenAnswers[playerNumber] != 0) { return; }
 
-        }
-
+        // Increment the number of answers
+        currentAnswerCount++;
         // Store and show the answer given
         givenAnswers[playerNumber] = answerGiven;
         currentAnswers[playerNumber].text = answerGiven.ToString();
@@ -110,6 +127,7 @@ public class QuizScript : MonoBehaviour
 
     void voteTime()
     {
+        Debug.Log("Questions Cleared");
         // Change which text is shown. (Need to change rest of UI)
         answerTimeText.GetComponent<Text>().enabled = false;
         voteTimeText.GetComponent<Text>().enabled = true;
