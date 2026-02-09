@@ -14,13 +14,20 @@ public class SpawnPlayerMenu : MonoBehaviour
 
     private void Awake()
     {
+        // Finds where the menu should go
         var parentMenu = GameObject.Find("Player Join Menus");
+
 
         if (parentMenu != null)
         {
+            //Creates player set up menu and sets its index
             GameObject menu = Instantiate(playerSetupMenu, parentMenu.transform);
             input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
             menu.GetComponent<PlayerSetUpMenuControl>().SetPlayerIndex(input.playerIndex);
+        }
+        else
+        {
+            Debug.Log("SpawnPlayerMenu Couldn't find Player Join Menus");
         }
 
 

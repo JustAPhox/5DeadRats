@@ -15,6 +15,7 @@ public class PlayerSetUpMenuControl : MonoBehaviour
     private float ignoreInputs;
     private bool inputsAllowed = false;
 
+    // Sets the index + shows player number + stops inputs from joining + inputing
     public void SetPlayerIndex (int givenIndex)
     {
         index = givenIndex;
@@ -25,6 +26,7 @@ public class PlayerSetUpMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Reallows inputs
         if (Time.time > ignoreInputs && inputsAllowed == false)
         {
             inputsAllowed = true;
@@ -32,6 +34,7 @@ public class PlayerSetUpMenuControl : MonoBehaviour
     }
 
 
+    // Tells the player config manager to change the player character for this player
     public void setCharacter(int character) 
     {
         if (!inputsAllowed) { return; }
@@ -39,6 +42,7 @@ public class PlayerSetUpMenuControl : MonoBehaviour
     }
 
 
+    // Tells the player config manager this player is ready
     public void readyPlayer()
     {
         if (!inputsAllowed) { return; }
