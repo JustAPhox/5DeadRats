@@ -42,6 +42,7 @@ public class QuizScript : MonoBehaviour
 
     // Stores info about answers
     private int[,] givenAnswers;
+    private int[] answerChanges;
     private int correctAnswer;
     private int[] playerScores;
 
@@ -66,6 +67,7 @@ public class QuizScript : MonoBehaviour
 
         playerScores = new int[playerCount];
 
+        answerChanges = new int[5];
 
         StartQuestion();
 
@@ -149,44 +151,74 @@ public class QuizScript : MonoBehaviour
         // If everyone voted move to next phase
         if (currentAnswerCount == playerCount)
         {
-            countPoints();
+            if (currentRound == 0) 
+            {
+                startNextRound();
+            }
+            else if (currentRound == 1)
+            {
+                countPoints();
+            }
         }
     }
 
 
-    private void startRoundTwo()
+    private void startNextRound()
     {
-        // Reset answer count
-        currentAnswerCount= 0;
-        currentRound = 1;
+        Debug.Log($"Started Round {currentRound + 1}");
+
+        currentAnswerCount = 0;
+        currentRound += 1;
+
     }
 
 
 
     private void countPoints()
     {
-        votingAllowed = false;
+        Debug.Log("End of Quiz");
 
+        votingAllowed = false;
 
         questionBox.GetComponent<QuizQuestionManager>().revealCorrectAnswer();
 
 
+        // Get changes for each vote
+
+        //
+
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (givenAnswers[i, 0] != givenAnswers[i, 1])
+            {
+                answerChanges[givenAnswers[i, 1]] += 1;
+            }
+        }
 
 
         for (int i = 0; i < playerCount; i++) 
         {
-            if (givenAnswers[i,0] == correctAnswer)
+            // If correct in the second round get 2 points
+            if (givenAnswers[i,1] == correctAnswer)
             {
-                Debug.Log($"Player {i} answered correctly");
-                playerScores[i] += 3;
-            }
-            else
-            {
-                Debug.Log($"Player {i} answered incorrectly");
-                playerScores[i] -= 1;
+                playerScores[i] += 2;
+
+                // Get a bonus point if starts correct
+                if (givenAnswers[i, 0] == correctAnswer)
+                {
+                    playerScores[i] += 1;
+                }
             }
 
 
+            // Gain score based on the number of people who changed to your first answer
+            // Unless you didn't vote
+
+            if (givenAnswers[i, 0] != 0)
+            {
+                playerScores[i] += answerChanges[givenAnswers[i, 0]];
+
+            }
 
             playersObjects[i].GetComponent<QuizCharacterScript>().updatePointTotal(playerScores[i]);
         }

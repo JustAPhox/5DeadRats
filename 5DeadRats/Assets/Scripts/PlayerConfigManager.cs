@@ -52,6 +52,19 @@ public class PlayerConfigManager : MonoBehaviour
         Debug.Log($"Player {index} changed to character {character}");
     }
 
+    public void allowJoining(bool joining)
+    {
+        if (joining)
+        {
+            inputManager.EnableJoining();
+        }
+        else
+        {
+            inputManager.DisableJoining();
+        }
+    }
+
+
     // Readys up a given plater
     public void playerReady(int index)
     {
