@@ -15,7 +15,9 @@ public class SpawnPlayerMenu : MonoBehaviour
     private void Awake()
     {
         // Finds where the menu should go
-        var parentMenu = GameObject.Find("Player Join Menus");
+        GameObject parentMenu = GameObject.Find("Player Join Menus");
+        GameObject joinedMenu = GameObject.Find("Player Joined Menus");
+
 
 
         if (parentMenu != null)
@@ -29,6 +31,17 @@ public class SpawnPlayerMenu : MonoBehaviour
         {
             Debug.Log("SpawnPlayerMenu Couldn't find Player Join Menus");
         }
+
+
+        if (joinedMenu != null)
+        {
+            joinedMenu.GetComponent<CharacterSelectionMenu>().playerJoined(input.playerIndex);
+        }
+        else
+        {
+            Debug.Log("SpawnPlayerMenu Couldn't find Player Joined Menu");
+        }
+
 
 
     }

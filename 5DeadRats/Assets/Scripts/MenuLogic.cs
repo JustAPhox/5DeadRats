@@ -19,7 +19,7 @@ public class MenuLogic : MonoBehaviour
     public void startGame()
     {
         // Hides title screen
-        //titleScreen.SetActive(false);
+        titleScreen.SetActive(false);
 
         // Opens Character Menu
         characterMenu.SetActive(true);
