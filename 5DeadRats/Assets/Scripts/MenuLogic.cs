@@ -7,21 +7,26 @@ using UnityEngine.UI;
 
 public class MenuLogic : MonoBehaviour
 {
-    public GameObject titleScreen;
+    [SerializeField]
+    private GameObject titleScreen;
+    [SerializeField]
+    private GameObject characterMenu;
+
+    [SerializeField]
+    private GameObject PlayerConfigManager;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void startGame()
     {
-        
-    }
+        // Hides title screen
+        //titleScreen.SetActive(false);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Opens Character Menu
+        characterMenu.SetActive(true);
 
+        PlayerConfigManager.GetComponent<PlayerConfigManager>().allowJoining(true);
+
+    }
 
 
     public void openQuiz()
