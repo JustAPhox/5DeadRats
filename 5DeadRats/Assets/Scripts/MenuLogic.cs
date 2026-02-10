@@ -28,6 +28,17 @@ public class MenuLogic : MonoBehaviour
 
     }
 
+    public void charactersChoosen()
+    {
+        // Hides title screen
+        titleScreen.SetActive(true);
+
+        // Opens Character Menu
+        characterMenu.SetActive(false);
+
+
+    }
+
 
     public void openQuiz()
     {

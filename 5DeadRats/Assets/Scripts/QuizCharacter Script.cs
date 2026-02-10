@@ -25,6 +25,7 @@ public class QuizCharacterScript : MonoBehaviour
 
     private void Awake()
     {
+        // [IMPORTANT] Gets the controlls and changes the action map
         controls = new PlayerControls();
 
     }
@@ -55,7 +56,7 @@ public class QuizCharacterScript : MonoBehaviour
         // [IMPORTANT] Adds a way to detect the C# events the players are creating.
         playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
-
+        playerConfig.playerInput.SwitchCurrentActionMap("Quiz");
     }
 
     // [IMPORTANT] Triggers whenever this player does an action.

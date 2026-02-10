@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterSelectionMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] playerCharacterMenu;
 
+    [SerializeField]
+    private GameObject playerConfigManager;
 
 
     // Start is called before the first frame update
@@ -21,8 +24,15 @@ public class CharacterSelectionMenu : MonoBehaviour
         
     }
 
-    public void playerJoined(int playerIndex)
+    public void playerJoined(PlayerInput input)
     {
-        playerCharacterMenu[playerIndex].GetComponent<PlayerCharacterMenu>().PlayerJoined();
+        playerCharacterMenu[input.playerIndex].GetComponent<PlayerCharacterMenu>().PlayerJoined(input);
+    }
+
+
+    public void playerReady(int index)
+    {
+        playerConfigManager.GetComponent<PlayerConfigManager>().setPlayerCharacter(index, 1);
+        playerConfigManager.GetComponent<PlayerConfigManager>().playerReady(index);
     }
 }
