@@ -19,6 +19,9 @@ public class QuizCharacterScript : MonoBehaviour
     private TextMeshProUGUI characterText;
 
 
+    [SerializeField]
+    private TextMeshProUGUI pointText;
+
 
     private void Awake()
     {
@@ -92,5 +95,12 @@ public class QuizCharacterScript : MonoBehaviour
         Debug.Log($"Player {playerConfig.playerIndex} voted on {answerGiven}");
 
         QuizMaster.GetComponent<QuizScript>().answeredReceived(answerGiven, playerConfig.playerIndex);
+    }
+
+
+
+    public void updatePointTotal(int currentPoints)
+    {
+        pointText.SetText($"Points: {currentPoints.ToString()}");
     }
 }

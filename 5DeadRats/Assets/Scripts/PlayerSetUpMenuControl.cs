@@ -19,8 +19,8 @@ public class PlayerSetUpMenuControl : MonoBehaviour
     public void SetPlayerIndex (int givenIndex)
     {
         index = givenIndex;
-        playerIndexText.SetText($"Player { (givenIndex + 1).ToString()}");
-        ignoreInputs = Time.time + 1.5f;
+        playerIndexText.SetText($"Player {givenIndex + 1}");
+        ignoreInputs = Time.time + 0.5f;
     }
 
     // Update is called once per frame
