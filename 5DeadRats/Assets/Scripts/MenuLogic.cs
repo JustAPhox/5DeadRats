@@ -18,6 +18,8 @@ public class MenuLogic : MonoBehaviour
 
     public void startGame()
     {
+        Debug.Log("Start Game Activated");
+
         // Hides title screen
         titleScreen.SetActive(false);
 
@@ -29,14 +31,10 @@ public class MenuLogic : MonoBehaviour
 
     public void charactersChoosen()
     {
-        // Hides title screen
-        Debug.Log($"Title Screen Before: {titleScreen.activeSelf}");
+        // Opens title screen
         titleScreen.SetActive(true);
-        Debug.Log($"Title Screen After: {titleScreen.activeSelf}");
-        // Opens Character Menu
-        Debug.Log($"Character Screen Before: {characterMenu.activeSelf}");
+        // Hides Character Menu
         characterMenu.SetActive(false);
-        Debug.Log($"Character Screen After: {characterMenu.activeSelf}");
 
 
     }

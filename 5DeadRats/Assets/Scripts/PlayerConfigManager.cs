@@ -83,9 +83,11 @@ public class PlayerConfigManager : MonoBehaviour
             // Also stops joining so I'd recommend doing this while testing
             Debug.Log("Game should start but won't yet");
 
-            menuLogic.GetComponent<MenuLogic>().charactersChoosen();
+
 
             inputManager.DisableJoining();
+
+            menuLogic.GetComponent<MenuLogic>().charactersChoosen();
         }
 
     }
