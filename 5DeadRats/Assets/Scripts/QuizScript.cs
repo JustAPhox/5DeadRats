@@ -98,12 +98,14 @@ public class QuizScript : MonoBehaviour
             // Create a player object to be controlled
             var player = Instantiate(playerPreFab, controllerSpace.transform);
 
-            // [IMPORTANT] Give them a player config to initialise with 
-            player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
-
             // Set parent and give them the quizmaster to report back to.
             player.transform.SetParent(controllerSpace.transform);
             player.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
+
+            // [IMPORTANT] Give them a player config to initialise with 
+            player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
+
+
 
            playersObjects[i] = player;
         }
@@ -128,18 +130,10 @@ public class QuizScript : MonoBehaviour
 
     public void answeredReceived(int answerGiven, int playerNumber)
     {
-        Debug.Log("Before Allowed check");
-
         if (!votingAllowed) { return; }
-
-        Debug.Log("After Allowed check");
-
 
         // If the person hasn't answered already don't allow it to
         if (givenAnswers[playerNumber, currentRound] != 0) { return; }
-
-        Debug.Log("Before Already Voted check");
-
 
         // Increment the number of answers
         currentAnswerCount++;

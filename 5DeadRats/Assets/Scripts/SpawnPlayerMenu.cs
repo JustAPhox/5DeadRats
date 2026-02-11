@@ -12,23 +12,22 @@ public class SpawnPlayerMenu : MonoBehaviour
     [SerializeField]
     private PlayerInput input;
 
+
     private void Awake()
     {
-        // Finds where the menu should go
-        var parentMenu = GameObject.Find("Player Join Menus");
+        // Finds what menu to tell it joined
+        GameObject joinedMenu = GameObject.Find("Player Joined Menus");
 
 
-        if (parentMenu != null)
+        if (joinedMenu != null)
         {
-            //Creates player set up menu and sets its index
-            GameObject menu = Instantiate(playerSetupMenu, parentMenu.transform);
-            input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
-            menu.GetComponent<PlayerSetUpMenuControl>().SetPlayerIndex(input.playerIndex);
+            joinedMenu.GetComponent<CharacterSelectionMenu>().playerJoined(input);
         }
         else
         {
-            Debug.Log("SpawnPlayerMenu Couldn't find Player Join Menus");
+            Debug.Log("SpawnPlayerMenu Couldn't find Player Joined Menu");
         }
+
 
 
     }

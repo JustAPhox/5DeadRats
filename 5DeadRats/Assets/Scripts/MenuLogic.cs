@@ -18,13 +18,24 @@ public class MenuLogic : MonoBehaviour
 
     public void startGame()
     {
+        Debug.Log("Start Game Activated");
+
         // Hides title screen
-        //titleScreen.SetActive(false);
+        titleScreen.SetActive(false);
 
         // Opens Character Menu
         characterMenu.SetActive(true);
 
         PlayerConfigManager.GetComponent<PlayerConfigManager>().allowJoining(true);
+    }
+
+    public void charactersChoosen()
+    {
+        // Opens title screen
+        titleScreen.SetActive(true);
+        // Hides Character Menu
+        characterMenu.SetActive(false);
+
 
     }
 
