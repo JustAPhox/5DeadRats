@@ -25,16 +25,18 @@ public class MenuLogic : MonoBehaviour
         characterMenu.SetActive(true);
 
         PlayerConfigManager.GetComponent<PlayerConfigManager>().allowJoining(true);
-
     }
 
     public void charactersChoosen()
     {
         // Hides title screen
+        Debug.Log($"Title Screen Before: {titleScreen.activeSelf}");
         titleScreen.SetActive(true);
-
+        Debug.Log($"Title Screen After: {titleScreen.activeSelf}");
         // Opens Character Menu
+        Debug.Log($"Character Screen Before: {characterMenu.activeSelf}");
         characterMenu.SetActive(false);
+        Debug.Log($"Character Screen After: {characterMenu.activeSelf}");
 
 
     }

@@ -30,9 +30,9 @@ public class CharacterSelectionMenu : MonoBehaviour
     }
 
 
-    public void playerReady(int index)
+    public void playerReady(int index, int character)
     {
-        playerConfigManager.GetComponent<PlayerConfigManager>().setPlayerCharacter(index, 1);
+        playerConfigManager.GetComponent<PlayerConfigManager>().setPlayerCharacter(index, character);
         playerConfigManager.GetComponent<PlayerConfigManager>().playerReady(index);
     }
 }

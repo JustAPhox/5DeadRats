@@ -130,18 +130,10 @@ public class QuizScript : MonoBehaviour
 
     public void answeredReceived(int answerGiven, int playerNumber)
     {
-        Debug.Log("Before Allowed check");
-
         if (!votingAllowed) { return; }
-
-        Debug.Log("After Allowed check");
-
 
         // If the person hasn't answered already don't allow it to
         if (givenAnswers[playerNumber, currentRound] != 0) { return; }
-
-        Debug.Log("Before Already Voted check");
-
 
         // Increment the number of answers
         currentAnswerCount++;
