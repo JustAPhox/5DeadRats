@@ -17,10 +17,11 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField]
     private PlayerInputManager inputManager;
 
-    public GameObject readyText;
-
-
     public static PlayerConfigManager instance;
+
+    [SerializeField]
+    private GameObject menuLogic;
+
 
     private void Awake()
     {
@@ -81,8 +82,12 @@ public class PlayerConfigManager : MonoBehaviour
             // For now just shows text saying ready
             // Also stops joining so I'd recommend doing this while testing
             Debug.Log("Game should start but won't yet");
+
+
+
             inputManager.DisableJoining();
-            readyText.SetActive(true);
+
+            menuLogic.GetComponent<MenuLogic>().charactersChoosen();
         }
 
     }

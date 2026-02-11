@@ -88,7 +88,7 @@ MonoBehaviour:
     m_ActionName: Menu/Move[/XInputControllerWindows/leftStick,/Keyboard/upArrow,/XInputControllerWindows/dpad/up,/Keyboard/downArrow,/XInputControllerWindows/dpad/down,/Keyboard/leftArrow,/XInputControllerWindows/dpad/left,/Keyboard/rightArrow,/XInputControllerWindows/dpad/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Quiz
+  m_DefaultActionMap: d8463289-92e3-46cd-a2bd-cda2d2d8c2b0
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &4374874314229314756
