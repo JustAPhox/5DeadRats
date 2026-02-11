@@ -1517,10 +1517,7 @@ MonoBehaviour:
     3. Choose Character and
     Ready Up (A or Space)
 
-    4. Press the button to go back because nothing ever
-    works
-
-    5. Select Scene'
+    4. Select Scene'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
