@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -186,7 +187,7 @@ public class QuizScript : MonoBehaviour
             }
         }
 
-
+        // Gives points
         for (int i = 0; i < playerCount; i++) 
         {
             // If correct in the second round get 2 points
@@ -216,7 +217,43 @@ public class QuizScript : MonoBehaviour
 
 
 
+        assignWinners();
 
 
     }
+
+
+
+    private void assignWinners()
+    {
+        int highestPoints = 0;
+
+
+
+                
+        // Finds heighest score
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (playerScores[i] > highestPoints)
+            {
+                highestPoints = playerScores[i];
+            }
+        }
+
+        // All players with best score win
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (playerScores[i] == highestPoints)
+            {
+                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, true);
+            }
+            else
+            {
+                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, false);
+            }
+        }
+
+
+    }
+
 }
