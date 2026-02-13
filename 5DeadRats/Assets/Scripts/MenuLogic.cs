@@ -54,7 +54,7 @@ public class MenuLogic : MonoBehaviour
     public void openMaze()
     {
         // Loads the scene
-        SceneManager.LoadScene("Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
 
         // Hides title screen
         titleScreen.SetActive(false);

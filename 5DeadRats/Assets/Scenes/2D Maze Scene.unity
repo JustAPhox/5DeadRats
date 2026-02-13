@@ -1122,8 +1122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1284436120}
-  - component: {fileID: 1284436119}
-  - component: {fileID: 1284436118}
+  - component: {fileID: 1284436121}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1131,68 +1130,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1284436118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284436117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35bd1b35fe7903d46a41c64357f84645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player_Here_Info: 010100000000
-  Player_Char_Info: 000000000000000000000000000000000000000000000000
-  Player_Disadvantage_Info: 000000000000
-  Player_Advantage_Info: 000000000000
-  Player_Input_Manager: {fileID: 1284436119}
-  RealPlayerNumber: 0
---- !u!114 &1284436119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284436117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
-  m_MaxPlayerCount: 6
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 468c66c3-2d8b-44fe-a9af-f3306b6bb6a3
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 8259993811554310599, guid: 12c0c883c40d7dd43815ab64ca1c6f2e, type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 1
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!4 &1284436120
 Transform:
   m_ObjectHideFlags: 0
@@ -1208,6 +1145,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1284436121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284436117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94a4f6df6578e7489a02e6152f048fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_Prefab: {fileID: 8259993811554310599, guid: 12c0c883c40d7dd43815ab64ca1c6f2e, type: 3}
 --- !u!1 &1306417141
 GameObject:
   m_ObjectHideFlags: 0
