@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MazePlayerController : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class MazePlayerController : MonoBehaviour
     public Vector2 Movement_Input;
     public Vector2 Facing_Direction = Vector2.down;//default direction
     public float Attack_Range = 1.5f;
+    public int Base_Dammage = 1;
 
     private Rigidbody2D rb;
     [ColorUsageAttribute(true, true)]
     public Color Flash_Colour = Color.red;
+    [ColorUsageAttribute(true, true)]
+    public Color Flash_Swap_Colour = Color.white;
     private float Flash_Time = 1f;
     private SpriteRenderer Sprite_Renderer;
     private Material material;
@@ -28,10 +32,18 @@ public class MazePlayerController : MonoBehaviour
     private Coroutine Stun_Coroutine;
 
     public AudioSource Bite_Noise;
+    public AudioSource[] Bite_Noises;
     public AudioSource Ouch_Noise;
+    public AudioSource[] Ouch_Noises;
+    public AudioSource[] Death_Noises;
+
+    public ParticleSystem Hurt_Particles;
 
     public int Max_HP = 12;
     public int Current_HP;
+
+    public bool Is_Speed_Buffed = false;
+    public bool Is_Dammage_Buffed = false;
 
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
@@ -43,6 +55,15 @@ public class MazePlayerController : MonoBehaviour
         Sprite_Renderer = GetComponent<SpriteRenderer>();
         material = Sprite_Renderer.material;
 
+        if(Is_Speed_Buffed == true)
+        {
+            Speed = Speed + 1f;
+        }
+
+        if(Is_Dammage_Buffed == true)
+        {
+            Base_Dammage =  Base_Dammage + 1;
+        }
     }
 
     void FixedUpdate()
@@ -56,14 +77,6 @@ public class MazePlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
-
-        if (Current_HP <= 0)
-        {
-            gameObject.layer = 6;
-
-            material.SetFloat("_Transparency", 0.52f);
-        }
-
         Update_Sprite_Rotation();
     }
 
@@ -122,19 +135,82 @@ public class MazePlayerController : MonoBehaviour
 
                 if (Script != null)
                 {
-                    if (Script.Is_Invicible == false)
+                    if (Script.Is_Invicible == false && Script.Current_HP > 0)
                     {  
-                            Script.Play_Ouch_Sound();
-                            Script.Current_HP = Script.Current_HP - 1;
+                        if (Current_HP > 0)
+                        {
+                            if (Script.Current_HP > Base_Dammage)
+                            {
+                                Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
+                            }
+                            else
+                            {
+                                Script.Play_Sound_From_Array(Death_Noises, 15.5f, 15.8f);
+                            }
+                            Script.Take_Dammage(Base_Dammage);
                             Script.Hit_Knockback(Attack_Direction);
                             Script.Call_Stun_Frames();
-                            Script.Call_Dammage_Flash();
+                            Script.Call_Dammage_Flash(Flash_Colour);
                             Script.Call_Invincibilty_Frames();
+                            Script.Spawn_Hurt_Particles();
+                        }
+                        else
+                        {
+                            if (Script.Current_HP > Base_Dammage)
+                            {
+                                Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
+                                Script.Take_Dammage(Base_Dammage);
+                                Script.Hit_Knockback(Attack_Direction);
+                                Script.Call_Stun_Frames();
+                                Script.Call_Dammage_Flash(Flash_Colour);
+                                Script.Call_Invincibilty_Frames();
+                                Script.Spawn_Hurt_Particles();
+                            }
+                            else
+                            {
+                                Script.Play_Sound_From_Array(Death_Noises, 15.5f, 15.8f);
+                                int HP_Storage = Script.Current_HP;
+                                Vector2 Position_Storage = Hit.collider.transform.position;
+                                Script.Current_HP = Current_HP;
+                                Current_HP = HP_Storage;
+                                Hit.collider.transform.position = transform.position;
+                                transform.position = Position_Storage;
+                                Script.Make_Ghost();
+                                Make_Not_Ghost();
+                                Call_Invincibilty_Frames();
+                                Script.Call_Dammage_Flash(Flash_Swap_Colour);
+                                Call_Dammage_Flash(Flash_Swap_Colour);
+                                Script.Spawn_Hurt_Particles();
+                            }
+                        }
                     }
                 }
 
                 break;//makes it stop at first valid target, might be removed later so can hit more than 1 rat at a time
             }
+        }
+    }
+
+    public void Make_Ghost()
+    {
+        gameObject.layer = 6;
+
+        material.SetFloat("_Transparency", 0.52f);
+
+        Speed = 3.5f;
+    }
+
+    public void Make_Not_Ghost()
+    {
+        gameObject.layer = 0;
+
+        material.SetFloat("_Transparency", 1f);
+
+        Speed = 5f;
+
+        if (Is_Speed_Buffed == true)
+        {
+            Speed = Speed + 1f;
         }
     }
 
@@ -147,6 +223,11 @@ public class MazePlayerController : MonoBehaviour
         else
         {
             Current_HP = Current_HP - Dammage_Amount;
+        }
+
+        if (Current_HP == 0)
+        {
+            Make_Ghost();
         }
     }
     
@@ -182,13 +263,13 @@ public class MazePlayerController : MonoBehaviour
         yield return new WaitForSeconds(Invincibility_Time);
         Is_Invicible = false;
     }
-    public void Call_Dammage_Flash()
+    public void Call_Dammage_Flash(Color Colour_Select)
     {
-        Dammage_Flash_Coroutine = StartCoroutine(Dammage_Flasher());
+        Dammage_Flash_Coroutine = StartCoroutine(Dammage_Flasher(Colour_Select));
     }
-    private IEnumerator Dammage_Flasher()
+    private IEnumerator Dammage_Flasher(Color Colour_Select)
     {
-        material.SetColor("_FlashColour", Flash_Colour);
+        material.SetColor("_FlashColour", Colour_Select);
 
         float Current_Flash_Amount = 0f;
         float Elapsed_Time = 0f;
@@ -217,5 +298,19 @@ public class MazePlayerController : MonoBehaviour
         float Angle = Mathf.Atan2(-Facing_Direction.x, Facing_Direction.y) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0f, 0f, Angle);
+    }
+
+    public void Play_Sound_From_Array(AudioSource[] Sound_Effect_Array, float Min_Volume_Variation, float Max_Volume_Variation)
+    {
+        int Sound_Effect_Location = Random.Range(0, Sound_Effect_Array.Length - 1);
+        AudioSource Sound_Effect = Sound_Effect_Array[Sound_Effect_Location];
+        Sound_Effect.volume = Random.Range(Min_Volume_Variation, Max_Volume_Variation);
+        Sound_Effect.pitch = Random.Range(0.7f, 1.0f);
+        Sound_Effect.Play();
+    }
+
+    public void Spawn_Hurt_Particles()
+    {
+        Instantiate(Hurt_Particles, transform.position, transform.rotation);
     }
 }
