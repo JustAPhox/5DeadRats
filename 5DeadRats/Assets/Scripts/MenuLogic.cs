@@ -15,6 +15,8 @@ public class MenuLogic : MonoBehaviour
     [SerializeField]
     private GameObject PlayerConfigManager;
 
+    [SerializeField]
+    private Camera menuCamera;
 
     public void startGame()
     {
@@ -45,6 +47,9 @@ public class MenuLogic : MonoBehaviour
         // Loads the scene
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
 
+        menuCamera.enabled = false;
+
+
         // Hides title screen
         titleScreen.SetActive(false);
     }
@@ -55,6 +60,8 @@ public class MenuLogic : MonoBehaviour
     {
         // Loads the scene
         SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+
+        menuCamera.enabled = false;
 
         // Hides title screen
         titleScreen.SetActive(false);

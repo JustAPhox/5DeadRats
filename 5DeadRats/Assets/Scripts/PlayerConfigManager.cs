@@ -53,6 +53,14 @@ public class PlayerConfigManager : MonoBehaviour
         Debug.Log($"Player {index} changed to character {character}");
     }
 
+
+
+    public void setPlayerBuffed(int index, bool buffed)
+    {
+        playerConfigList[index].playerBuffed = buffed;
+        Debug.Log($"Player {index} buffed: {buffed}");
+    }
+
     public void allowJoining(bool joining)
     {
         if (joining)

@@ -10,10 +10,10 @@ public class QuizQuestionPicker : MonoBehaviour
     // Okay this should be better but like no
     //2d array of questions
     string[,] questions = {
-    { "Question 1", "Wrong", "Correct", "Still Wrong", "More Wrong", "2" },
-    { "Question 2", "Correct", "Wrong", "Still Wrong", "More Wrong", "1" },
-    { "Question 3", "Wrong", "Still Wrong", "Correct", "More Wrong", "3" },
-    { "Question 4", "Wrong", "More Wrong", "Still Wrong", "Correct", "4" }
+    { "What is the name of the monkey who played Dexter in Night at the Museum?", "Peggy", "Crystal", "Bonzo", "Belle", "2" },
+    { "What is the name of Patty and Selma’s lizard from The Simpsons?", "Jub-Jub", "Chirpy Boy", "Mojo", "Raymond", "1" },
+    { "Which of these events have NOT been featured in the Olympic Games?", "Steeplechase", "Basque Pelota", "Korfball", "Tejo", "4" },
+    { "By how many pixels is the Minecraft toolbar off centre by in bedrock edition?", "2 pixels", "A single pixel", "Over 10 pixels", "Trick question, it’s on center", "2" }
     };
 
 
@@ -23,7 +23,7 @@ public class QuizQuestionPicker : MonoBehaviour
     /// <returns>Random Question</returns>
     public string[] getQuestion(int questionCode)
     {
-        string[] questionGiven = {"Question", "Answer 0", "Answer 1", "Answer 2", "Answer 3", "Correct Answer Number"};
+        string[] questionGiven = { questions[questionCode, 0], questions[questionCode, 1], questions[questionCode, 2], questions[questionCode, 3], questions[questionCode, 4], questions[questionCode, 5] };
 
         questionGiven[0] = questions[questionCode, 0];
         questionGiven[1] = questions[questionCode, 1];
