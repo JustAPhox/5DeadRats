@@ -127,4 +127,6 @@ public class PlayerConfig
     public bool playerReady;
     public int playerCharacter;
 
+    public bool playerBuffed;
+
 }
