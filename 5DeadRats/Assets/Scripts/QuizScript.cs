@@ -37,9 +37,6 @@ public class QuizScript : MonoBehaviour
     [SerializeField]
     private GameObject correctAnswerShower;
 
-    [SerializeField]
-    private Text[,] testingworkds;
-
     // Stores info about answers
     private int[,] givenAnswers;
     private int[] answerChanges;
