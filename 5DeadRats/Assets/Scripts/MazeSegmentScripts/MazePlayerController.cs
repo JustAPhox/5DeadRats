@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 
 public class MazePlayerController : MonoBehaviour
 {
+    private PlayerConfig playerConfig;
+    private PlayerControls controls;
+    private int playerCharacter;
+    
     public float Speed = 5f;
     public Vector2 Movement_Input;
     public Vector2 Facing_Direction = Vector2.down;//default direction
@@ -50,6 +54,8 @@ public class MazePlayerController : MonoBehaviour
 
     void Awake()
     {
+        controls = new PlayerControls();
+
         Current_HP = Max_HP;
         rb = GetComponent<Rigidbody2D>();
         Sprite_Renderer = GetComponent<SpriteRenderer>();
@@ -78,6 +84,27 @@ public class MazePlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
         Update_Sprite_Rotation();
+    }
+
+    public void intitialisePlayer(PlayerConfig config)
+    {
+        playerConfig = config;
+        playerCharacter = config.playerCharacter;
+        playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
+
+        playerConfig.playerInput.SwitchCurrentActionMap("Maze");
+    }
+
+    private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
+    {
+        if(context.action.name == controls.Maze.Attack.name)
+        {
+            OnAttack(context);
+        }
+        else if (context.action.name == controls.Maze.Move.name)
+        {
+            OnMove(context);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)

@@ -8,40 +8,70 @@ using UnityEngine.UI;
 public class QuizScript : MonoBehaviour
 {
     // Used to show the current question
-    public Text questionBox;
-    // Shows the current answers
-    public Text[] answerBoxes;
+    [SerializeField]
+    private Text questionTextBox;
 
-    int playerCount = gameManager.getPlayerCount();
+    // Used to show question and answers
+    [SerializeField]
+    private GameObject questionBox;
+
+    // Shows the current answers
+    [SerializeField]
+    private Text[] answerBoxText;
+
+    private int playerCount;
+
 
     // Used for inputting actions without a controller
-    public GameObject fakeController;
-    public GameObject controllerSpace;
+    [SerializeField]
+    private GameObject playerPreFab;
+
+    private GameObject[] playersObjects;
+
+    [SerializeField]
+    private GameObject controllerSpace;
 
     // Debug info
-    public Text correctAnswerBox;
-    public Text[] currentAnswers;
+    [SerializeField]
+    private Text[] answeredBoxRound1;
+    [SerializeField]
+    private GameObject correctAnswerShower;
+
+    [SerializeField]
+    private Text[,] testingworkds;
 
     // Stores info about answers
-    int[] givenAnswers;
-    int correctAnswer;
+    private int[,] givenAnswers;
+    private int[] answerChanges;
+    private int correctAnswer;
+    private int[] playerScores;
 
-    // Shows the current voting type
-    public Text answerTimeText;
-    public Text voteTimeText;
+    private int currentRound = 0;
 
     // How many people have answered
-    int currentAnswerCount = 0;
+    private int currentAnswerCount = 0;
+
+
+    private bool votingAllowed = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         // Given Answers will always be the same length as number of players
-        givenAnswers = new int[playerCount];
 
         SetUpPlayers();
+
+
+        givenAnswers = new int[playerCount,2];
+
+        playerScores = new int[playerCount];
+
+        answerChanges = new int[5];
+
         StartQuestion();
+
+        votingAllowed = true;
     }
 
 
@@ -54,74 +84,142 @@ public class QuizScript : MonoBehaviour
 
     private void SetUpPlayers()
     {
-        // For each player create a fake controller
-        for (int i = 0; i < playerCount; i++)
+        // [IMPORTANT] Gets an array of all the players
+        var playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
+
+        // Gets the number of players
+        playerCount = playerConfigs.Length;
+
+        playersObjects = new GameObject[playerCount];
+
+        // For each player
+        for (int i = 0; i < playerConfigs.Length; i++)
         {
-            GameObject characterController;
-            characterController = Instantiate(fakeController);
+            // Create a player object to be controlled
+            var player = Instantiate(playerPreFab, controllerSpace.transform);
 
-            characterController.transform.SetParent(controllerSpace.transform);
-            characterController.GetComponent<RectTransform>().anchoredPosition = new Vector2(110 + 220*i,55);
-            characterController.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
-            characterController.GetComponent<QuizCharacterScript>().playerNumber = i;
+            // Set parent and give them the quizmaster to report back to.
+            player.transform.SetParent(controllerSpace.transform);
+            player.GetComponent<QuizCharacterScript>().QuizMaster = gameObject;
 
+            // [IMPORTANT] Give them a player config to initialise with 
+            player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
+
+
+
+           playersObjects[i] = player;
         }
     }
-
 
     void StartQuestion()
     {
         // Get a random question and store its info
-        string[] questionDetails = GetComponent<QuizQuestionPicker>().getQuestion();
+        int questionCode = GetComponent<QuizQuestionPicker>().chooseQuestion();
 
-        questionBox.text = questionDetails[0];
-        answerBoxes[0].text = questionDetails[1];
-        answerBoxes[1].text = questionDetails[2];
-        answerBoxes[2].text = questionDetails[3];
-        answerBoxes[3].text = questionDetails[4];
-        correctAnswer = Convert.ToInt32(questionDetails[5]);
+        // Stores the correct answer
+        correctAnswer = GetComponent<QuizQuestionPicker>().giveAnswer(questionCode);
 
-        correctAnswerBox.text = correctAnswer.ToString();
+        // Sends the questionbox the current question
+        questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion(questionCode);
+
+        // Shows the correct answer for debug info
+        correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
     }
 
 
 
     public void answeredReceived(int answerGiven, int playerNumber)
     {
-        // If the person hasn't answered already increment the counter
-        if (givenAnswers[playerNumber] == 0)
-        {
-            currentAnswerCount++;
+        if (!votingAllowed) { return; }
 
-        }
+        // If the person hasn't answered already don't allow it to
+        if (givenAnswers[playerNumber, currentRound] != 0) { return; }
 
+        // Increment the number of answers
+        currentAnswerCount++;
         // Store and show the answer given
-        givenAnswers[playerNumber] = answerGiven;
-        currentAnswers[playerNumber].text = answerGiven.ToString();
+        givenAnswers[playerNumber, currentRound] = answerGiven;
+        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentRound, playerNumber, answerGiven);
 
 
         // If everyone voted move to next phase
         if (currentAnswerCount == playerCount)
         {
-            voteTime();
+            if (currentRound == 0) 
+            {
+                startNextRound();
+            }
+            else if (currentRound == 1)
+            {
+                countPoints();
+            }
         }
     }
 
 
-    void voteTime()
+    private void startNextRound()
     {
-        // Change which text is shown. (Need to change rest of UI)
-        answerTimeText.GetComponent<Text>().enabled = false;
-        voteTimeText.GetComponent<Text>().enabled = true;
+        Debug.Log($"Started Round {currentRound + 1}");
 
-        // Reset answer count
-        currentAnswerCount= 0;
+        currentAnswerCount = 0;
+        currentRound += 1;
 
-        // Each player's answers are removed
-        for (int i = 0; i< playerCount; i++)
+    }
+
+
+
+    private void countPoints()
+    {
+        Debug.Log("End of Quiz");
+
+        votingAllowed = false;
+
+        questionBox.GetComponent<QuizQuestionManager>().revealCorrectAnswer();
+
+
+        // Get changes for each vote
+
+        //
+
+        for (int i = 0; i < playerCount; i++)
         {
-            givenAnswers[i] = 0;
-            currentAnswers[i].text = "0";
+            if (givenAnswers[i, 0] != givenAnswers[i, 1])
+            {
+                answerChanges[givenAnswers[i, 1]] += 1;
+            }
         }
+
+
+        for (int i = 0; i < playerCount; i++) 
+        {
+            // If correct in the second round get 2 points
+            if (givenAnswers[i,1] == correctAnswer)
+            {
+                playerScores[i] += 2;
+
+                // Get a bonus point if starts correct
+                if (givenAnswers[i, 0] == correctAnswer)
+                {
+                    playerScores[i] += 1;
+                }
+            }
+
+
+            // Gain score based on the number of people who changed to your first answer
+            // Unless you didn't vote
+
+            if (givenAnswers[i, 0] != 0)
+            {
+                playerScores[i] += answerChanges[givenAnswers[i, 0]];
+
+            }
+
+            playersObjects[i].GetComponent<QuizCharacterScript>().updatePointTotal(playerScores[i]);
+        }
+
+
+
+
+
     }
 }

@@ -2225,7 +2225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8259993811554310599}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -2296,6 +2296,7 @@ MonoBehaviour:
   Movement_Input: {x: 0, y: 0}
   Facing_Direction: {x: 0, y: -1}
   Attack_Range: 1.5
+  Base_Dammage: 1
   Flash_Colour: {r: 8.47419, g: 0, b: 0.08873497, a: 1}
   Flash_Swap_Colour: {r: 8.474191, g: 8.474191, b: 8.474191, a: 1}
   Invincibility_Time: 1.5
@@ -2317,6 +2318,8 @@ MonoBehaviour:
   Hurt_Particles: {fileID: 1406491792145351656, guid: 7cac31a37fa179c4bb6d092637bfb915, type: 3}
   Max_HP: 12
   Current_HP: 0
+  Is_Speed_Buffed: 0
+  Is_Dammage_Buffed: 0
 --- !u!58 &1305701098349594098
 CircleCollider2D:
   m_ObjectHideFlags: 0

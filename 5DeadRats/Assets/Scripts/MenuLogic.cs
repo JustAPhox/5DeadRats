@@ -7,31 +7,43 @@ using UnityEngine.UI;
 
 public class MenuLogic : MonoBehaviour
 {
-    public GameObject titleScreen;
-    public Slider QuizPlayerCount;
+    [SerializeField]
+    private GameObject titleScreen;
+    [SerializeField]
+    private GameObject characterMenu;
+
+    [SerializeField]
+    private GameObject PlayerConfigManager;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void startGame()
     {
-        
+        Debug.Log("Start Game Activated");
+
+        // Hides title screen
+        titleScreen.SetActive(false);
+
+        // Opens Character Menu
+        characterMenu.SetActive(true);
+
+        PlayerConfigManager.GetComponent<PlayerConfigManager>().allowJoining(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void charactersChoosen()
     {
-        
-    }
+        // Opens title screen
+        titleScreen.SetActive(true);
+        // Hides Character Menu
+        characterMenu.SetActive(false);
 
+
+    }
 
 
     public void openQuiz()
     {
         // Loads the scene
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
-
-        // Stores the playercount set via the slider
-        gameManager.setPlayerCount(Convert.ToInt32(QuizPlayerCount.value));
 
         // Hides title screen
         titleScreen.SetActive(false);
@@ -42,7 +54,7 @@ public class MenuLogic : MonoBehaviour
     public void openMaze()
     {
         // Loads the scene
-        SceneManager.LoadScene("Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
 
         // Hides title screen
         titleScreen.SetActive(false);
