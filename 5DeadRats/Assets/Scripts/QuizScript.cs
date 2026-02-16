@@ -4,21 +4,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuizScript : MonoBehaviour
 {
-    // Used to show the current question
-    [SerializeField]
-    private Text questionTextBox;
-
     // Used to show question and answers
     [SerializeField]
     private GameObject questionBox;
-
-    // Shows the current answers
-    [SerializeField]
-    private Text[] answerBoxText;
 
     private int playerCount;
 
@@ -34,8 +27,6 @@ public class QuizScript : MonoBehaviour
 
     // Debug info
     [SerializeField]
-    private Text[] answeredBoxRound1;
-    [SerializeField]
     private GameObject correctAnswerShower;
 
     // Stores info about answers
@@ -44,7 +35,7 @@ public class QuizScript : MonoBehaviour
     private int correctAnswer;
     private int[] playerScores;
 
-    private int currentRound = 0;
+    private int currentPhase = 0;
 
     // How many people have answered
     private int currentAnswerCount = 0;
@@ -69,7 +60,6 @@ public class QuizScript : MonoBehaviour
 
         StartQuestion();
 
-        votingAllowed = true;
     }
 
 
@@ -122,6 +112,8 @@ public class QuizScript : MonoBehaviour
 
         // Shows the correct answer for debug info
         correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
+
+        votingAllowed = true;
     }
 
 
@@ -131,23 +123,23 @@ public class QuizScript : MonoBehaviour
         if (!votingAllowed) { return; }
 
         // If the person hasn't answered already don't allow it to
-        if (givenAnswers[playerNumber, currentRound] != 0) { return; }
+        if (givenAnswers[playerNumber, currentPhase] != 0) { return; }
 
         // Increment the number of answers
         currentAnswerCount++;
         // Store and show the answer given
-        givenAnswers[playerNumber, currentRound] = answerGiven;
-        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentRound, playerNumber, answerGiven);
+        givenAnswers[playerNumber, currentPhase] = answerGiven;
+        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentPhase, playerNumber, answerGiven);
 
 
         // If everyone voted move to next phase
         if (currentAnswerCount == playerCount)
         {
-            if (currentRound == 0) 
+            if (currentPhase == 0) 
             {
-                startNextRound();
+                startNextPhase();
             }
-            else if (currentRound == 1)
+            else if (currentPhase == 1)
             {
                 countPoints();
             }
@@ -155,13 +147,39 @@ public class QuizScript : MonoBehaviour
     }
 
 
-    private void startNextRound()
+    private void startNextPhase()
     {
-        Debug.Log($"Started Round {currentRound + 1}");
+        Debug.Log($"Started Phase {currentPhase + 1}");
 
         currentAnswerCount = 0;
-        currentRound += 1;
+        currentPhase += 1;
 
+    }
+
+
+    public void startNextRound()
+    {
+        Debug.Log($"Starting next round of questions");
+
+
+        currentAnswerCount = 0;
+        currentPhase = 0;
+
+        answerChanges = new int[5];
+        givenAnswers = new int[playerCount, 2];
+
+
+        StartQuestion();
+    }
+
+
+    public void moveToMaze()
+    {
+        Debug.Log($"Moving to maze Scene");
+        assignWinners();
+
+        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(1);
     }
 
 
@@ -190,7 +208,7 @@ public class QuizScript : MonoBehaviour
         // Gives points
         for (int i = 0; i < playerCount; i++) 
         {
-            // If correct in the second round get 2 points
+            // If correct in the second phase get 2 points
             if (givenAnswers[i,1] == correctAnswer)
             {
                 playerScores[i] += 2;
@@ -217,7 +235,7 @@ public class QuizScript : MonoBehaviour
 
 
 
-        assignWinners();
+        
 
 
     }

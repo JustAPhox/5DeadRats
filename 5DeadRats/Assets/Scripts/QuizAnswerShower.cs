@@ -31,6 +31,16 @@ public class QuizAnswerShower : MonoBehaviour
     public void setCorrectAnswer(int correctAnswer)
     {
         correctAnswerBox.text = correctAnswer.ToString();
+        answeredBoxRound1[0].text = "0";
+
+        for (int i = 0; i < 4; i++)
+        {
+            answeredBoxRound1[i].text = "0";
+            answeredBoxRound2[i].text = "0";
+
+        }
+
+
     }
 
 
