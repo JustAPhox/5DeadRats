@@ -240,18 +240,18 @@ public class QuizScript : MonoBehaviour
             assignWinners();
 
 
-            Invoke(nameof(moveToMaze), 5f);
+            Invoke(nameof(moveToItems), 5f);
         }
     }
 
 
 
-    public void moveToMaze()
+    private void moveToItems()
     {
-        Debug.Log($"Moving to maze Scene");
+        Debug.Log($"Moving to item Scene");
         assignWinners();
 
-        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Item Selection Scene", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(1);
     }
 
@@ -325,32 +325,38 @@ public class QuizScript : MonoBehaviour
 
     private void assignWinners()
     {
-        int highestPoints = 0;
-
-
-
-                
-        // Finds heighest score
-        for (int i = 0; i < playerCount; i++)
-        {
-            if (playerScores[i] > highestPoints)
-            {
-                highestPoints = playerScores[i];
-            }
-        }
 
         // All players with best score win
         for (int i = 0; i < playerCount; i++)
         {
-            if (playerScores[i] == highestPoints)
-            {
-                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, true);
-            }
-            else
-            {
-                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, false);
-            }
+            PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setQuizScore(i, playerScores[i]);
         }
+
+
+        //// Add back when need to know who won
+        //int highestPoints = 0;
+
+        //// Finds heighest score
+        //for (int i = 0; i < playerCount; i++)
+        //{
+        //    if (playerScores[i] > highestPoints)
+        //    {
+        //        highestPoints = playerScores[i];
+        //    }
+        //}
+
+        //// All players with best score win
+        //for (int i = 0; i < playerCount; i++)
+        //{
+        //    if (playerScores[i] == highestPoints)
+        //    {
+        //        // They Won
+        //    }
+        //    else
+        //    {
+        //        // They Lost
+        //    }
+        //}
 
 
     }
