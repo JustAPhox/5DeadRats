@@ -27,9 +27,6 @@ public class PlayerCharacterMenu : MonoBehaviour
 
     private int currentCharacter = 1;
 
-
-    private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
-
     private void Awake()
     {
         controls = new PlayerControls();
@@ -49,8 +46,6 @@ public class PlayerCharacterMenu : MonoBehaviour
         playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
         charcterText.enabled = true;
-        charcterText.SetText($"Current Character: {characterNames[0]}");
-
     }
 
     private void PlayerInput_onActionTriggered(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -81,8 +76,6 @@ public class PlayerCharacterMenu : MonoBehaviour
 
     private void changeCharacter(int direction)
     {
-        if (readyText.activeSelf == true) { return; }
-
         currentCharacter += direction;
         if (currentCharacter == 0)
         {
@@ -92,6 +85,6 @@ public class PlayerCharacterMenu : MonoBehaviour
         {
             currentCharacter = 1;
         }
-        charcterText.SetText($"Current Character: {characterNames[currentCharacter - 1]}");
+        charcterText.SetText($"Current Character: {currentCharacter}");
     }
 }
