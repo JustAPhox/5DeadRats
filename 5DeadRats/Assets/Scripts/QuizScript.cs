@@ -240,18 +240,18 @@ public class QuizScript : MonoBehaviour
             assignWinners();
 
 
-            Invoke(nameof(moveToMaze), 5f);
+            Invoke(nameof(moveToItems), 5f);
         }
     }
 
 
 
-    public void moveToMaze()
+    public void moveToItems()
     {
-        Debug.Log($"Moving to maze Scene");
+        Debug.Log($"Moving to item Scene");
         assignWinners();
 
-        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Item Selection Scene", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(1);
     }
 
