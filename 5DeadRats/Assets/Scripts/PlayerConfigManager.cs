@@ -133,11 +133,14 @@ public class PlayerConfig
     {
         playerIndex = input.playerIndex;
         playerInput = input;
+        buffs = new PlayerBuffs();
     }
 
 
 
     public PlayerInput playerInput;
+    public PlayerBuffs buffs;
+
     public int playerIndex;
     public bool playerReady;
     public int playerCharacter;
@@ -145,5 +148,27 @@ public class PlayerConfig
 
 
     public bool playerBuffed;
+
+}
+
+
+public class PlayerBuffs
+{
+    // When created is given a player input which it stores + index
+    public PlayerBuffs()
+    {
+        miscBuffs = new List<string>();
+
+
+    }
+
+    public int damage;
+    public int health;
+    public int speed;
+    public List<string> miscBuffs; 
+
+
+
+
 
 }
