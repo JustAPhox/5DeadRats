@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class QuizScript : MonoBehaviour
 {
@@ -14,6 +16,14 @@ public class QuizScript : MonoBehaviour
     private GameObject questionBox;
 
     private int playerCount;
+
+
+
+    [SerializeField] 
+    TextMeshProUGUI timerText;
+
+    private float timerEndTime;
+    private bool timerStarted = false;
 
 
     // Used for inputting actions without a controller
@@ -68,7 +78,31 @@ public class QuizScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if ((timerEndTime <= Time.time) && timerStarted)
+        {
+            Debug.Log("Timer Ended");
+            timerStarted = false;
+            startNextPhase();
+            timerText.SetText($"00:00");
+        }
+        else if (timerStarted)
+        {
+            TimeSpan currentTimer = new TimeSpan(0,0,0, (int) (timerEndTime - Time.time) ,0);
+
+            string secondsLeft = currentTimer.Seconds.ToString();
+
+            if (secondsLeft.Length == 1)
+            {
+                secondsLeft = "0" + secondsLeft;
+            }
+
+
+            timerText.SetText($"{currentTimer.Minutes}:{secondsLeft}");
+
+
+        }
+
+
     }
 
 
@@ -101,7 +135,7 @@ public class QuizScript : MonoBehaviour
         }
     }
 
-    void StartQuestion()
+    private void StartQuestion()
     {
         // Get a random question and store its info
         int questionCode = GetComponent<QuizQuestionPicker>().chooseQuestion();
@@ -116,8 +150,18 @@ public class QuizScript : MonoBehaviour
         correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
 
         votingAllowed = true;
+
+        startTimer(20);
+
     }
 
+
+
+    private void startTimer(float timerLength)
+    {
+        timerEndTime = Time.time + timerLength;
+        timerStarted = true;
+    }
 
 
     public void answeredReceived(int answerGiven, int playerNumber)
@@ -153,6 +197,7 @@ public class QuizScript : MonoBehaviour
             revealAnswers();
             currentAnswerCount = 0;
             currentPhase += 1;
+            startTimer(30);
         }
         else if (currentPhase == 1)
         {

@@ -119,17 +119,8 @@ public class QuizCharacterScript : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            Debug.Log($"Hoding Voters {i} for player {playerConfig.playerIndex}");
-            Debug.Log($"Before: Yes Vote {i} for player {playerConfig.playerIndex} is {voteShowers[i].activeSelf}");
-            Debug.Log($"Before: No Vote {i} for player {playerConfig.playerIndex} is {noVoteShowers[i].activeSelf}");
-
-
             voteShowers[i].SetActive(false);
             noVoteShowers[i].SetActive(false);
-
-            Debug.Log($"After: Yes Vote {i} for player {playerConfig.playerIndex} is {voteShowers[i].activeSelf}");
-            Debug.Log($"After: No Vote {i} for player {playerConfig.playerIndex} is {noVoteShowers[i].activeSelf}");
-
         }
     }
 
