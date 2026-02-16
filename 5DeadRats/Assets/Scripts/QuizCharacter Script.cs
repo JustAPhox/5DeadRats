@@ -22,6 +22,14 @@ public class QuizCharacterScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI pointText;
 
+    [SerializeField]
+    private GameObject[] voteShowers;
+    [SerializeField]
+    private GameObject[] noVoteShowers;
+
+
+    private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
+
 
     private void Awake()
     {
@@ -51,7 +59,7 @@ public class QuizCharacterScript : MonoBehaviour
 
         // Stores and shows the player character (okay just a number but thats like half the work)
         playerCharacter = config.playerCharacter;
-        characterText.SetText(playerCharacter.ToString());
+        characterText.SetText(characterNames[playerCharacter - 1]);
 
         // [IMPORTANT] Adds a way to detect the C# events the players are creating.
         playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
@@ -103,5 +111,60 @@ public class QuizCharacterScript : MonoBehaviour
     public void updatePointTotal(int currentPoints)
     {
         pointText.SetText($"Points: {currentPoints.ToString()}");
+    }
+
+
+
+    public void hideAnswers()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Debug.Log($"Hoding Voters {i} for player {playerConfig.playerIndex}");
+            Debug.Log($"Before: Yes Vote {i} for player {playerConfig.playerIndex} is {voteShowers[i].activeSelf}");
+            Debug.Log($"Before: No Vote {i} for player {playerConfig.playerIndex} is {noVoteShowers[i].activeSelf}");
+
+
+            voteShowers[i].SetActive(false);
+            noVoteShowers[i].SetActive(false);
+
+            Debug.Log($"After: Yes Vote {i} for player {playerConfig.playerIndex} is {voteShowers[i].activeSelf}");
+            Debug.Log($"After: No Vote {i} for player {playerConfig.playerIndex} is {noVoteShowers[i].activeSelf}");
+
+        }
+    }
+
+
+    public void revealAnswer(int answer, int timesAnswered)
+    {
+        Debug.Log($"Show Answer for player {playerConfig.playerIndex}");
+
+        if (answer == 0)
+        {
+            noVoteShowers[timesAnswered].SetActive(true);  
+        }
+        else if (answer == 1)
+        {
+            voteShowers[timesAnswered].transform.rotation = Quaternion.Euler(Vector3.forward * 0);
+            voteShowers[timesAnswered].SetActive(true);
+        }
+        else if (answer == 2)
+        {
+            voteShowers[timesAnswered].transform.rotation = Quaternion.Euler(Vector3.forward * 90);
+            voteShowers[timesAnswered].SetActive(true);
+        }
+        else if (answer == 3)
+        {
+            voteShowers[timesAnswered].transform.rotation = Quaternion.Euler(Vector3.forward * 270);
+            voteShowers[timesAnswered].SetActive(true);
+        }
+        else if (answer == 4)
+        {
+            voteShowers[timesAnswered].transform.rotation = Quaternion.Euler(Vector3.forward * 180);
+            voteShowers[timesAnswered].SetActive(true);
+        }
+
+
+
+
     }
 }
