@@ -17,6 +17,8 @@ public class MenuLogic : MonoBehaviour
 
     [SerializeField]
     private Camera menuCamera;
+    [SerializeField]
+    private AudioListener menuAudioListener;
 
     public void startGame()
     {
@@ -48,6 +50,7 @@ public class MenuLogic : MonoBehaviour
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
 
         menuCamera.enabled = false;
+        menuAudioListener.enabled = false;
 
 
         // Hides title screen
@@ -62,6 +65,8 @@ public class MenuLogic : MonoBehaviour
         SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
 
         menuCamera.enabled = false;
+        menuAudioListener.enabled = false;
+
 
         // Hides title screen
         titleScreen.SetActive(false);
