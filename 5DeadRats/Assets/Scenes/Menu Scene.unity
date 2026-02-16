@@ -1928,6 +1928,7 @@ MonoBehaviour:
   characterMenu: {fileID: 1549464275}
   PlayerConfigManager: {fileID: 2128457539}
   menuCamera: {fileID: 260475390}
+  menuAudioListener: {fileID: 260475389}
 --- !u!4 &2134601339
 Transform:
   m_ObjectHideFlags: 0
