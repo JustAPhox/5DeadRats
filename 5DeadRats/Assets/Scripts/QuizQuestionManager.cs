@@ -12,6 +12,12 @@ public class QuizQuestionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI questionTextBox;
 
+
+    [SerializeField]
+    private TextMeshProUGUI categoryTextBox;
+
+    private string[] categoryNames = { "Media and Entertainment", "Science and Nature", "History and the Outside World", "Our Glorious Kind", "Geography", "Bonus Round" };
+
     // Shows the current answers
     [SerializeField]
     private Text[] answerBoxText;
@@ -25,11 +31,12 @@ public class QuizQuestionManager : MonoBehaviour
 
     private int correctAnswer;
 
-    public void setCurrentQuestion(int questionCode)
+    public void setCurrentQuestion(int[] questionCode)
     {
         string[] questionDetails = quizMaster.GetComponent<QuizQuestionPicker>().getQuestion(questionCode);
 
         questionTextBox.SetText(questionDetails[0]);
+        categoryTextBox.SetText(categoryNames[questionCode[0]]);
         answerBoxText[0].text = questionDetails[1];
         answerBoxText[1].text = questionDetails[2];
         answerBoxText[2].text = questionDetails[3];

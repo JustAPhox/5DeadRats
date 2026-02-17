@@ -81,9 +81,7 @@ public class QuizScript : MonoBehaviour
         if ((timerEndTime <= Time.time) && timerStarted)
         {
             Debug.Log("Timer Ended");
-            timerStarted = false;
             startNextPhase();
-            timerText.SetText($"00:00");
         }
         else if (timerStarted)
         {
@@ -138,7 +136,7 @@ public class QuizScript : MonoBehaviour
     private void StartQuestion()
     {
         // Get a random question and store its info
-        int questionCode = GetComponent<QuizQuestionPicker>().chooseQuestion();
+        int[] questionCode = GetComponent<QuizQuestionPicker>().chooseFullQuestion();
 
         // Stores the correct answer
         correctAnswer = GetComponent<QuizQuestionPicker>().giveAnswer(questionCode);
@@ -161,6 +159,11 @@ public class QuizScript : MonoBehaviour
     {
         timerEndTime = Time.time + timerLength;
         timerStarted = true;
+    }
+    private void stopTimer()
+    {
+        timerText.SetText($"00:00");
+        timerStarted = false;
     }
 
 
@@ -191,6 +194,7 @@ public class QuizScript : MonoBehaviour
 
     public void startNextPhase()
     {
+        stopTimer();
         if (currentPhase == 0)
         {
             Debug.Log($"Started Phase {currentPhase + 1}");
