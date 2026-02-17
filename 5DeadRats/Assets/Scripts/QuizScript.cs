@@ -1,25 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class QuizScript : MonoBehaviour
 {
-    // Used to show the current question
-    [SerializeField]
-    private Text questionTextBox;
-
     // Used to show question and answers
     [SerializeField]
     private GameObject questionBox;
 
-    // Shows the current answers
-    [SerializeField]
-    private Text[] answerBoxText;
-
     private int playerCount;
+
+
+
+    [SerializeField] 
+    TextMeshProUGUI timerText;
+
+    private float timerEndTime;
+    private bool timerStarted = false;
 
 
     // Used for inputting actions without a controller
@@ -33,12 +37,7 @@ public class QuizScript : MonoBehaviour
 
     // Debug info
     [SerializeField]
-    private Text[] answeredBoxRound1;
-    [SerializeField]
     private GameObject correctAnswerShower;
-
-    [SerializeField]
-    private Text[,] testingworkds;
 
     // Stores info about answers
     private int[,] givenAnswers;
@@ -46,7 +45,9 @@ public class QuizScript : MonoBehaviour
     private int correctAnswer;
     private int[] playerScores;
 
+    private int currentPhase = 0;
     private int currentRound = 0;
+    private int maxRounds = 2;
 
     // How many people have answered
     private int currentAnswerCount = 0;
@@ -71,14 +72,37 @@ public class QuizScript : MonoBehaviour
 
         StartQuestion();
 
-        votingAllowed = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if ((timerEndTime <= Time.time) && timerStarted)
+        {
+            Debug.Log("Timer Ended");
+            timerStarted = false;
+            startNextPhase();
+            timerText.SetText($"00:00");
+        }
+        else if (timerStarted)
+        {
+            TimeSpan currentTimer = new TimeSpan(0,0,0, (int) (timerEndTime - Time.time) ,0);
+
+            string secondsLeft = currentTimer.Seconds.ToString();
+
+            if (secondsLeft.Length == 1)
+            {
+                secondsLeft = "0" + secondsLeft;
+            }
+
+
+            timerText.SetText($"{currentTimer.Minutes}:{secondsLeft}");
+
+
+        }
+
+
     }
 
 
@@ -111,7 +135,7 @@ public class QuizScript : MonoBehaviour
         }
     }
 
-    void StartQuestion()
+    private void StartQuestion()
     {
         // Get a random question and store its info
         int questionCode = GetComponent<QuizQuestionPicker>().chooseQuestion();
@@ -124,8 +148,20 @@ public class QuizScript : MonoBehaviour
 
         // Shows the correct answer for debug info
         correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
+
+        votingAllowed = true;
+
+        startTimer(20);
+
     }
 
+
+
+    private void startTimer(float timerLength)
+    {
+        timerEndTime = Time.time + timerLength;
+        timerStarted = true;
+    }
 
 
     public void answeredReceived(int answerGiven, int playerNumber)
@@ -133,45 +169,108 @@ public class QuizScript : MonoBehaviour
         if (!votingAllowed) { return; }
 
         // If the person hasn't answered already don't allow it to
-        if (givenAnswers[playerNumber, currentRound] != 0) { return; }
+        if (givenAnswers[playerNumber, currentPhase] != 0) { return; }
 
         // Increment the number of answers
         currentAnswerCount++;
         // Store and show the answer given
-        givenAnswers[playerNumber, currentRound] = answerGiven;
-        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentRound, playerNumber, answerGiven);
+        givenAnswers[playerNumber, currentPhase] = answerGiven;
+        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentPhase, playerNumber, answerGiven);
 
 
         // If everyone voted move to next phase
         if (currentAnswerCount == playerCount)
         {
-            if (currentRound == 0) 
-            {
-                startNextRound();
-            }
-            else if (currentRound == 1)
-            {
-                countPoints();
-            }
+
+            startNextPhase();
+
+
         }
     }
 
 
-    private void startNextRound()
+    public void startNextPhase()
     {
-        Debug.Log($"Started Round {currentRound + 1}");
+        if (currentPhase == 0)
+        {
+            Debug.Log($"Started Phase {currentPhase + 1}");
+            revealAnswers();
+            currentAnswerCount = 0;
+            currentPhase += 1;
+            startTimer(30);
+        }
+        else if (currentPhase == 1)
+        {
+            countPoints();
+        }
 
-        currentAnswerCount = 0;
-        currentRound += 1;
+
+
 
     }
+
+
+    public void startNextRound()
+    {
+        currentRound++;
+
+        if (currentRound == (maxRounds -1))
+        {
+            Debug.Log($"Starting next round of questions");
+
+            currentAnswerCount = 0;
+            currentPhase = 0;
+
+            answerChanges = new int[5];
+            givenAnswers = new int[playerCount, 2];
+
+
+            for (int i = 0; i < playerCount; i++)
+            {
+                playersObjects[i].GetComponent<QuizCharacterScript>().hideAnswers();
+
+            }
+
+
+
+            StartQuestion();
+        }
+        else
+        {
+            assignWinners();
+
+
+            Invoke(nameof(moveToItems), 5f);
+        }
+    }
+
+
+
+    private void moveToItems()
+    {
+        Debug.Log($"Moving to item Scene");
+        assignWinners();
+
+        SceneManager.LoadScene("Item Selection Scene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(1);
+    }
+
+    private void revealAnswers()
+    {
+        for (int i = 0; i < playerCount; i++)
+        {
+            playersObjects[i].GetComponent<QuizCharacterScript>().revealAnswer(givenAnswers[i, currentPhase], currentPhase);
+        }
+    }
+
+
 
 
 
     private void countPoints()
     {
         Debug.Log("End of Quiz");
-
+        revealAnswers();
         votingAllowed = false;
 
         questionBox.GetComponent<QuizQuestionManager>().revealCorrectAnswer();
@@ -189,10 +288,10 @@ public class QuizScript : MonoBehaviour
             }
         }
 
-
+        // Gives points
         for (int i = 0; i < playerCount; i++) 
         {
-            // If correct in the second round get 2 points
+            // If correct in the second phase get 2 points
             if (givenAnswers[i,1] == correctAnswer)
             {
                 playerScores[i] += 2;
@@ -219,7 +318,47 @@ public class QuizScript : MonoBehaviour
 
 
 
+        Invoke(nameof(startNextRound), 5f);
+    }
+
+
+
+    private void assignWinners()
+    {
+
+        // All players with best score win
+        for (int i = 0; i < playerCount; i++)
+        {
+            PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setQuizScore(i, playerScores[i]);
+        }
+
+
+        //// Add back when need to know who won
+        //int highestPoints = 0;
+
+        //// Finds heighest score
+        //for (int i = 0; i < playerCount; i++)
+        //{
+        //    if (playerScores[i] > highestPoints)
+        //    {
+        //        highestPoints = playerScores[i];
+        //    }
+        //}
+
+        //// All players with best score win
+        //for (int i = 0; i < playerCount; i++)
+        //{
+        //    if (playerScores[i] == highestPoints)
+        //    {
+        //        // They Won
+        //    }
+        //    else
+        //    {
+        //        // They Lost
+        //    }
+        //}
 
 
     }
+
 }
