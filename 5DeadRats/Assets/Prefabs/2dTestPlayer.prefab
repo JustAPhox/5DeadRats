@@ -2299,6 +2299,11 @@ MonoBehaviour:
   Base_Dammage: 1
   Flash_Colour: {r: 8.47419, g: 0, b: 0.08873497, a: 1}
   Flash_Swap_Colour: {r: 8.474191, g: 8.474191, b: 8.474191, a: 1}
+  Ruby_Colour: {r: 0.93792105, g: 0, b: 1, a: 0}
+  Pablo_Colour: {r: 0.31495833, g: 0.6666667, b: 0, a: 0}
+  Winona_Colour: {r: 1, g: 0.4509434, b: 0.69803923, a: 0}
+  John_Colour: {r: 0, g: 0.45180893, b: 1, a: 0}
+  Steven_Colour: {r: 1, g: 0.5704299, b: 0, a: 0}
   Invincibility_Time: 1.5
   Stun_Time: 1
   Bite_Noise: {fileID: 6585281429475115508}

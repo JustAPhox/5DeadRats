@@ -22,6 +22,11 @@ public class MazePlayerController : MonoBehaviour
     public Color Flash_Colour = Color.red;
     [ColorUsageAttribute(true, true)]
     public Color Flash_Swap_Colour = Color.white;
+    [SerializeField] public Color Ruby_Colour;
+    [SerializeField] public Color Pablo_Colour;
+    [SerializeField] public Color Winona_Colour;
+    [SerializeField] public Color John_Colour;
+    [SerializeField] public Color Steven_Colour;
     private float Flash_Time = 1f;
     private SpriteRenderer Sprite_Renderer;
     private Material material;
@@ -60,16 +65,6 @@ public class MazePlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Sprite_Renderer = GetComponent<SpriteRenderer>();
         material = Sprite_Renderer.material;
-
-        if(Is_Speed_Buffed == true)
-        {
-            Speed = Speed + 1f;
-        }
-
-        if(Is_Dammage_Buffed == true)
-        {
-            Base_Dammage =  Base_Dammage + 1;
-        }
     }
 
     void FixedUpdate()
@@ -93,6 +88,47 @@ public class MazePlayerController : MonoBehaviour
         playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
         playerConfig.playerInput.SwitchCurrentActionMap("Maze");
+
+        if (playerConfig.playerBuffed == true)
+        {
+            Is_Speed_Buffed = true;
+            Is_Dammage_Buffed = true;
+        }
+
+        if (Is_Speed_Buffed == true)
+        {
+            Speed = Speed + 1f;
+        }
+
+        if (Is_Dammage_Buffed == true)
+        {
+            Base_Dammage = Base_Dammage + 1;
+        }
+
+        if (playerConfig.playerCharacter == 0)
+        {
+            material.SetColor("_CharacterColour", Ruby_Colour);
+        }
+        else if (playerConfig.playerCharacter == 1)
+        {
+            material.SetColor("_CharacterColour", Ruby_Colour);//ruby
+        }
+        else if (playerConfig.playerCharacter == 2)
+        {
+            material.SetColor("_CharacterColour", Pablo_Colour);//pablo
+        }
+        else if (playerConfig.playerCharacter == 3)
+        {
+            material.SetColor("_CharacterColour", Winona_Colour);//winnona
+        }
+        else if (playerConfig.playerCharacter == 4)
+        {
+            material.SetColor("_CharacterColour", John_Colour);//jhon
+        }
+        else if (playerConfig.playerCharacter == 5)
+        {
+            material.SetColor("_CharacterColour", Steven_Colour);//Steven
+        }
     }
 
     private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
