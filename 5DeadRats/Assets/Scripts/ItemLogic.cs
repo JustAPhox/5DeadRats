@@ -105,7 +105,7 @@ public class ItemLogic : MonoBehaviour
     {
         Debug.Log($"Moving to maze Scene");
 
-        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Maze1", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(3);
     }
 

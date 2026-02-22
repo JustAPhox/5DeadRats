@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RatManager : MonoBehaviour
@@ -9,6 +10,12 @@ public class RatManager : MonoBehaviour
     private GameObject[] Player_Objects;
 
     private int Player_Count;
+
+    public Transform[] Spawn_Points;
+
+    private Transform Spawn_Location;
+
+    private List<Transform> Selected_Spawn_Points = new List<Transform>();
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +26,20 @@ public class RatManager : MonoBehaviour
 
         for (int i = 0; i < PlayerConfigs.Length; i++)
         {
-            var player = Instantiate(Player_Prefab);
+            do
+            {
+                Spawn_Location = Spawn_Points[Random.Range(0, Spawn_Points.Length)];
+            }
+            
+            while(Selected_Spawn_Points.Contains(Spawn_Location));
+
+            Selected_Spawn_Points.Add(Spawn_Location);
+            
+            var player = Instantiate(
+                Player_Prefab,
+                Spawn_Location.position,
+                Spawn_Location.rotation
+            );
 
             player.GetComponent<MazePlayerController>().intitialisePlayer(PlayerConfigs[i]);
 

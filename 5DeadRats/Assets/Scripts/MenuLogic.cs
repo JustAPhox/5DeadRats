@@ -62,7 +62,7 @@ public class MenuLogic : MonoBehaviour
     public void openMaze()
     {
         // Loads the scene
-        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Maze1", LoadSceneMode.Additive);
 
         menuCamera.enabled = false;
         menuAudioListener.enabled = false;

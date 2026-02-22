@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,7 +34,7 @@ public class MazePlayerController : MonoBehaviour
     private Coroutine Dammage_Flash_Coroutine;
 
     public float Invincibility_Time = 20.5f;
-    private bool Is_Invicible = false;
+    public bool Is_Invicible = false;
     private Coroutine Invicibility_Coroutine;
 
     public float Stun_Time = 20f;
@@ -57,6 +58,8 @@ public class MazePlayerController : MonoBehaviour
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
+    private CinemachineImpulseSource Impulse_Source;
+
     void Awake()
     {
         controls = new PlayerControls();
@@ -65,6 +68,8 @@ public class MazePlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Sprite_Renderer = GetComponent<SpriteRenderer>();
         material = Sprite_Renderer.material;
+
+        Impulse_Source = GetComponent<CinemachineImpulseSource>();
     }
 
     void FixedUpdate()
@@ -211,7 +216,7 @@ public class MazePlayerController : MonoBehaviour
                                 Script.Play_Sound_From_Array(Death_Noises, 15.5f, 15.8f);
                             }
                             Script.Take_Dammage(Base_Dammage);
-                            Script.Hit_Knockback(Attack_Direction);
+                            //Script.Hit_Knockback(Attack_Direction);
                             Script.Call_Stun_Frames();
                             Script.Call_Dammage_Flash(Flash_Colour);
                             Script.Call_Invincibilty_Frames();
@@ -223,7 +228,7 @@ public class MazePlayerController : MonoBehaviour
                             {
                                 Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
                                 Script.Take_Dammage(Base_Dammage);
-                                Script.Hit_Knockback(Attack_Direction);
+                                //Script.Hit_Knockback(Attack_Direction);
                                 Script.Call_Stun_Frames();
                                 Script.Call_Dammage_Flash(Flash_Colour);
                                 Script.Call_Invincibilty_Frames();
@@ -279,6 +284,8 @@ public class MazePlayerController : MonoBehaviour
 
     public void Take_Dammage(int Dammage_Amount)
     {
+        CameraShakeManagerScript.instance.CameraShake(Impulse_Source);
+        
         if (Current_HP <= Dammage_Amount)
         {
             Current_HP = 0;
