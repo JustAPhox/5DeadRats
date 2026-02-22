@@ -55,6 +55,8 @@ public class MazePlayerController : MonoBehaviour
     public bool Is_Speed_Buffed = false;
     public bool Is_Dammage_Buffed = false;
 
+    public int Crit_Chance = 0;
+
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
@@ -64,7 +66,6 @@ public class MazePlayerController : MonoBehaviour
     {
         controls = new PlayerControls();
 
-        Current_HP = Max_HP;
         rb = GetComponent<Rigidbody2D>();
         Sprite_Renderer = GetComponent<SpriteRenderer>();
         material = Sprite_Renderer.material;
@@ -94,21 +95,31 @@ public class MazePlayerController : MonoBehaviour
 
         playerConfig.playerInput.SwitchCurrentActionMap("Maze");
 
-        if (playerConfig.playerBuffed == true)
-        {
-            Is_Speed_Buffed = true;
-            Is_Dammage_Buffed = true;
-        }
+        //if (playerConfig.playerBuffed == true)
+        //{
+            //Is_Speed_Buffed = true;
+            //Is_Dammage_Buffed = true;
+        //}
 
-        if (Is_Speed_Buffed == true)
-        {
-            Speed = Speed + 1f;
-        }
+        //if (Is_Speed_Buffed == true)
+        //{
+            //Speed = Speed + 1f;
+        //}
 
-        if (Is_Dammage_Buffed == true)
-        {
-            Base_Dammage = Base_Dammage + 1;
-        }
+        //if (Is_Dammage_Buffed == true)
+        //{
+            //Base_Dammage = Base_Dammage + 1;
+        //}
+
+        Max_HP = Max_HP + playerConfig.playerHealthStat;
+
+        Current_HP = Max_HP;
+
+        Base_Dammage = Base_Dammage + playerConfig.playerDammageStat;
+
+        Speed = Speed + playerConfig.playerSpeedStat;
+
+        Crit_Chance = Crit_Chance + playerConfig.playerCritStat;
 
         if (playerConfig.playerCharacter == 0)
         {
@@ -205,9 +216,15 @@ public class MazePlayerController : MonoBehaviour
                 {
                     if (Script.Is_Invicible == false && Script.Current_HP > 0)
                     {  
+                        int Actual_Dammage = Base_Dammage;
+                        if(Random.Range(1, 20) <= Crit_Chance)
+                        {
+                            Actual_Dammage = Base_Dammage * 2;
+                        }
+                        
                         if (Current_HP > 0)
                         {
-                            if (Script.Current_HP > Base_Dammage)
+                            if (Script.Current_HP > Actual_Dammage)
                             {
                                 Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
                             }
@@ -215,7 +232,7 @@ public class MazePlayerController : MonoBehaviour
                             {
                                 Script.Play_Sound_From_Array(Death_Noises, 15.5f, 15.8f);
                             }
-                            Script.Take_Dammage(Base_Dammage);
+                            Script.Take_Dammage(Actual_Dammage);
                             //Script.Hit_Knockback(Attack_Direction);
                             Script.Call_Stun_Frames();
                             Script.Call_Dammage_Flash(Flash_Colour);
@@ -224,10 +241,10 @@ public class MazePlayerController : MonoBehaviour
                         }
                         else
                         {
-                            if (Script.Current_HP > Base_Dammage)
+                            if (Script.Current_HP > 1)
                             {
                                 Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
-                                Script.Take_Dammage(Base_Dammage);
+                                Script.Take_Dammage(1);
                                 //Script.Hit_Knockback(Attack_Direction);
                                 Script.Call_Stun_Frames();
                                 Script.Call_Dammage_Flash(Flash_Colour);
