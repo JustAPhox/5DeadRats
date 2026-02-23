@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerCharacterMenu : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class PlayerCharacterMenu : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI charcterText;
 
+
+    [SerializeField]
+    private Image ratImage;
+
     private PlayerInput playerInput;
 
     private PlayerControls controls;
@@ -29,6 +34,14 @@ public class PlayerCharacterMenu : MonoBehaviour
 
 
     private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
+
+    [SerializeField]
+    private Sprite[] spriteMouthOpen;
+
+    [SerializeField]
+    private Sprite[] spriteMouthClose;
+
+
 
     private void Awake()
     {
@@ -42,16 +55,23 @@ public class PlayerCharacterMenu : MonoBehaviour
 
     public void PlayerJoined(PlayerInput input)
     {
-        joinedText.SetText("Yes PLayer :D");
+        joinedText.SetText($"Player {input.playerIndex + 1}");
 
         playerInput = input;
 
         playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
         charcterText.enabled = true;
-        charcterText.SetText($"Current Character: {characterNames[0]}");
-
+        charcterText.SetText(characterNames[0]);
+        ratImage.enabled = true;
     }
+
+
+    public void stopInputs()
+    {
+        playerInput.onActionTriggered -= PlayerInput_onActionTriggered;
+    }
+
 
     private void PlayerInput_onActionTriggered(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -92,6 +112,7 @@ public class PlayerCharacterMenu : MonoBehaviour
         {
             currentCharacter = 1;
         }
-        charcterText.SetText($"Current Character: {characterNames[currentCharacter - 1]}");
+        charcterText.SetText(characterNames[currentCharacter - 1]);
+        ratImage.sprite = spriteMouthClose[currentCharacter - 1];
     }
 }

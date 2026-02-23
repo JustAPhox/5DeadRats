@@ -108,6 +108,7 @@ public class PlayerConfigManager : MonoBehaviour
     }
 
 
+
     // Adds player to the list when they join
     public void HandlePlayerJoin(PlayerInput playerInput)
     {
@@ -119,10 +120,11 @@ public class PlayerConfigManager : MonoBehaviour
             playerConfigList.Add(new PlayerConfig(playerInput));
         }
     }
-
-
-
 }
+
+
+
+
 
 
 // Stores everything about a player
@@ -138,6 +140,7 @@ public class PlayerConfig
 
 
     public PlayerInput playerInput;
+
     public int playerIndex;
     public bool playerReady;
     public int playerCharacter;

@@ -251,8 +251,7 @@ public class QuizScript : MonoBehaviour
         Debug.Log($"Moving to item Scene");
         assignWinners();
 
-        SceneManager.LoadScene("Item Selection Scene", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.LoadScene("Item Selection Scene");
     }
 
     private void revealAnswers()

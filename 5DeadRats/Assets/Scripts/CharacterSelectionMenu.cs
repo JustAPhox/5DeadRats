@@ -35,4 +35,11 @@ public class CharacterSelectionMenu : MonoBehaviour
         playerConfigManager.GetComponent<PlayerConfigManager>().setPlayerCharacter(index, character);
         playerConfigManager.GetComponent<PlayerConfigManager>().playerReady(index);
     }
+
+
+    public void disableInputs()
+    {
+
+    }
+
 }
