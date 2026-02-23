@@ -62,7 +62,7 @@ public class MenuLogic : MonoBehaviour
     public void openMaze()
     {
         // Loads the scene
-        SceneManager.LoadScene("2D Maze Scene");
+        SceneManager.LoadScene("Maze1");
     }
 
 }
