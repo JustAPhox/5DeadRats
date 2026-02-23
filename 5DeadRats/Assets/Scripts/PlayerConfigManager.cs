@@ -54,12 +54,19 @@ public class PlayerConfigManager : MonoBehaviour
     }
 
 
+    public void setQuizScore(int index, int score)
+    {
+        playerConfigList[index].quizScore = score;
+        Debug.Log($"Player {index} got a total score {score}");
+    }
+
 
     public void setPlayerBuffed(int index, bool buffed)
     {
         playerConfigList[index].playerBuffed = buffed;
         Debug.Log($"Player {index} buffed: {buffed}");
     }
+
 
     public void allowJoining(bool joining)
     {
@@ -101,6 +108,7 @@ public class PlayerConfigManager : MonoBehaviour
     }
 
 
+
     // Adds player to the list when they join
     public void HandlePlayerJoin(PlayerInput playerInput)
     {
@@ -112,10 +120,11 @@ public class PlayerConfigManager : MonoBehaviour
             playerConfigList.Add(new PlayerConfig(playerInput));
         }
     }
-
-
-
 }
+
+
+
+
 
 
 // Stores everything about a player
@@ -131,10 +140,20 @@ public class PlayerConfig
 
 
     public PlayerInput playerInput;
+
     public int playerIndex;
     public bool playerReady;
     public int playerCharacter;
+    public int quizScore;
 
-    public bool playerBuffed;
+
+    public bool playerBuffed;//this will become irrelevant with the new item and stats system, we should get rid of it when we finish implementing that
+
+    //The following are the basic stats for each player - the Cap for each stat = 9
+    public int playerHealthStat = 0;
+    public int playerDammageStat = 0;
+    public int playerSpeedStat = 0;
+    public int playerVisionStat = 0;//save things that effect this stat for last as i need to figure out how to make it effect things properly
+    public int playerCritStat = 0;//Cap for this stat is 19 as it add 5% crit chance for each you have maxing out at 95% chance
 
 }

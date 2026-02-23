@@ -47,14 +47,14 @@ public class MenuLogic : MonoBehaviour
     public void openQuiz()
     {
         // Loads the scene
-        SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Additive);
-
-        menuCamera.enabled = false;
-        menuAudioListener.enabled = false;
+        SceneManager.LoadScene("Quiz Scene");
+    }
 
 
-        // Hides title screen
-        titleScreen.SetActive(false);
+    public void openItemMenu()
+    {
+        // Loads the scene
+        SceneManager.LoadScene("Item Selection Scene");
     }
 
 
@@ -62,14 +62,7 @@ public class MenuLogic : MonoBehaviour
     public void openMaze()
     {
         // Loads the scene
-        SceneManager.LoadScene("2D Maze Scene", LoadSceneMode.Additive);
-
-        menuCamera.enabled = false;
-        menuAudioListener.enabled = false;
-
-
-        // Hides title screen
-        titleScreen.SetActive(false);
+        SceneManager.LoadScene("Maze1");
     }
 
 }
