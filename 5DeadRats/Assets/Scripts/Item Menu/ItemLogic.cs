@@ -21,7 +21,7 @@ public class ItemLogic : MonoBehaviour
     {
         SetUpPlayers();
         tempBadRewardGiver();
-        moveToMaze();
+        //moveToMaze();
     }
 
     // Update is called once per frame
@@ -42,17 +42,23 @@ public class ItemLogic : MonoBehaviour
 
         playersObjects = new GameObject[playerCount];
 
-        // For each player
-        //for (int i = 0; i < playerConfigs.Length; i++)
-        //{
-        // Create a player object to be controlled
-        //GameObject player = Instantiate(playerPreFab);
+        //For each player
+        for (int i = 0; i < playerConfigs.Length; i++)
+        {
+            //Create a player object to be controlled
+            GameObject player = Instantiate(playerPreFab);
 
-        // [IMPORTANT] Give them a player config to initialise with 
-        //player.GetComponent<QuizCharacterScript>().initialisePlayer(playerConfigs[i]);
+            player.GetComponent<ItemMenuCharacter>().itemLogic = gameObject;
 
-        //playersObjects[i] = player;
-        //}
+            player.transform.SetParent(gameObject.transform);
+
+
+
+            //[IMPORTANT] Give them a player config to initialise with
+            player.GetComponent<ItemMenuCharacter>().initialisePlayer(playerConfigs[i]);
+
+            playersObjects[i] = player;
+        }
     }
 
 
@@ -101,7 +107,7 @@ public class ItemLogic : MonoBehaviour
 
 
 
-    private void moveToMaze()
+    public void moveToMaze()
     {
         Debug.Log($"Moving to maze Scene");
 
