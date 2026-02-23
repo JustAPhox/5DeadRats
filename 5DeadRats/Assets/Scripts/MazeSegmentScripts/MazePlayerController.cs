@@ -400,4 +400,9 @@ public class MazePlayerController : MonoBehaviour
     {
         Instantiate(Hurt_Particles, transform.position, transform.rotation);
     }
+
+    public void Add_Win_Point()
+    {
+        playerConfig.winPoints = playerConfig.winPoints + 1;
+    }
 }

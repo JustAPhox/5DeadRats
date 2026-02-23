@@ -7,7 +7,7 @@ public class RatManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject Player_Prefab;
-    private GameObject[] Player_Objects;
+    public GameObject[] Player_Objects;
 
     private int Player_Count;
 
