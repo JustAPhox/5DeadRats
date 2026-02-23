@@ -147,6 +147,13 @@ public class PlayerConfig
     public int quizScore;
 
 
-    public bool playerBuffed;
+    public bool playerBuffed;//this will become irrelevant with the new item and stats system, we should get rid of it when we finish implementing that
+
+    //The following are the basic stats for each player - the Cap for each stat = 9
+    public int playerHealthStat = 0;
+    public int playerDammageStat = 0;
+    public int playerSpeedStat = 0;
+    public int playerVisionStat = 0;//save things that effect this stat for last as i need to figure out how to make it effect things properly
+    public int playerCritStat = 0;//Cap for this stat is 19 as it add 5% crit chance for each you have maxing out at 95% chance
 
 }
