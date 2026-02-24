@@ -20,7 +20,7 @@ public class QuizQuestionManager : MonoBehaviour
 
     // Shows the current answers
     [SerializeField]
-    private Text[] answerBoxText;
+    private TextMeshProUGUI[] answerBoxText;
 
     // Changes correct answer to green
     [SerializeField]
@@ -37,10 +37,10 @@ public class QuizQuestionManager : MonoBehaviour
 
         questionTextBox.SetText(questionDetails[0]);
         categoryTextBox.SetText(categoryNames[questionCode[0]]);
-        answerBoxText[0].text = questionDetails[1];
-        answerBoxText[1].text = questionDetails[2];
-        answerBoxText[2].text = questionDetails[3];
-        answerBoxText[3].text = questionDetails[4];
+        answerBoxText[0].SetText(questionDetails[1]);
+        answerBoxText[1].SetText(questionDetails[2]);
+        answerBoxText[2].SetText(questionDetails[3]);
+        answerBoxText[3].SetText(questionDetails[4]);
         correctAnswer = Convert.ToInt32(questionDetails[5]);
 
         for (int i = 0; i < 4; i++)
