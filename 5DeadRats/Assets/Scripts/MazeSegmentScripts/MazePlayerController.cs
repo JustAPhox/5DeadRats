@@ -274,6 +274,13 @@ public class MazePlayerController : MonoBehaviour
                 break;//makes it stop at first valid target, might be removed later so can hit more than 1 rat at a time
             }
         }
+
+        GameObject Canvas = GameObject.Find("Canvas");
+        MazeTimerScript Timer_Script = Canvas.GetComponent<MazeTimerScript>();
+        if(Timer_Script.Times_Up == true)
+        {
+            Timer_Script.openQuiz();
+        }
     }
 
     public void Make_Ghost()
