@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ItemLogic : MonoBehaviour
 {
@@ -12,7 +14,20 @@ public class ItemLogic : MonoBehaviour
     [SerializeField]
     private GameObject playerPreFab;
 
+    [SerializeField]
+    private GameObject itemPreFab;
+
+    [SerializeField]
+    private GameObject itemSpace;
+
+
     private GameObject[] playersObjects;
+
+    private int[] itemStatus;
+    private GameObject[] itemObjects;
+    private int selectedItemPos;
+
+    private int boughtItemCount;
 
 
 
@@ -20,9 +35,13 @@ public class ItemLogic : MonoBehaviour
     void Start()
     {
         SetUpPlayers();
+        SetUpItems();
+
         tempBadRewardGiver();
         //moveToMaze();
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -62,6 +81,30 @@ public class ItemLogic : MonoBehaviour
     }
 
 
+    private void SetUpItems()
+    {
+        itemStatus = new int[playerCount];
+        itemObjects = new GameObject[playerCount];
+
+
+        //For each player
+        for (int i = 0; i < playerCount; i++)
+        {
+            //Create a player object to be controlled
+            GameObject item = Instantiate(itemPreFab, itemSpace.transform);
+
+            item.transform.SetParent(itemSpace.transform);
+
+            itemObjects[i] = item;
+
+
+            if (i == 0)
+            {
+                item.GetComponent<Image>().color = Color.green;
+            }
+        }
+    }
+
     private void tempBadRewardGiver()
     {
         PlayerConfig[] playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
@@ -100,6 +143,81 @@ public class ItemLogic : MonoBehaviour
                 PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, false);
             }
         }
+
+
+    }
+
+
+    public void buyItem(int playerIndex)
+    {
+        itemObjects[selectedItemPos].GetComponent<Image>().color = Color.red;
+        itemStatus[selectedItemPos] = 1;
+
+        boughtItemCount += 1;
+
+        if (boughtItemCount != playerCount)
+        {
+            selectItem(playerIndex, 1);
+        }
+        else
+        {
+            moveToMaze();
+        }
+
+
+    }
+
+
+    public void selectItem(int playerIndex, int change)
+    {
+
+        if (boughtItemCount == playerCount) { return; }
+
+
+        if (itemStatus[selectedItemPos] == 0)
+        {
+            itemObjects[selectedItemPos].GetComponent<Image>().color = Color.white;
+        }
+
+        bool keepGoing = true;
+
+
+        int attempts = 0;
+
+
+        while (keepGoing)
+        {
+            attempts += 1;
+
+            keepGoing = false;
+
+
+            selectedItemPos += change;
+
+
+
+            if (selectedItemPos < 0)
+            {
+                selectedItemPos = playerCount - 1;
+            }
+            else if (selectedItemPos > playerCount - 1)
+            {
+                selectedItemPos = 0;
+            }
+
+            if (itemStatus[selectedItemPos] == 1)
+            {
+                keepGoing = true;
+            }
+
+            if (attempts > playerCount * 2)
+            {
+                keepGoing = false;
+            }
+
+        }
+
+        itemObjects[selectedItemPos].GetComponent<Image>().color = Color.green;
 
 
     }
