@@ -22,6 +22,9 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField]
     private GameObject menuLogic;
 
+    private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
+
+
 
     private void Awake()
     {
@@ -45,6 +48,13 @@ public class PlayerConfigManager : MonoBehaviour
     {
         return playerConfigList;
     }
+
+
+    public string GetPlayerCharacterName (int characterIndex)
+    {
+        return characterNames[characterIndex - 1];
+    }
+
 
     // Takes an index and character and changes that character when asked
     public void setPlayerCharacter(int index, int character)
@@ -146,7 +156,7 @@ public class PlayerConfig
     public int playerIndex;
     public bool playerReady;
     public int playerCharacter;
-    public int quizScore;
+    public int quizScore = 0;
 
 
     public bool playerBuffed;//this will become irrelevant with the new item and stats system, we should get rid of it when we finish implementing that
@@ -158,7 +168,7 @@ public class PlayerConfig
     public int playerVisionStat = 0;//save things that effect this stat for last as i need to figure out how to make it effect things properly
     public int playerCritStat = 0;//Cap for this stat is 19 as it add 5% crit chance for each you have maxing out at 95% chance
 
-    private List<string> playerItems;
+    public List<string> playerItems;
 
 
 }

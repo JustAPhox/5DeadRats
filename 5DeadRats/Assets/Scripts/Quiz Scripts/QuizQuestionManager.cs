@@ -58,7 +58,10 @@ public class QuizQuestionManager : MonoBehaviour
 
     public void revealCorrectAnswer()
     {
-        answerBox[correctAnswer - 1].GetComponent<Image>().color = Color.green;
+        if (correctAnswer != 0 && correctAnswer != 5)
+        {
+            answerBox[correctAnswer - 1].GetComponent<Image>().color = Color.green;
+        }
     }
 
 
