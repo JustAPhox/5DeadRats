@@ -304,7 +304,7 @@
             "id": "3fc78f63-58f9-4b4e-8688-1619758a6e76",
             "actions": [
                 {
-                    "name": "Confirm",
+                    "name": "BuyItem",
                     "type": "Button",
                     "id": "c66aa5fc-df61-4bc1-8e13-02da47f24396",
                     "expectedControlType": "",
@@ -313,16 +313,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Move",
-                    "type": "PassThrough",
-                    "id": "924a2727-13c7-42b6-a65d-198143559e4b",
-                    "expectedControlType": "Stick",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Left",
+                    "name": "ItemLeft",
                     "type": "Button",
                     "id": "aa47f9c6-a47f-405b-8571-65b3deb14051",
                     "expectedControlType": "",
@@ -331,7 +322,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right",
+                    "name": "ItemRight",
                     "type": "Button",
                     "id": "6c45cc1c-c08e-4060-bee0-a12009d90aef",
                     "expectedControlType": "",
@@ -348,7 +339,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Confirm",
+                    "action": "BuyItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -359,7 +350,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Confirm",
+                    "action": "BuyItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -370,119 +361,9 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Confirm",
+                    "action": "BuyItem",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1986dac3-3e70-40e1-b0b6-0234ad16d3d3",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "3e9b777b-f8de-4948-8342-1d719258ede6",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "50dd5386-fbfd-4c4a-ac91-1c902a6adb3c",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "up",
-                    "id": "b4462f42-c408-41f7-8e9b-f6a59d70df6c",
-                    "path": "<Gamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1d60332c-4ac8-415f-abb0-3e4f9604b033",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "41f2fb89-73ef-4771-b0e3-3b16a53b4bbd",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "61a3545d-874e-4dea-967f-03ba0bb310f3",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "d2268022-545f-43d9-bc1d-80b7a3ae7eb7",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "5e7dc190-459c-4f2b-bb95-122bce8a8b8c",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "774c7b9f-68e9-454c-86e4-5dc4d6f88c8d",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -491,7 +372,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "ItemLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -502,7 +383,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "ItemLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -513,7 +394,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left",
+                    "action": "ItemLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -524,7 +405,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "ItemRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -535,7 +416,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "ItemRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -546,7 +427,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right",
+                    "action": "ItemRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

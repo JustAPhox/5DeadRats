@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,15 +46,15 @@ public class ItemMenuCharacter : MonoBehaviour
         if (obj.performed)
         {
             // Checks if action performed is the same as a cirtain action and if so does that function.
-            if (obj.action.name == controls.Items.Confirm.name)
+            if (obj.action.name == controls.Items.BuyItem.name)
             {
                 selectItem();
             }
-            else if (obj.action.name == controls.Items.Left.name)
+            else if (obj.action.name == controls.Items.ItemLeft.name)
             {
                 changeSelectedItem(-1);
             }
-            else if (obj.action.name == controls.Items.Right.name)
+            else if (obj.action.name == controls.Items.ItemRight.name)
             {
                 changeSelectedItem(1);
             }

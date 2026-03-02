@@ -390,7 +390,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""3fc78f63-58f9-4b4e-8688-1619758a6e76"",
             ""actions"": [
                 {
-                    ""name"": ""Confirm"",
+                    ""name"": ""BuyItem"",
                     ""type"": ""Button"",
                     ""id"": ""c66aa5fc-df61-4bc1-8e13-02da47f24396"",
                     ""expectedControlType"": """",
@@ -399,16 +399,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""924a2727-13c7-42b6-a65d-198143559e4b"",
-                    ""expectedControlType"": ""Stick"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Left"",
+                    ""name"": ""ItemLeft"",
                     ""type"": ""Button"",
                     ""id"": ""aa47f9c6-a47f-405b-8571-65b3deb14051"",
                     ""expectedControlType"": """",
@@ -417,7 +408,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Right"",
+                    ""name"": ""ItemRight"",
                     ""type"": ""Button"",
                     ""id"": ""6c45cc1c-c08e-4060-bee0-a12009d90aef"",
                     ""expectedControlType"": """",
@@ -434,7 +425,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Confirm"",
+                    ""action"": ""BuyItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -445,7 +436,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Confirm"",
+                    ""action"": ""BuyItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -456,119 +447,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Confirm"",
+                    ""action"": ""BuyItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1986dac3-3e70-40e1-b0b6-0234ad16d3d3"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""3e9b777b-f8de-4948-8342-1d719258ede6"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""50dd5386-fbfd-4c4a-ac91-1c902a6adb3c"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""b4462f42-c408-41f7-8e9b-f6a59d70df6c"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1d60332c-4ac8-415f-abb0-3e4f9604b033"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""41f2fb89-73ef-4771-b0e3-3b16a53b4bbd"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""61a3545d-874e-4dea-967f-03ba0bb310f3"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d2268022-545f-43d9-bc1d-80b7a3ae7eb7"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""5e7dc190-459c-4f2b-bb95-122bce8a8b8c"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""774c7b9f-68e9-454c-86e4-5dc4d6f88c8d"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -577,7 +458,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Left"",
+                    ""action"": ""ItemLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -588,7 +469,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Left"",
+                    ""action"": ""ItemLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -599,7 +480,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Left"",
+                    ""action"": ""ItemLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -610,7 +491,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Right"",
+                    ""action"": ""ItemRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -621,7 +502,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Right"",
+                    ""action"": ""ItemRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -632,7 +513,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Right"",
+                    ""action"": ""ItemRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1027,10 +908,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Menu_Right = m_Menu.FindAction("Right", throwIfNotFound: true);
         // Items
         m_Items = asset.FindActionMap("Items", throwIfNotFound: true);
-        m_Items_Confirm = m_Items.FindAction("Confirm", throwIfNotFound: true);
-        m_Items_Move = m_Items.FindAction("Move", throwIfNotFound: true);
-        m_Items_Left = m_Items.FindAction("Left", throwIfNotFound: true);
-        m_Items_Right = m_Items.FindAction("Right", throwIfNotFound: true);
+        m_Items_BuyItem = m_Items.FindAction("BuyItem", throwIfNotFound: true);
+        m_Items_ItemLeft = m_Items.FindAction("ItemLeft", throwIfNotFound: true);
+        m_Items_ItemRight = m_Items.FindAction("ItemRight", throwIfNotFound: true);
         // Quiz
         m_Quiz = asset.FindActionMap("Quiz", throwIfNotFound: true);
         m_Quiz_Answer1 = m_Quiz.FindAction("Answer 1", throwIfNotFound: true);
@@ -1253,10 +1133,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Items
     private readonly InputActionMap m_Items;
     private List<IItemsActions> m_ItemsActionsCallbackInterfaces = new List<IItemsActions>();
-    private readonly InputAction m_Items_Confirm;
-    private readonly InputAction m_Items_Move;
-    private readonly InputAction m_Items_Left;
-    private readonly InputAction m_Items_Right;
+    private readonly InputAction m_Items_BuyItem;
+    private readonly InputAction m_Items_ItemLeft;
+    private readonly InputAction m_Items_ItemRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Items".
     /// </summary>
@@ -1269,21 +1148,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public ItemsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Items/Confirm".
+        /// Provides access to the underlying input action "Items/BuyItem".
         /// </summary>
-        public InputAction @Confirm => m_Wrapper.m_Items_Confirm;
+        public InputAction @BuyItem => m_Wrapper.m_Items_BuyItem;
         /// <summary>
-        /// Provides access to the underlying input action "Items/Move".
+        /// Provides access to the underlying input action "Items/ItemLeft".
         /// </summary>
-        public InputAction @Move => m_Wrapper.m_Items_Move;
+        public InputAction @ItemLeft => m_Wrapper.m_Items_ItemLeft;
         /// <summary>
-        /// Provides access to the underlying input action "Items/Left".
+        /// Provides access to the underlying input action "Items/ItemRight".
         /// </summary>
-        public InputAction @Left => m_Wrapper.m_Items_Left;
-        /// <summary>
-        /// Provides access to the underlying input action "Items/Right".
-        /// </summary>
-        public InputAction @Right => m_Wrapper.m_Items_Right;
+        public InputAction @ItemRight => m_Wrapper.m_Items_ItemRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1310,18 +1185,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ItemsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ItemsActionsCallbackInterfaces.Add(instance);
-            @Confirm.started += instance.OnConfirm;
-            @Confirm.performed += instance.OnConfirm;
-            @Confirm.canceled += instance.OnConfirm;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Left.started += instance.OnLeft;
-            @Left.performed += instance.OnLeft;
-            @Left.canceled += instance.OnLeft;
-            @Right.started += instance.OnRight;
-            @Right.performed += instance.OnRight;
-            @Right.canceled += instance.OnRight;
+            @BuyItem.started += instance.OnBuyItem;
+            @BuyItem.performed += instance.OnBuyItem;
+            @BuyItem.canceled += instance.OnBuyItem;
+            @ItemLeft.started += instance.OnItemLeft;
+            @ItemLeft.performed += instance.OnItemLeft;
+            @ItemLeft.canceled += instance.OnItemLeft;
+            @ItemRight.started += instance.OnItemRight;
+            @ItemRight.performed += instance.OnItemRight;
+            @ItemRight.canceled += instance.OnItemRight;
         }
 
         /// <summary>
@@ -1333,18 +1205,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="ItemsActions" />
         private void UnregisterCallbacks(IItemsActions instance)
         {
-            @Confirm.started -= instance.OnConfirm;
-            @Confirm.performed -= instance.OnConfirm;
-            @Confirm.canceled -= instance.OnConfirm;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Left.started -= instance.OnLeft;
-            @Left.performed -= instance.OnLeft;
-            @Left.canceled -= instance.OnLeft;
-            @Right.started -= instance.OnRight;
-            @Right.performed -= instance.OnRight;
-            @Right.canceled -= instance.OnRight;
+            @BuyItem.started -= instance.OnBuyItem;
+            @BuyItem.performed -= instance.OnBuyItem;
+            @BuyItem.canceled -= instance.OnBuyItem;
+            @ItemLeft.started -= instance.OnItemLeft;
+            @ItemLeft.performed -= instance.OnItemLeft;
+            @ItemLeft.canceled -= instance.OnItemLeft;
+            @ItemRight.started -= instance.OnItemRight;
+            @ItemRight.performed -= instance.OnItemRight;
+            @ItemRight.canceled -= instance.OnItemRight;
         }
 
         /// <summary>
@@ -1658,33 +1527,26 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IItemsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "BuyItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnConfirm(InputAction.CallbackContext context);
+        void OnBuyItem(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ItemLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMove(InputAction.CallbackContext context);
+        void OnItemLeft(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ItemRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLeft(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Right" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRight(InputAction.CallbackContext context);
+        void OnItemRight(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Quiz" which allows adding and removing callbacks.
