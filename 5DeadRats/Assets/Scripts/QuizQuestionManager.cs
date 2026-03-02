@@ -12,9 +12,15 @@ public class QuizQuestionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI questionTextBox;
 
+
+    [SerializeField]
+    private TextMeshProUGUI categoryTextBox;
+
+    private string[] categoryNames = { "Media and Entertainment", "Science and Nature", "History and the Outside World", "Our Glorious Kind", "Geography", "Bonus Round" };
+
     // Shows the current answers
     [SerializeField]
-    private Text[] answerBoxText;
+    private TextMeshProUGUI[] answerBoxText;
 
     // Changes correct answer to green
     [SerializeField]
@@ -25,15 +31,16 @@ public class QuizQuestionManager : MonoBehaviour
 
     private int correctAnswer;
 
-    public void setCurrentQuestion(int questionCode)
+    public void setCurrentQuestion(int[] questionCode)
     {
         string[] questionDetails = quizMaster.GetComponent<QuizQuestionPicker>().getQuestion(questionCode);
 
         questionTextBox.SetText(questionDetails[0]);
-        answerBoxText[0].text = questionDetails[1];
-        answerBoxText[1].text = questionDetails[2];
-        answerBoxText[2].text = questionDetails[3];
-        answerBoxText[3].text = questionDetails[4];
+        categoryTextBox.SetText(categoryNames[questionCode[0]]);
+        answerBoxText[0].SetText(questionDetails[1]);
+        answerBoxText[1].SetText(questionDetails[2]);
+        answerBoxText[2].SetText(questionDetails[3]);
+        answerBoxText[3].SetText(questionDetails[4]);
         correctAnswer = Convert.ToInt32(questionDetails[5]);
 
         for (int i = 0; i < 4; i++)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuizCharacterScript : MonoBehaviour
 {
@@ -16,8 +17,13 @@ public class QuizCharacterScript : MonoBehaviour
     private int playerCharacter;
 
     [SerializeField]
-    private TextMeshProUGUI characterText;
+    private Image ratImage;
 
+    [SerializeField]
+    private Sprite[] spriteMouthOpen;
+
+    [SerializeField]
+    private Sprite[] spriteMouthClose;
 
     [SerializeField]
     private TextMeshProUGUI pointText;
@@ -59,12 +65,13 @@ public class QuizCharacterScript : MonoBehaviour
 
         // Stores and shows the player character (okay just a number but thats like half the work)
         playerCharacter = config.playerCharacter;
-        characterText.SetText(characterNames[playerCharacter - 1]);
 
         // [IMPORTANT] Adds a way to detect the C# events the players are creating.
         playerConfig.playerInput.onActionTriggered += PlayerInput_onActionTriggered;
 
         playerConfig.playerInput.SwitchCurrentActionMap("Quiz");
+
+        ratImage.sprite = spriteMouthClose[playerCharacter - 1];
     }
 
     // [IMPORTANT] Triggers whenever this player does an action.

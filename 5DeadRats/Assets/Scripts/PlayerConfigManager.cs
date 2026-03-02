@@ -135,6 +135,8 @@ public class PlayerConfig
     {
         playerIndex = input.playerIndex;
         playerInput = input;
+        playerItems = new List<string>();
+
     }
 
 
@@ -155,7 +157,7 @@ public class PlayerConfig
     public int playerSpeedStat = 0;
     public int playerVisionStat = 0;//save things that effect this stat for last as i need to figure out how to make it effect things properly
     public int playerCritStat = 0;//Cap for this stat is 19 as it add 5% crit chance for each you have maxing out at 95% chance
-
+    private List<string> playerItems;
     public int winPoints = 0;
 
 }

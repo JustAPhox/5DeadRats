@@ -65,11 +65,11 @@ public class ItemMenuCharacter : MonoBehaviour
 
     private void selectItem()
     {
-        Debug.Log($"Player {playerConfig.playerIndex} confirms");
+        itemLogic.GetComponent<ItemLogic>().buyItem(playerConfig.playerIndex);
     }
 
     private void changeSelectedItem(int change)
     {
-        Debug.Log($"Player {playerConfig.playerIndex} changes item in direction {change}");
+        itemLogic.GetComponent<ItemLogic>().selectItem(playerConfig.playerIndex, change);
     }
 }
