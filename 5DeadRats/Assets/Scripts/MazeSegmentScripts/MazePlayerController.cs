@@ -8,9 +8,9 @@ using UnityEngine.UIElements;
 
 public class MazePlayerController : MonoBehaviour
 {
-    private PlayerConfig playerConfig;
+    public PlayerConfig playerConfig;
     private PlayerControls controls;
-    private int playerCharacter;
+    public int playerCharacter;
     
     public float Speed = 5f;
     public Vector2 Movement_Input;
