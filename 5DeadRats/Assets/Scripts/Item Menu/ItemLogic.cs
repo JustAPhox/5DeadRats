@@ -216,7 +216,7 @@ public class ItemLogic : MonoBehaviour
 
         string boughtItem = itemObjects[selectedItemPos].GetComponent<ItemShower>().itemBought();
 
-        playerConfigs[playerIndex].playerItems.Append(boughtItem)
+        playerConfigs[playerIndex].playerItems.Append(boughtItem);
 
         itemStatus[selectedItemPos] = 1;
 
