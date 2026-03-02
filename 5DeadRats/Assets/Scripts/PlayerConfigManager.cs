@@ -169,6 +169,6 @@ public class PlayerConfig
     public int playerCritStat = 0;//Cap for this stat is 19 as it add 5% crit chance for each you have maxing out at 95% chance
 
     public List<string> playerItems;
-
+    public int winPoints = 0;
 
 }
