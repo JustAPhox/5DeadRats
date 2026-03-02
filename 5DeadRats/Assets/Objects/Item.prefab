@@ -443,6 +443,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b2eb2fe4aaf2c1141ba1ea81149fa5d4, type: 3}
   - {fileID: 21300000, guid: f283f34ae16672e4fb9a1948dbc3072c, type: 3}
   - {fileID: 21300000, guid: 3583923bfcea25b489eac0545bcdbb03, type: 3}
+  - {fileID: 21300000, guid: d8d7effb445b04645a6195c70769da11, type: 3}
   negativeItemSprites:
   - {fileID: 21300000, guid: b2eb2fe4aaf2c1141ba1ea81149fa5d4, type: 3}
   itemImage: {fileID: 8861474733608408539}

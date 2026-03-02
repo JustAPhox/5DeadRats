@@ -167,48 +167,6 @@ public class ItemLogic : MonoBehaviour
         }
     }
 
-    private void tempBadRewardGiver()
-    {
-        //PlayerConfig[] playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
-
-        int[] playerScores = new int[playerCount];
-
-        for (int i = 0; i < playerCount; i++)
-        {
-            playerScores[i] = playerConfigs[i].quizScore;
-        }
-
-
-        int highestPoints = 0;
-
-
-
-
-        // Finds heighest score
-        for (int i = 0; i < playerCount; i++)
-        {
-            if (playerScores[i] > highestPoints)
-            {
-                highestPoints = playerScores[i];
-            }
-        }
-
-        // All players with best score win
-        for (int i = 0; i < playerCount; i++)
-        {
-            if (playerScores[i] == highestPoints)
-            {
-                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, true);
-            }
-            else
-            {
-                PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setPlayerBuffed(i, false);
-            }
-        }
-
-
-    }
-
 
     public void buyItem(int playerIndex)
     {
@@ -216,7 +174,7 @@ public class ItemLogic : MonoBehaviour
 
         string boughtItem = itemObjects[selectedItemPos].GetComponent<ItemShower>().itemBought();
 
-        playerConfigs[playerIndex].playerItems.Append(boughtItem);
+        ApplyItem(playerIndex, boughtItem);
 
         itemStatus[selectedItemPos] = 1;
 
@@ -234,6 +192,27 @@ public class ItemLogic : MonoBehaviour
 
     }
 
+    private void ApplyItem(int playerIndex, string boughtItem)
+    {
+        playerConfigs[playerIndex].playerItems.Append(boughtItem);
+
+        if (boughtItem == "overclocked_pacemaker")
+        {
+            playerConfigs[playerIndex].playerDammageStat += 1;
+            playerConfigs[playerIndex].playerHealthStat += 1;
+            playerConfigs[playerIndex].playerSpeedStat += 1;
+            playerConfigs[playerIndex].playerVisionStat += 1;
+            playerConfigs[playerIndex].playerCritStat += 1;
+        }
+        else if (boughtItem == "toothbrush")
+        {
+            playerConfigs[playerIndex].playerDammageStat += 1;
+        }
+        else if (boughtItem == "hearty_cheese")
+        {
+            playerConfigs[playerIndex].playerHealthStat += 1;
+        }
+    }
 
     public void selectItem(int playerIndex, int change)
     {
@@ -301,3 +280,4 @@ public class ItemLogic : MonoBehaviour
     }
 
 }
+

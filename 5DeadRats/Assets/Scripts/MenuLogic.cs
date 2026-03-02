@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +21,9 @@ public class MenuLogic : MonoBehaviour
     private Camera menuCamera;
     [SerializeField]
     private AudioListener menuAudioListener;
+
+    [SerializeField]
+    TextAsset jsonFile;
 
     public void startGame()
     {
@@ -44,6 +49,16 @@ public class MenuLogic : MonoBehaviour
     }
 
 
+    public void readjSON()
+    {
+        JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text);
+
+
+        
+
+        //Debug.Log(JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text));
+    }
+
     public void openQuiz()
     {
         // Loads the scene
@@ -65,4 +80,32 @@ public class MenuLogic : MonoBehaviour
         SceneManager.LoadScene("Maze1");
     }
 
+}
+
+[Serializable]
+public class ItemInfo
+{
+    ItemInfo() 
+    {
+        name = "Name";
+        code = "code";
+        description = "Stuff About the Item";
+
+        health = 0;
+        damage = 0;
+        speed = 0;
+        vision = 0;
+        crit = 0;    
+    }  
+
+
+    public string name;
+    public string code;
+    public string description;
+
+    public int health;
+    public int damage;
+    public int speed;
+    public int vision;
+    public int crit;
 }
