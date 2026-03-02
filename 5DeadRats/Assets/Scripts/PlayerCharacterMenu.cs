@@ -63,6 +63,8 @@ public class PlayerCharacterMenu : MonoBehaviour
 
         charcterText.enabled = true;
         charcterText.SetText(characterNames[0]);
+        ratImage.sprite = spriteMouthClose[0];
+
         ratImage.enabled = true;
     }
 
