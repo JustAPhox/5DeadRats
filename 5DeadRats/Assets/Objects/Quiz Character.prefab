@@ -59,17 +59,17 @@ MonoBehaviour:
   QuizMaster: {fileID: 0}
   ratImage: {fileID: 6952333159382422448}
   spriteMouthOpen:
-  - {fileID: 21300000, guid: bc7f80e991c7e624f80c50f5e28d30cd, type: 3}
-  - {fileID: 21300000, guid: d7375a254c2a8984a9f27bd0c7d81636, type: 3}
-  - {fileID: 21300000, guid: 33143a6dd764e0642992f2919d140903, type: 3}
-  - {fileID: 21300000, guid: f00d6a26b1898cc41a13777fcb78e553, type: 3}
-  - {fileID: 21300000, guid: da5e5a1d65e70c04fa034b1e0eb2f5b2, type: 3}
+  - {fileID: 21300000, guid: ec5c2487c3f20b74bb23b53fc9587416, type: 3}
+  - {fileID: 21300000, guid: d61ef5c339439484ebf75bd684f750f0, type: 3}
+  - {fileID: 21300000, guid: 22bb84f76ac9c374f8371b98db98cd12, type: 3}
+  - {fileID: 21300000, guid: 604efae995d3e84499c5178e96998ad6, type: 3}
+  - {fileID: 21300000, guid: 2335530b00288c2468c4d7c440677b6e, type: 3}
   spriteMouthClose:
-  - {fileID: 21300000, guid: e9003a83ad389b1469f2c5ef9d1145fe, type: 3}
-  - {fileID: 21300000, guid: 164f1ee1d54da374a98591824030a20b, type: 3}
-  - {fileID: 21300000, guid: 2f37f891f03bf694c9c52c1f1690b92e, type: 3}
-  - {fileID: 21300000, guid: ae59f5b1b390f5e498dd3494328644d5, type: 3}
-  - {fileID: 21300000, guid: 2b9d37a14ef7c76428f8896da7ae75c1, type: 3}
+  - {fileID: 21300000, guid: d0580d4c1e7ab4943a841ab378280d77, type: 3}
+  - {fileID: 21300000, guid: 084e83df682d0af42b9f9739e7e649d4, type: 3}
+  - {fileID: 21300000, guid: 64094fdd964167c449405cd533d52dcb, type: 3}
+  - {fileID: 21300000, guid: a65caf1d80621934095675f73646cae8, type: 3}
+  - {fileID: 21300000, guid: 17dba3fb4f12f8e4b9b2724259a99c73, type: 3}
   pointText: {fileID: 7370211949342504904}
   voteShowers:
   - {fileID: 5283209661982815371}
@@ -320,8 +320,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 175, y: 121.4}
-  m_SizeDelta: {x: 719.3701, y: 719.373}
+  m_AnchoredPosition: {x: 176.49, y: 154}
+  m_SizeDelta: {x: 529.84, y: 529.8403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5597172369341361714
 CanvasRenderer:
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 761be3213377ba440b0a977111e747e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b7274b46291c1a468abca42b37df65a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9003a83ad389b1469f2c5ef9d1145fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0580d4c1e7ab4943a841ab378280d77, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
