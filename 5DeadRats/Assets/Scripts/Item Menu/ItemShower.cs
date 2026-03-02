@@ -15,6 +15,14 @@ public class ItemShower : MonoBehaviour
 
     private int[] itemCode;
 
+    [SerializeField]
+    private Sprite[] positiveItemSprites;
+    [SerializeField]
+    private Sprite[] negativeItemSprites;
+
+    [SerializeField]
+    private Image itemImage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +41,15 @@ public class ItemShower : MonoBehaviour
         itemCode = code;
         itemNameBox.SetText(itemLogic.GetComponent<ItemChooser>().getItemName(itemCode));
         itemDescriptionBox.SetText(itemLogic.GetComponent<ItemChooser>().getItemDescription(itemCode));
+        if (itemCode[0] == 0)
+        {
+            itemImage.sprite = positiveItemSprites[itemCode[1]];
+        }
+        else
+        {
+            itemImage.sprite = negativeItemSprites[itemCode[1]];
+
+        }
     }
 
     public void itemSelected()

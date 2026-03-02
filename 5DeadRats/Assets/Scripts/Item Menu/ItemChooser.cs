@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ItemChooser : MonoBehaviour
 {
-    string[,] positveItems = {{ "GoodStuff", "Good_Stuff" ,"It Helps" }};
-    string[,] negativeItems = {{ "BadStuff", "Bad_Stuff" ,"It Hurts" }};
+    string[,] positveItems = {
+        { "Berserker’s helmet", "berserker_helmet", "Each time you take damage this round, your attack raises by 1 for the rest of the round." },
+        { "Cannablistic urges", "cannibalistic_urges", "Heal a quarter heart for every hit." },
+        { "Holy Cheese", "holy_cheese", "Resurrect yourself after you die." },
+        { "Overclocked pacemaker", "overclocked_pacemaker", "Increase all stats by 3. Every 5 seconds there is a 1/1000 chance that you immediately die." },
+    };
+    string[,] negativeItems = {{ "Nothing", "No_Bad_Item" ,"It Hurts" }};
 
 
 
@@ -26,14 +31,14 @@ public class ItemChooser : MonoBehaviour
 
     public int[] GivePositiveItem()
     {
-        int[] itemCode = { 0, Random.Range(0, positveItems.Length - 1) };
+        int[] itemCode = { 0, Random.Range(0, positveItems.GetLength(0)) };
         return itemCode;
     }
 
 
     public int[] GiveNegativeItem()
     {
-        int[] itemCode = { 1, Random.Range(0, negativeItems.Length - 1) };
+        int[] itemCode = { 1, Random.Range(0, negativeItems.GetLength(0)) };
         return itemCode;
     }
 
