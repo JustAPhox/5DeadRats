@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,6 +22,10 @@ public class ItemLogic : MonoBehaviour
     [SerializeField]
     private GameObject itemSpace;
 
+    [SerializeField]
+    private TextMeshProUGUI currentPlayerText;
+
+    private PlayerConfig[] playerConfigs;
 
     private GameObject[] playersObjects;
 
@@ -29,17 +35,26 @@ public class ItemLogic : MonoBehaviour
 
     private int boughtItemCount;
 
+    private int[] playerOrder;
+    private int[] playerScores;
+
+    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         SetUpPlayers();
+
+        OrderPlayers();
+
         SetUpItems();
 
-        tempBadRewardGiver();
+        //tempBadRewardGiver();
         //moveToMaze();
     }
+
 
 
 
@@ -54,7 +69,7 @@ public class ItemLogic : MonoBehaviour
     private void SetUpPlayers()
     {
         // [IMPORTANT] Gets an array of all the players
-        PlayerConfig[] playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
+        playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
 
         // Gets the number of players
         playerCount = playerConfigs.Length;
@@ -78,8 +93,33 @@ public class ItemLogic : MonoBehaviour
 
             playersObjects[i] = player;
         }
+
+
     }
 
+
+
+    private void OrderPlayers()
+    {
+        playerOrder = new int[playerCount];
+        playerScores = new int[playerCount];
+
+        for (int i = 0;i < playerCount; i++)
+        {
+            playerOrder[i] = i;
+            playerScores[i] = playerConfigs[i].quizScore;
+        }
+
+
+        Array.Sort(playerScores, playerOrder);
+        Array.Reverse(playerScores);
+        Array.Reverse(playerOrder);
+
+        Debug.Log($"Player Order: {string.Join(", ", playerOrder)}");
+        Debug.Log($"Player Scores: {string.Join(", ", playerScores)}");
+
+        currentPlayerText.SetText($"{PlayerConfigManager.instance.GetPlayerCharacterName(playerOrder[0])} choose your item.");
+    }
 
     private void SetUpItems()
     {
@@ -95,19 +135,41 @@ public class ItemLogic : MonoBehaviour
 
             item.transform.SetParent(itemSpace.transform);
 
+            item.GetComponent<ItemShower>().itemLogic = gameObject;
+
+
             itemObjects[i] = item;
+
+
+            int[] itemCode;
+
+            if (i == 0)
+            {
+                itemCode = gameObject.GetComponent<ItemChooser>().GivePositiveItem();
+            }
+            else if (i == 1)
+            {
+                itemCode = gameObject.GetComponent<ItemChooser>().GiveNegativeItem();
+            }
+            else
+            {
+                itemCode = gameObject.GetComponent<ItemChooser>().GiveRandomItem();
+            }
+
+
+            item.GetComponent<ItemShower>().initialiseBox(itemCode);
 
 
             if (i == 0)
             {
-                item.GetComponent<Image>().color = Color.green;
+                item.GetComponent<ItemShower>().itemSelected();
             }
         }
     }
 
     private void tempBadRewardGiver()
     {
-        PlayerConfig[] playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
+        //PlayerConfig[] playerConfigs = PlayerConfigManager.instance.GetPlayerConfigs().ToArray();
 
         int[] playerScores = new int[playerCount];
 
@@ -150,14 +212,19 @@ public class ItemLogic : MonoBehaviour
 
     public void buyItem(int playerIndex)
     {
-        itemObjects[selectedItemPos].GetComponent<Image>().color = Color.red;
+        if (playerIndex != playerOrder[boughtItemCount]) { return; }
+
+        string boughtItem = itemObjects[selectedItemPos].GetComponent<ItemShower>().itemBought();
+
+        playerConfigs[playerIndex].playerItems.Append(boughtItem);
+
         itemStatus[selectedItemPos] = 1;
 
         boughtItemCount += 1;
 
         if (boughtItemCount != playerCount)
         {
-            selectItem(playerIndex, 1);
+            selectItem(playerOrder[boughtItemCount], 1);
         }
         else
         {
@@ -172,11 +239,12 @@ public class ItemLogic : MonoBehaviour
     {
 
         if (boughtItemCount == playerCount) { return; }
+        if (playerIndex != playerOrder[boughtItemCount]) { return; }
 
 
         if (itemStatus[selectedItemPos] == 0)
         {
-            itemObjects[selectedItemPos].GetComponent<Image>().color = Color.white;
+            itemObjects[selectedItemPos].GetComponent<ItemShower>().itemUnselected();
         }
 
         bool keepGoing = true;
@@ -217,7 +285,7 @@ public class ItemLogic : MonoBehaviour
 
         }
 
-        itemObjects[selectedItemPos].GetComponent<Image>().color = Color.green;
+        itemObjects[selectedItemPos].GetComponent<ItemShower>().itemSelected();
 
 
     }
