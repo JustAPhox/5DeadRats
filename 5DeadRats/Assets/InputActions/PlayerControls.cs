@@ -574,19 +574,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""24dedae8-7855-486c-844a-5aaddd452a7e"",
-                    ""path"": ""<XInputController>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Answer 1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""22564836-3df9-4872-b3a9-770e6c541637"",
-                    ""path"": ""<SwitchProControllerHID>/buttonWest"",
+                    ""id"": ""76911c0a-d0b9-470f-84be-c8539f43797e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -607,19 +596,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""20c72cec-0ccd-4354-bedf-21fcb391df08"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Answer 2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ce1539be-fcba-4475-a234-703ce2f255c9"",
-                    ""path"": ""<SwitchProControllerHID>/buttonNorth"",
+                    ""id"": ""444662c2-fa75-4f91-900b-a30746495d44"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -640,19 +618,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f23b0917-79e1-42ff-99ba-7b83b616c523"",
-                    ""path"": ""<XInputController>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Answer 3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""435c9ef8-baa8-4e72-a03b-55a3c0575cac"",
-                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
+                    ""id"": ""e1c5d902-4b75-4c13-9d60-893cfcdd644f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -673,19 +640,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15475926-1b45-4fce-9eeb-4ebd94539d1c"",
-                    ""path"": ""<XInputController>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Answer 4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5b81cda6-8bc2-4f9d-a4ed-ae378fd15eab"",
-                    ""path"": ""<SwitchProControllerHID>/buttonEast"",
+                    ""id"": ""f0b723d3-ca16-432e-8269-0e8690c8443b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -712,6 +668,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""ec531dbf-49ee-463c-bc2b-caede04212bd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Active"",
+                    ""type"": ""Button"",
+                    ""id"": ""5fec096b-35fd-492f-9b86-c1189f03c362"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -894,6 +859,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d328d675-ef0e-48fb-8e7e-aa387cbe3e61"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Active"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d37dad51-0f8d-4f47-b9b6-203779893b53"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Active"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -921,6 +908,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Maze = asset.FindActionMap("Maze", throwIfNotFound: true);
         m_Maze_Move = m_Maze.FindAction("Move", throwIfNotFound: true);
         m_Maze_Attack = m_Maze.FindAction("Attack", throwIfNotFound: true);
+        m_Maze_Active = m_Maze.FindAction("Active", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -1382,6 +1370,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IMazeActions> m_MazeActionsCallbackInterfaces = new List<IMazeActions>();
     private readonly InputAction m_Maze_Move;
     private readonly InputAction m_Maze_Attack;
+    private readonly InputAction m_Maze_Active;
     /// <summary>
     /// Provides access to input actions defined in input action map "Maze".
     /// </summary>
@@ -1401,6 +1390,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Maze/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Maze_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/Active".
+        /// </summary>
+        public InputAction @Active => m_Wrapper.m_Maze_Active;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1433,6 +1426,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Active.started += instance.OnActive;
+            @Active.performed += instance.OnActive;
+            @Active.canceled += instance.OnActive;
         }
 
         /// <summary>
@@ -1450,6 +1446,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Active.started -= instance.OnActive;
+            @Active.performed -= instance.OnActive;
+            @Active.canceled -= instance.OnActive;
         }
 
         /// <summary>
@@ -1605,5 +1604,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Active" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActive(InputAction.CallbackContext context);
     }
 }

@@ -29,6 +29,9 @@ public class MazeTimerScript : MonoBehaviour
         if (Times_Up == false)
         {
             Remaining_Time -= Time.deltaTime;
+
+            Check_All_Dead();
+
             int Minutes = Mathf.FloorToInt(Remaining_Time / 60);
             int Seconds = Mathf.FloorToInt(Remaining_Time % 60);
             Timer_Text.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
@@ -138,5 +141,57 @@ public class MazeTimerScript : MonoBehaviour
     public void openQuiz()
     {
         SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Single);
+    }
+
+    public void Check_All_Dead()
+    {
+        GameObject Player_Manager = GameObject.Find("PlayerManager");
+        RatManager Script = Player_Manager.GetComponent<RatManager>();
+        GameObject Player1 = null;
+        GameObject Player2 = null;
+        GameObject Player3 = null;
+        GameObject Player4 = null;
+
+        if (Script.Player_Objects.Length > 0)
+            Player1 = Script.Player_Objects[0];
+
+        if (Script.Player_Objects.Length > 1)
+            Player2 = Script.Player_Objects[1];
+
+        if (Script.Player_Objects.Length > 2)
+            Player3 = Script.Player_Objects[2];
+
+        if (Script.Player_Objects.Length > 3)
+            Player4 = Script.Player_Objects[3];
+
+        int Player1_HP = 0;
+        int Player2_HP = 0;
+        int Player3_HP = 0;
+        int Player4_HP = 0;
+        if (Player1 != null)
+        {
+            MazePlayerController P1_Script = Player1.GetComponent<MazePlayerController>();
+            Player1_HP = P1_Script.Current_HP;
+        }
+        if (Player2 != null)
+        {
+            MazePlayerController P2_Script = Player2.GetComponent<MazePlayerController>();
+            Player2_HP = P2_Script.Current_HP;
+        }
+        if (Player3 != null)
+        {
+            MazePlayerController P3_Script = Player3.GetComponent<MazePlayerController>();
+            Player3_HP = P3_Script.Current_HP;
+        }
+        if (Player4 != null)
+        {
+            MazePlayerController P4_Script = Player4.GetComponent<MazePlayerController>();
+            Player4_HP = P4_Script.Current_HP;
+        }
+
+        if (Player1_HP == 0 && Player2_HP == 0 && Player3_HP == 0 && Player4_HP == 0)
+        {
+            Remaining_Time = 0;
+        }
     }
 }
