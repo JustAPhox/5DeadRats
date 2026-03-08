@@ -5396,9 +5396,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer_Text: {fileID: 1877706693}
-  Remaining_Time: 121
+  Remaining_Time: 11
   Times_Up: 0
   End_Segement_Button: {fileID: 295174772}
+  Ruby_Wins: {fileID: 8712345633930687146, guid: d0a0eeec6d9b6404a949ebfa8f2e82aa, type: 3}
+  Ruby_Looses: {fileID: 8712345633930687146, guid: 2e11657ebe7a4c04cbbdec2c5283555e, type: 3}
+  Pablo_Wins: {fileID: 8712345633930687146, guid: a2837f42fe5bb3144b41a9a55ebbeb0f, type: 3}
+  Pablo_Looses: {fileID: 8712345633930687146, guid: 10aca0b7e4dc80549950c3090d914cfe, type: 3}
+  Winona_Wins: {fileID: 8712345633930687146, guid: 091ba44ba06d4f244a420e362b5c31a9, type: 3}
+  Winona_Looses: {fileID: 8712345633930687146, guid: 34948f7cc36af71428c4940090c88f97, type: 3}
+  John_Wins: {fileID: 8712345633930687146, guid: 988fb3996dd51a9438d628834c407aa8, type: 3}
+  John_Looses: {fileID: 8712345633930687146, guid: 42a8c4c6d43cf674f94f1b8e5dd2038b, type: 3}
+  Steven_Wins: {fileID: 8712345633930687146, guid: 71b9db420ab4d9647861be7157ae7c43, type: 3}
+  Steven_Looses: {fileID: 8712345633930687146, guid: c3ba527549c12784c9281097dcf0fff6, type: 3}
+  This_Canvas: {fileID: 1712829985}
+  P1_Pos: {x: -103, y: 62}
+  P2_Pos: {x: 103, y: 62}
+  P3_Pos: {x: -300, y: 62}
+  P4_Pos: {x: 300, y: 62}
 --- !u!114 &1712829983
 MonoBehaviour:
   m_ObjectHideFlags: 0
