@@ -52,6 +52,9 @@ public class QuizScript : MonoBehaviour
     // How many people have answered
     private int currentAnswerCount = 0;
 
+    [SerializeField]
+    private TextMeshProUGUI phaseText;
+
 
     private bool votingAllowed = false;
 
@@ -149,6 +152,8 @@ public class QuizScript : MonoBehaviour
 
         votingAllowed = true;
 
+        phaseText.SetText("Answer The Question");
+
         startTimer(20);
 
     }
@@ -199,6 +204,7 @@ public class QuizScript : MonoBehaviour
         {
             Debug.Log($"Started Phase {currentPhase + 1}");
             revealAnswers();
+            phaseText.SetText("Debate And Reanswer");
             currentAnswerCount = 0;
             currentPhase += 1;
             startTimer(30);
