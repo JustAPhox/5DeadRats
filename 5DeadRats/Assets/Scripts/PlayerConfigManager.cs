@@ -25,6 +25,9 @@ public class PlayerConfigManager : MonoBehaviour
     private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
 
 
+    private bool debugModeOn = false;
+
+
 
     private void Awake()
     {
@@ -47,6 +50,18 @@ public class PlayerConfigManager : MonoBehaviour
     public List<PlayerConfig> GetPlayerConfigs()
     {
         return playerConfigList;
+    }
+
+
+    public void SetDebugMode(bool newState)
+    {
+        debugModeOn = newState;
+    }
+
+
+    public bool GetDebugMode()
+    {
+        return debugModeOn;
     }
 
 

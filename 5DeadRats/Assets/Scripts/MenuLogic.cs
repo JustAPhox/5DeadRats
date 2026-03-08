@@ -22,6 +22,12 @@ public class MenuLogic : MonoBehaviour
     [SerializeField]
     private AudioListener menuAudioListener;
 
+
+
+    [SerializeField]
+    private Toggle debugMode;
+
+
     [SerializeField]
     TextAsset jsonFile;
 
@@ -35,15 +41,26 @@ public class MenuLogic : MonoBehaviour
         // Opens Character Menu
         characterMenu.SetActive(true);
 
+        PlayerConfigManager.GetComponent<PlayerConfigManager>().SetDebugMode(debugMode.isOn);
+
         PlayerConfigManager.GetComponent<PlayerConfigManager>().allowJoining(true);
     }
 
     public void charactersChoosen()
     {
-        // Opens title screen
-        titleScreen.SetActive(true);
-        // Hides Character Menu
-        characterMenu.SetActive(false);
+        // If debug mode is on go back to menu
+        if (PlayerConfigManager.GetComponent<PlayerConfigManager>().GetDebugMode())
+        {
+            // Opens title screen
+            titleScreen.SetActive(true);
+            // Hides Character Menu
+            characterMenu.SetActive(false);
+        }
+        // If not it goes to quiz
+        else
+        {
+            openQuiz();
+        }
 
 
     }
