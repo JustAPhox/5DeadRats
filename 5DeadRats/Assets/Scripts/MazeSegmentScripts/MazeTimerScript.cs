@@ -16,6 +16,29 @@ public class MazeTimerScript : MonoBehaviour
     public bool Times_Up = false;
     public GameObject End_Segement_Button;
 
+    public GameObject Ruby_Wins;
+    public GameObject Ruby_Looses;
+    public GameObject Pablo_Wins;
+    public GameObject Pablo_Looses;
+    public GameObject Winona_Wins;
+    public GameObject Winona_Looses;
+    public GameObject John_Wins;
+    public GameObject John_Looses;
+    public GameObject Steven_Wins;
+    public GameObject Steven_Looses;
+
+    public Canvas This_Canvas;
+
+    public Vector2 P1_Pos;
+    public Vector2 P2_Pos;
+    public Vector2 P3_Pos;
+    public Vector2 P4_Pos;
+
+    MazePlayerController P1_Script = null;
+    MazePlayerController P2_Script = null;
+    MazePlayerController P3_Script = null;
+    MazePlayerController P4_Script = null;
+
     private void Start()
     {
         Start_Time = Remaining_Time;
@@ -29,6 +52,9 @@ public class MazeTimerScript : MonoBehaviour
         if (Times_Up == false)
         {
             Remaining_Time -= Time.deltaTime;
+
+            Check_All_Dead();
+
             int Minutes = Mathf.FloorToInt(Remaining_Time / 60);
             int Seconds = Mathf.FloorToInt(Remaining_Time % 60);
             Timer_Text.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
@@ -72,22 +98,22 @@ public class MazeTimerScript : MonoBehaviour
                 int Player4_HP = 0;
                 if (Player1 != null)
                 {
-                    MazePlayerController P1_Script = Player1.GetComponent<MazePlayerController>();
+                    P1_Script = Player1.GetComponent<MazePlayerController>();
                     Player1_HP = P1_Script.Current_HP;
                 }
                 if (Player2 != null)
                 {
-                    MazePlayerController P2_Script = Player2.GetComponent<MazePlayerController>();
+                    P2_Script = Player2.GetComponent<MazePlayerController>();
                     Player2_HP = P2_Script.Current_HP;
                 }
                 if (Player3 != null)
                 {
-                    MazePlayerController P3_Script = Player3.GetComponent<MazePlayerController>();
+                    P3_Script = Player3.GetComponent<MazePlayerController>();
                     Player3_HP = P3_Script.Current_HP;
                 }
                 if (Player4 != null)
                 {
-                    MazePlayerController P4_Script = Player4.GetComponent<MazePlayerController>();
+                    P4_Script = Player4.GetComponent<MazePlayerController>();
                     Player4_HP = P4_Script.Current_HP;
                 }
 
@@ -106,29 +132,83 @@ public class MazeTimerScript : MonoBehaviour
 
                     if (Player1_HP == Highest_HP)
                     {
-                        MazePlayerController P1_Script = Player1.GetComponent<MazePlayerController>();
+                        P1_Script = Player1.GetComponent<MazePlayerController>();
                         P1_Script.Add_Win_Point();
                         Debug.Log("Player1 gained a point");
+                        Place_Win_Icon(P1_Script.playerCharacter, P1_Pos);
                     }
+                    else if (Player1 != null)
+                    {
+                        P1_Script = Player1.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P1_Script.playerCharacter, P1_Pos);
+                    }
+
                     if (Player2_HP == Highest_HP)
                     {
-                        MazePlayerController P2_Script = Player2.GetComponent<MazePlayerController>();
+                        P2_Script = Player2.GetComponent<MazePlayerController>();
                         P2_Script.Add_Win_Point();
                         Debug.Log("Player2 gained a point");
+                        Place_Win_Icon(P2_Script.playerCharacter, P2_Pos);
                     }
+                    else if (Player2 != null)
+                    {
+                        P2_Script = Player2.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P2_Script.playerCharacter, P2_Pos);
+                    }
+
                     if (Player3_HP == Highest_HP)
                     {
-                        MazePlayerController P3_Script = Player3.GetComponent<MazePlayerController>();
+                        P3_Script = Player3.GetComponent<MazePlayerController>();
                         P3_Script.Add_Win_Point();
                         Debug.Log("Player3 gained a point");
+                        Place_Win_Icon(P3_Script.playerCharacter, P3_Pos);
                     }
+                    else if (Player3 != null)
+                    {
+                        P3_Script = Player3.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P3_Script.playerCharacter, P3_Pos);
+                    }
+
                     if (Player4_HP == Highest_HP)
                     {
-                        MazePlayerController P4_Script = Player4.GetComponent<MazePlayerController>();
+                        P4_Script = Player4.GetComponent<MazePlayerController>();
                         P4_Script.Add_Win_Point();
                         Debug.Log("Player4 gained a point");
+                        Place_Win_Icon(P4_Script.playerCharacter, P4_Pos);
+                    }
+                    else if (Player4 != null)
+                    {
+                        P4_Script = Player4.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P4_Script.playerCharacter, P4_Pos);
                     }
                 }
+                else
+                {
+                    if (Player1 != null)
+                    {
+                        P1_Script = Player1.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P1_Script.playerCharacter, P1_Pos);
+                    }
+
+                    if (Player2 != null)
+                    {
+                        P2_Script = Player2.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P2_Script.playerCharacter, P2_Pos);
+                    }
+
+                    if (Player3 != null)
+                    {
+                        P3_Script = Player3.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P3_Script.playerCharacter, P3_Pos);
+                    }
+
+                    if (Player4 != null)
+                    {
+                        P4_Script = Player4.GetComponent<MazePlayerController>();
+                        Place_Loose_Icon(P4_Script.playerCharacter, P4_Pos);
+                    }
+                }
+
                 End_Segement_Button.SetActive(true);
             }
         }
@@ -137,6 +217,191 @@ public class MazeTimerScript : MonoBehaviour
 
     public void openQuiz()
     {
-        SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Single);
+        //P1_Script.playerConfig.winPoints = 11;
+        //P2_Script.playerConfig.winPoints = 10;
+
+        bool Win_Scene_Open = false;
+        
+        if (P4_Script != null)
+        {
+            if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10 || P3_Script.playerConfig.winPoints >= 10 || P4_Script.playerConfig.winPoints >= 10)
+            {
+                if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P4_Script.playerConfig.winPoints)
+                {
+                    if (P2_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints && P2_Script.playerConfig.winPoints != P4_Script.playerConfig.winPoints)
+                    {
+                        if (P3_Script.playerConfig.winPoints != P4_Script.playerConfig.winPoints)
+                        {
+                            Win_Scene_Open = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (P3_Script != null)
+        {
+            if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10 || P3_Script.playerConfig.winPoints >= 10)
+            {
+                if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints)
+                {
+                    if (P2_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints)
+                    {
+                        Win_Scene_Open = true;
+                    }
+                }
+            }
+        }
+
+        if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10)
+        {
+            if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints)
+            {
+                Win_Scene_Open = true;
+            }
+        }
+
+        if (Win_Scene_Open == true)
+        {
+            Debug.Log("Move to Win scene");
+            SceneManager.LoadScene("Win Scene", LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene("Quiz Scene", LoadSceneMode.Single);
+        }
+    }
+
+    public void Check_All_Dead()
+    {
+        GameObject Player_Manager = GameObject.Find("PlayerManager");
+        RatManager Script = Player_Manager.GetComponent<RatManager>();
+        GameObject Player1 = null;
+        GameObject Player2 = null;
+        GameObject Player3 = null;
+        GameObject Player4 = null;
+
+        if (Script.Player_Objects.Length > 0)
+            Player1 = Script.Player_Objects[0];
+
+        if (Script.Player_Objects.Length > 1)
+            Player2 = Script.Player_Objects[1];
+
+        if (Script.Player_Objects.Length > 2)
+            Player3 = Script.Player_Objects[2];
+
+        if (Script.Player_Objects.Length > 3)
+            Player4 = Script.Player_Objects[3];
+
+        int Player1_HP = 0;
+        int Player2_HP = 0;
+        int Player3_HP = 0;
+        int Player4_HP = 0;
+        if (Player1 != null)
+        {
+            MazePlayerController P1_Script = Player1.GetComponent<MazePlayerController>();
+            Player1_HP = P1_Script.Current_HP;
+        }
+        if (Player2 != null)
+        {
+            MazePlayerController P2_Script = Player2.GetComponent<MazePlayerController>();
+            Player2_HP = P2_Script.Current_HP;
+        }
+        if (Player3 != null)
+        {
+            MazePlayerController P3_Script = Player3.GetComponent<MazePlayerController>();
+            Player3_HP = P3_Script.Current_HP;
+        }
+        if (Player4 != null)
+        {
+            MazePlayerController P4_Script = Player4.GetComponent<MazePlayerController>();
+            Player4_HP = P4_Script.Current_HP;
+        }
+
+        if (Player1_HP == 0 && Player2_HP == 0 && Player3_HP == 0 && Player4_HP == 0)
+        {
+            Remaining_Time = 0;
+        }
+    }
+
+
+    public void Place_Win_Icon(int Player_Character, Vector2 Pos)
+    {
+        if(Player_Character == 0)
+        {
+            GameObject Current_Player_Icon = Instantiate(Ruby_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 1)
+        {
+            GameObject Current_Player_Icon = Instantiate(Ruby_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 2)
+        {
+            GameObject Current_Player_Icon = Instantiate(Pablo_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 3)
+        {
+            GameObject Current_Player_Icon = Instantiate(Winona_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 4)
+        {
+            GameObject Current_Player_Icon = Instantiate(John_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 5)
+        {
+            GameObject Current_Player_Icon = Instantiate(Steven_Wins, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+    }
+
+    public void Place_Loose_Icon(int Player_Character, Vector2 Pos)
+    {
+        if(Player_Character == 0)
+        {
+            GameObject Current_Player_Icon = Instantiate(Ruby_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 1)
+        {
+            GameObject Current_Player_Icon = Instantiate(Ruby_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 2)
+        {
+            GameObject Current_Player_Icon = Instantiate(Pablo_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 3)
+        {
+            GameObject Current_Player_Icon = Instantiate(Winona_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 4)
+        {
+            GameObject Current_Player_Icon = Instantiate(John_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
+        else if(Player_Character == 5)
+        {
+            GameObject Current_Player_Icon = Instantiate(Steven_Looses, This_Canvas.transform);
+            RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
+            Rect.anchoredPosition = Pos;
+        }
     }
 }

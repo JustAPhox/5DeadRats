@@ -716,6 +716,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Active"",
+                    ""type"": ""Button"",
+                    ""id"": ""5fec096b-35fd-492f-9b86-c1189f03c362"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -894,6 +903,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d328d675-ef0e-48fb-8e7e-aa387cbe3e61"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Active"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d37dad51-0f8d-4f47-b9b6-203779893b53"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Active"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -921,6 +952,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Maze = asset.FindActionMap("Maze", throwIfNotFound: true);
         m_Maze_Move = m_Maze.FindAction("Move", throwIfNotFound: true);
         m_Maze_Attack = m_Maze.FindAction("Attack", throwIfNotFound: true);
+        m_Maze_Active = m_Maze.FindAction("Active", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -1382,6 +1414,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IMazeActions> m_MazeActionsCallbackInterfaces = new List<IMazeActions>();
     private readonly InputAction m_Maze_Move;
     private readonly InputAction m_Maze_Attack;
+    private readonly InputAction m_Maze_Active;
     /// <summary>
     /// Provides access to input actions defined in input action map "Maze".
     /// </summary>
@@ -1401,6 +1434,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Maze/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Maze_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/Active".
+        /// </summary>
+        public InputAction @Active => m_Wrapper.m_Maze_Active;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1433,6 +1470,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Active.started += instance.OnActive;
+            @Active.performed += instance.OnActive;
+            @Active.canceled += instance.OnActive;
         }
 
         /// <summary>
@@ -1450,6 +1490,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Active.started -= instance.OnActive;
+            @Active.performed -= instance.OnActive;
+            @Active.canceled -= instance.OnActive;
         }
 
         /// <summary>
@@ -1605,5 +1648,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Active" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActive(InputAction.CallbackContext context);
     }
 }
