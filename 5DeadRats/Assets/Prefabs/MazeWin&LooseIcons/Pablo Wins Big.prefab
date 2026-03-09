@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pablo is way smarter than  5 Dead Rats
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ef4f79596d5a8584da4e33907df833db, type: 2}
-  m_sharedMaterial: {fileID: -9031136237955680933, guid: ef4f79596d5a8584da4e33907df833db, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
+  m_sharedMaterial: {fileID: 8805817490618045699, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
