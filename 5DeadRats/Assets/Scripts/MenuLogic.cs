@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -68,12 +69,17 @@ public class MenuLogic : MonoBehaviour
 
     public void readjSON()
     {
-        JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text);
 
 
-        
+        //JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text);
 
-        //Debug.Log(JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text));
+        ItemListObject itemList = itemList = JsonUtility.FromJson<ItemListObject>(jsonFile.text);
+
+
+        Debug.Log(itemList.itemList[0].name);
+
+
+
     }
 
     public void openQuiz()
@@ -99,10 +105,22 @@ public class MenuLogic : MonoBehaviour
 
 }
 
-[Serializable]
+
+[System.Serializable]
+public class ItemListObject
+{
+    public ItemListObject()
+    {
+        itemList = new List<ItemInfo>();
+    }
+    public List<ItemInfo> itemList;
+}
+
+
+[System.Serializable]
 public class ItemInfo
 {
-    ItemInfo() 
+    public ItemInfo() 
     {
         name = "Name";
         code = "code";
