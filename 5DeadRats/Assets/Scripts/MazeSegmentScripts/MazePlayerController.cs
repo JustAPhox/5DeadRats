@@ -5,6 +5,9 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
+using System.Linq.Expressions;
 
 public class MazePlayerController : MonoBehaviour
 {
@@ -28,6 +31,8 @@ public class MazePlayerController : MonoBehaviour
     [SerializeField] public Color Winona_Colour;
     [SerializeField] public Color John_Colour;
     [SerializeField] public Color Steven_Colour;
+    [ColorUsageAttribute(true, true)]
+    public Color Flash_Heal_Colour = Color.green;
     private float Flash_Time = 1f;
     private SpriteRenderer Sprite_Renderer;
     private Material material;
@@ -57,6 +62,16 @@ public class MazePlayerController : MonoBehaviour
 
     public int Crit_Chance = 0;
 
+    private int Berserk_Dammage = 0;
+    private int Revives = 0;
+
+    private bool Can_Have_Heart_Attack = false;
+    private int Heart_Attack_Value = 0;
+
+    private Light2D Light_Refference;
+
+    private bool Used_Active = false;
+
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
@@ -85,6 +100,19 @@ public class MazePlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
         Update_Sprite_Rotation();
+
+        if (Can_Have_Heart_Attack == true && Current_HP > 0)
+        {
+            if (Random.Range(0, 1000) <= Heart_Attack_Value)
+            {
+                Take_Dammage(Current_HP);
+                Call_Stun_Frames();
+                Call_Dammage_Flash(Flash_Colour);
+                Call_Invincibilty_Frames();
+                Spawn_Hurt_Particles();
+            }
+            Call_Heart_Attack_Chance();
+        }
     }
 
     public void intitialisePlayer(PlayerConfig config)
@@ -95,22 +123,6 @@ public class MazePlayerController : MonoBehaviour
 
         playerConfig.playerInput.SwitchCurrentActionMap("Maze");
 
-        //if (playerConfig.playerBuffed == true)
-        //{
-            //Is_Speed_Buffed = true;
-            //Is_Dammage_Buffed = true;
-        //}
-
-        //if (Is_Speed_Buffed == true)
-        //{
-            //Speed = Speed + 1f;
-        //}
-
-        //if (Is_Dammage_Buffed == true)
-        //{
-            //Base_Dammage = Base_Dammage + 1;
-        //}
-
         Max_HP = Max_HP + playerConfig.playerHealthStat;
 
         Current_HP = Max_HP;
@@ -120,6 +132,11 @@ public class MazePlayerController : MonoBehaviour
         Speed = Speed + playerConfig.playerSpeedStat;
 
         Crit_Chance = Crit_Chance + playerConfig.playerCritStat;
+
+        Light_Refference = GetComponentInChildren<Light2D>();
+
+        Light_Refference.pointLightInnerRadius = Light_Refference.pointLightInnerRadius + playerConfig.playerVisionStat;
+        Light_Refference.pointLightOuterRadius = Light_Refference.pointLightOuterRadius + playerConfig.playerVisionStat;
 
         if (playerConfig.playerCharacter == 0)
         {
@@ -147,6 +164,44 @@ public class MazePlayerController : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        if (playerConfig.playerItems.IndexOf("holy_cheese") != -1)
+        {
+            foreach (string Item in playerConfig.playerItems)
+            {
+                if (Item == "holy_cheese")
+                {
+                    Revives = Revives + 1;
+                    Debug.Log(Revives);
+                }
+            }
+        }
+
+        if (playerConfig.playerItems.IndexOf("overclocked_pacemaker") != -1)
+        {
+            foreach (string Item in playerConfig.playerItems)
+            {
+                if (Item == "overclocked_pacemaker")
+                {
+                    Base_Dammage = Base_Dammage + 3;
+                    Max_HP = Max_HP + 3;
+
+                    if (Max_HP > 24)
+                    {
+                        Max_HP = 24;
+                    }
+
+                    Current_HP = Max_HP;
+                    Speed = Speed + 3;
+                    Crit_Chance = Crit_Chance + 3;
+                    Can_Have_Heart_Attack = true;
+                    Heart_Attack_Value = Heart_Attack_Value + 1;
+                }
+            }
+        }
+    }
+
     private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
     {
         if(context.action.name == controls.Maze.Attack.name)
@@ -156,6 +211,10 @@ public class MazePlayerController : MonoBehaviour
         else if (context.action.name == controls.Maze.Move.name)
         {
             OnMove(context);
+        }
+        else if(context.action.name == controls.Maze.Active.name)
+        {
+            OnActive(context);
         }
     }
 
@@ -168,6 +227,188 @@ public class MazePlayerController : MonoBehaviour
             {
                 Facing_Direction = Movement_Input.normalized;
             }
+        }
+    }
+
+    public void OnActive(InputAction.CallbackContext ctx)
+    {
+        if (Is_Stunned == false && Used_Active == false && Current_HP > 0)
+        {
+            if (playerConfig.playerItems.IndexOf("medicine_drug") != -1)
+            {
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "medicine_drug" && Current_HP + 1 <= Max_HP)
+                    {
+                        Current_HP = Current_HP + 1;
+                    }
+                }
+                Call_Dammage_Flash(Flash_Heal_Colour);
+            }
+
+            if (playerConfig.playerItems.IndexOf("rusty_syringe") != -1)
+            {
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "rusty_syringe" && Current_HP + 3 <= Max_HP)
+                    {
+                        Current_HP = Current_HP + 3;
+                    }
+                }
+                Call_Dammage_Flash(Flash_Heal_Colour);
+            }
+
+            if (playerConfig.playerItems.IndexOf("blindness") != -1)
+            {
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "blindness")
+                    {
+                        bool Is_Player1 = false;
+                        bool Is_Player2 = false;
+                        bool Is_Player3 = false;
+                        bool Is_Player4 = false;
+
+                        GameObject Player_Manager = GameObject.Find("PlayerManager");
+                        RatManager Script = Player_Manager.GetComponent<RatManager>();
+
+                        if (Script.Player_Objects.Length > 0)
+                        {
+                            Is_Player1 = true;
+
+                            if (gameObject == Script.Player_Objects[0])
+                            {
+                                Is_Player1 = false;
+                            }
+                        }
+
+                        if (Script.Player_Objects.Length > 1)
+                        {
+                            Is_Player2 = true;
+
+                            if (gameObject == Script.Player_Objects[1])
+                            {
+                                Is_Player2 = false;
+                            }
+                        }
+
+                        if (Script.Player_Objects.Length > 2)
+                        {
+                            Is_Player3 = true;
+
+                            if (gameObject == Script.Player_Objects[2])
+                            {
+                                Is_Player3 = false;
+                            }
+                        }
+
+                        if (Script.Player_Objects.Length > 3)
+                        {
+                            Is_Player4 = true;
+
+                            if (gameObject == Script.Player_Objects[3])
+                            {
+                                Is_Player4 = false;
+                            }
+                        }
+
+                        bool Check = false;
+                        
+                        while (Check == false)
+                        {
+                            int Random_Interger = Random.Range(0, 4);
+
+                            if (Random_Interger == 0 && Is_Player1 == true)
+                            {
+                                Light2D Player_Light = Script.Player_Objects[0].GetComponentInChildren<Light2D>();
+                                Player_Light.pointLightInnerRadius = 0;
+                                Player_Light.pointLightOuterRadius = 0;
+                                Check = true;
+                            }
+                            else if (Random_Interger == 1 && Is_Player2 == true)
+                            {
+                                Light2D Player_Light = Script.Player_Objects[1].GetComponentInChildren<Light2D>();
+                                Player_Light.pointLightInnerRadius = 0;
+                                Player_Light.pointLightOuterRadius = 0;
+                                Check = true;
+                            }
+                            else if (Random_Interger == 2 && Is_Player3 == true)
+                            {
+                                Light2D Player_Light = Script.Player_Objects[2].GetComponentInChildren<Light2D>();
+                                Player_Light.pointLightInnerRadius = 0;
+                                Player_Light.pointLightOuterRadius = 0;
+                                Check = true;
+                            }
+                            else if (Random_Interger == 3 && Is_Player4 == true)
+                            {
+                                Light2D Player_Light = Script.Player_Objects[3].GetComponentInChildren<Light2D>();
+                                Player_Light.pointLightInnerRadius = 0;
+                                Player_Light.pointLightOuterRadius = 0;
+                                Check = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (playerConfig.playerItems.IndexOf("pied_piper_pipe") != -1)
+            {
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "pied_piper_pipe")
+                    {
+                        GameObject Player_Manager = GameObject.Find("PlayerManager");
+                        RatManager Script = Player_Manager.GetComponent<RatManager>();
+
+                        Transform Current_Pos = gameObject.transform;
+
+                        for (int i = 0; i < Script.Player_Objects.Length; i++)
+                        {
+                            if (gameObject != Script.Player_Objects[i])
+                            {
+                                Vector2 Direction = (Current_Pos.position - Script.Player_Objects[i].transform.position).normalized;
+                                Rigidbody2D Rat_Rigidbody = Script.Player_Objects[i].GetComponent<Rigidbody2D>();
+                                Rat_Rigidbody.AddForce(Direction * 5000);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (playerConfig.playerItems.IndexOf("teleporter") != -1)
+            {
+                GameObject Player_Manager = GameObject.Find("PlayerManager");
+                RatManager Script = Player_Manager.GetComponent<RatManager>();
+
+                List<Transform> Rat_Transforms = new List<Transform>();
+                List<Vector3> Original_Positions = new List<Vector3>();
+
+                // Store transforms and their positions
+                foreach (GameObject Rat in Script.Player_Objects)
+                {
+                    Rat_Transforms.Add(Rat.transform);
+                    Original_Positions.Add(Rat.transform.position);
+                    Rat.GetComponent<MazePlayerController>().Call_Dammage_Flash(Flash_Swap_Colour);
+                }
+
+                // Shuffle positions (Fisher-Yates shuffle)
+                for (int i = 0; i < Original_Positions.Count; i++)
+                {
+                    int Random_Index = Random.Range(i, Original_Positions.Count);
+
+                    Vector3 temp = Original_Positions[i];
+                    Original_Positions[i] = Original_Positions[Random_Index];
+                    Original_Positions[Random_Index] = temp;
+                }
+
+                // Assign shuffled positions back
+                for (int i = 0; i < Rat_Transforms.Count; i++)
+                {
+                    Rat_Transforms[i].position = Original_Positions[i];
+                }
+            }
+
+            Used_Active = true;
         }
     }
 
@@ -217,6 +458,8 @@ public class MazePlayerController : MonoBehaviour
                     if (Script.Is_Invicible == false && Script.Current_HP > 0)
                     {  
                         int Actual_Dammage = Base_Dammage;
+
+                        Actual_Dammage = Base_Dammage + Berserk_Dammage;
                         if(Random.Range(1, 20) <= Crit_Chance)
                         {
                             Actual_Dammage = Base_Dammage * 2;
@@ -233,6 +476,7 @@ public class MazePlayerController : MonoBehaviour
                                 Script.Play_Sound_From_Array(Death_Noises, 15.5f, 15.8f);
                             }
                             Script.Take_Dammage(Actual_Dammage);
+                            Canabalistic_Urges_Effect();
                             //Script.Hit_Knockback(Attack_Direction);
                             Script.Call_Stun_Frames();
                             Script.Call_Dammage_Flash(Flash_Colour);
@@ -321,7 +565,27 @@ public class MazePlayerController : MonoBehaviour
 
         if (Current_HP == 0)
         {
-            Make_Ghost();
+            if(Revives <= 0)
+            {
+                Make_Ghost();
+            }
+            else
+            {
+                Revives = Revives - 1;
+                
+                Current_HP = Max_HP;
+            }
+        }
+
+        if (playerConfig.playerItems.IndexOf("berserker_helmet") != -1)
+        {
+            foreach (string Item in playerConfig.playerItems)
+            {
+                if (Item == "berserker_helmet")
+                {
+                    Berserk_Dammage = Berserk_Dammage + 1;
+                }
+            }
         }
     }
     
@@ -411,5 +675,33 @@ public class MazePlayerController : MonoBehaviour
     public void Add_Win_Point()
     {
         playerConfig.winPoints = playerConfig.winPoints + 1;
+    }
+
+    public void Canabalistic_Urges_Effect()
+    {
+        if (playerConfig.playerItems.IndexOf("cannibalistic_urges") != -1)
+        {
+            foreach (string Item in playerConfig.playerItems)
+            {
+                if (Item == "cannibalistic_urges" && Current_HP + 1 <= Max_HP)
+                {
+                    Current_HP = Current_HP + 1;
+                }
+            }
+
+            Call_Dammage_Flash(Flash_Colour);
+        }
+    }
+
+    public void Call_Heart_Attack_Chance()
+    {
+        StartCoroutine(Heart_Attack_Chance());
+    }
+
+    private IEnumerator Heart_Attack_Chance()
+    {
+        Can_Have_Heart_Attack = false;
+        yield return new WaitForSeconds(Random.Range(1, 10));
+        Can_Have_Heart_Attack = true;
     }
 }
