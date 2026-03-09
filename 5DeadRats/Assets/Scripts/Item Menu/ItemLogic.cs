@@ -150,7 +150,7 @@ public class ItemLogic : MonoBehaviour
             }
             else
             {
-                itemCode = gameObject.GetComponent<ItemChooser>().GiveRandomItem();
+                itemCode = gameObject.GetComponent<ItemChooser>().GivePositiveItem();
             }
 
 
@@ -192,7 +192,7 @@ public class ItemLogic : MonoBehaviour
 
     private void ApplyItem(int playerIndex, ItemInfo boughtItem)
     {
-        playerConfigs[playerIndex].playerItems.Append(boughtItem.code);
+        playerConfigs[playerIndex].playerItems.Add(boughtItem.code);
 
         playerConfigs[playerIndex].playerHealthStat += boughtItem.health;
         playerConfigs[playerIndex].playerDammageStat += boughtItem.damage;

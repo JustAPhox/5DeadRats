@@ -1,27 +1,5 @@
 {
-	"positiveItems": [
-		{
-			"name": "Cannablistic urges",
-			"code": "cannibalistic_urges",
-			"description": "Heal a quarter heart for every hit."
-		},
-		{
-			"name": "Holy Cheese",
-			"code": "holy_cheese",
-			"description": "Resurrect yourself after you die."
-
-		},
-		{
-			"name": "Overclocked pacemaker",
-			"code": "overclocked_pacemaker",
-			"description": "Increase all stats by 3. Every 5 seconds there is a 1/1000 chance that you immediately die.",
-			"health": 3,
-			"damage": 3,
-			"speed": 3,
-			"vision": 3,
-			"crit": 3
-
-		},
+	"mildItems": [
 		{
 			"name": "Toothbrush",
 			"code": "toothbrush",
@@ -33,17 +11,265 @@
 			"name": "Hearty cheese",
 			"code": "hearty_cheese",
 			"description": "Gives an extra heart quarter.",
-			"health": 1,
-			"damage": 0,
-			"speed": 0,
-			"vision": 0,
-			"crit": 0
-
+			"health": 1
+		},
+		{
+			"name": "Adrenalin shot",
+			"code": "adrenaline",
+			"description": "Increases speed by 1",
+			"damage": 1
+		},
+		{
+			"name": "Four-leaf clover",
+			"code": "four_leaf_clover",
+			"description": "Gives +5% crit chance. (A crit does x3 damage).",
+			"crit": 1
+		},
+		{
+			"name": "Contact lenses",
+			"code": "contact_lens",
+			"description": "Increases vision area by 1.",
+			"vision": 1
+		},
+		{
+			"name": "Sword",
+			"code": "sword",
+			"description": "Swings in an area forward dealing damage.",
+			"keepChance": 0
+		},
+		{
+			"name": "Slingshot",
+			"code": "slingshot",
+			"description": "Fire a small and weak projectile forwards.",
+			"keepChance": 0
+		},
+		{
+			"name": "Lightbulb",
+			"code": "lightbulb",
+			"description": "Shining projectile that deals no damage.",
+			"keepChance": 0
+		},
+		{
+			"name": "Fly swatter",
+			"code": "flyswatter",
+			"description": "Whacks above the opponent stunning them briefly, makes a funny sound.",
+			"keepChance": 0
+		},
+		{
+			"name": "Medicine pill",
+			"code": "medicine drug",
+			"description": "Regain 1 heart quarter."
 		},
 		{
 			"name": "Name",
 			"code": "code",
 			"description": "Decription",
+			"health": 0,
+			"damage": 0,
+			"speed": 0,
+			"vision": 0,
+			"crit": 0,
+			"keepChance": 0
+		}
+	],
+	"matureItems": [
+		{
+			"name": "Roulette",
+			"code": "roulette",
+			"description": "Increases a random stat by 2.",
+			"keepChance": 0
+		},
+		{
+			"name": "Saboteur",
+			"code": "saboteur",
+			"description": "Pick another player. They get -1 in a random stat.",
+			"keepChance": 0
+		},
+		{
+			"name": "Rat bomb",
+			"code": "rat_bomb",
+			"description": "Passes between players and will blow up after  a set amount of time.",
+			"keepChance": 0
+		},
+		{
+			"name": "Rat poison",
+			"code": "rat_poison",
+			"description": "Poison target rat who slowly loses health.",
+			"keepChance": 0
+		},
+		{
+			"name": "Shield",
+			"code": "shield",
+			"description": "Protects the rat from attacks from the front.",
+			"keepChance": 0
+		},
+		{
+			"name": "Manufacturing error",
+			"code": "manufacturing error",
+			"description": "Destroy a random item.",
+			"keepChance": 0
+		},
+		{
+			"name": "Cannablistic urges",
+			"code": "cannibalistic_urges",
+			"description": "Heal a quarter heart for every hit."
+		},
+		{
+			"name": "Olive oil",
+			"code": "olive_oil",
+			"description": "Chance to trigger a trap without being harmed.",
+			"keepChance": 0
+		},
+		{
+			"name": "Video game reference",
+			"code": "video_game_reference",
+			"description": "Spawns two pipes next to different traps that you can teleport between.",
+			"keepChance": 0
+		},
+		{
+			"name": "Rusty syringe",
+			"code": "rusty_syringe",
+			"description": "Regain 3 heart quarters."
+		},
+		{
+			"name": "Blindness",
+			"code": "blindness",
+			"description": "Turn off someone else’s light."
+		},
+		{
+			"name": "Pied Piper’s pipe",
+			"code": "pied_pipers_pipe",
+			"description": "When played, rats move towards each other."
+		},
+		{
+			"name": "Name",
+			"code": "code",
+			"description": "Stuff About the Item",
+			"health": 0,
+			"damage": 0,
+			"speed": 0,
+			"vision": 0,
+			"crit": 0,
+			"keepChance": 0
+		}
+	],
+	"stinkyItems": [
+		{
+			"name": "The Host’s Blessing",
+			"code": "host_s_gift",
+			"description": "Increases every stat by 1.",
+			"health": 1,
+			"damage": 1,
+			"speed": 1,
+			"vision": 1,
+			"crit": 1
+		},
+		{
+			"name": "Neural whip",
+			"code": "neural_whip",
+			"description": "Any player you hit with it, will be given the same debuffs as you for the rest of that round.",
+			"keepChance": 0
+		},
+		{
+			"name": "Thievery",
+			"code": "thievery",
+			"description": "When this item is selected, you randomly gain an item held by another player.",
+			"keepChance": 0
+		},
+		{
+			"name": "Double-edged sword",
+			"code": "double_edged_sword",
+			"description": "Deal double damage. Take 1 damage each time you attack.",
+			"keepChance": 0
+		},
+		{
+			"name": "Hollow Cheese",
+			"code": "hollow_cheese",
+			"description": "Shoots one big ball that moves very slowly but if it touches someone it does major damage.",
+			"keepChance": 0
+		},
+		{
+			"name": "Overclocked pacemaker",
+			"code": "overclocked_pacemaker",
+			"description": "Increase all stats by 3. Every 5 seconds there is a 1/1000 chance that you immediately die."
+
+		},
+		{
+			"name": "Berserker’s helmet",
+			"code": "berserker_helmet",
+			"description": "Each time you take damage this round, your attack raises by 1 for the rest of the round."
+		},
+		{
+			"name": "Bad signal",
+			"code": "bad_signal",
+			"description": "For the rest of the round the screen is obscured with TV static.",
+			"keepChance": 0
+		},
+		{
+			"name": "Teleporter",
+			"code": "teleporter",
+			"description": "Swap the positions of all the rats."
+		},
+		{
+			"name": "IV drip",
+			"code": "iv_drip",
+			"description": "Fully regain your health."
+		},
+		{
+			"name": "Name",
+			"code": "code",
+			"description": "Stuff About the Item",
+			"health": 0,
+			"damage": 0,
+			"speed": 0,
+			"vision": 0,
+			"crit": 0,
+			"keepChance": 0
+		}
+	],
+	"blueItems": [
+		{
+			"name": "Omnipotence",
+			"code": "omnipotence",
+			"description": "Max out every stat."
+		},
+		{
+			"name": "Gun",
+			"code": "gun",
+			"description": "Fires a super fast projectile that instakills.",
+			"keepChance": 0
+		},
+		{
+			"name": "Giant dentures",
+			"code": "giant_dentures",
+			"description": "Let’s you eat (insta-kill) any rat that gets within range.",
+			"keepChance": 0
+		},
+		{
+			"name": "Holy Cheese",
+			"code": "holy_cheese",
+			"description": "Resurrect yourself after you die."
+		},
+		{
+			"name": "High intensity lubricant",
+			"code": "high_intensity_lubricant",
+			"description": "Immune to all traps.",
+			"keepChance": 0
+		},
+		{
+			"name": "Big nuclear bomb that kills everyone",
+			"code": "big_nuclear_bomb_that_killes_everyone",
+			"description": "Big nuclear bomb that kills everyone."
+		},
+		{
+			"name": "Stopwatch",
+			"code": "stopwatch",
+			"description": "The timer immediately ends, moving straight to the quiz section."
+		},
+		{
+			"name": "Name",
+			"code": "code",
+			"description": "Stuff About the Item",
 			"health": 0,
 			"damage": 0,
 			"speed": 0,
@@ -86,7 +312,7 @@
 			"speed": 0,
 			"vision": 0,
 			"crit": 0,
-			"keepChance":  0
+			"keepChance": 0
 		}
 	]
 }

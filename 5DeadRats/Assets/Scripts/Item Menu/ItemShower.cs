@@ -21,7 +21,7 @@ public class ItemShower : MonoBehaviour
     private Sprite[] negativeItemSprites;
 
     [SerializeField]
-    private Image itemImage;
+    private GameObject itemImage;
 
 
     // Start is called before the first frame update
@@ -42,14 +42,7 @@ public class ItemShower : MonoBehaviour
         ItemInfo item = itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
         itemNameBox.SetText(item.name);
         itemDescriptionBox.SetText(item.description);
-        if (itemCode[0] == 0)
-        {
-            itemImage.sprite = positiveItemSprites[itemCode[1]];
-        }
-        else
-        {
-            itemImage.sprite = negativeItemSprites[itemCode[1]];
-        }
+        itemImage.GetComponent<itemIconChooser>().showItem(code);
     }
 
     public void itemSelected()

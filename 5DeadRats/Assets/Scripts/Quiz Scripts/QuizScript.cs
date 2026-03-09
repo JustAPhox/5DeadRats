@@ -229,7 +229,7 @@ public class QuizScript : MonoBehaviour
             phaseText.SetText("Debate And Reanswer");
             currentAnswerCount = 0;
             currentPhase += 1;
-            startTimer(30);
+            startTimer(90);
         }
         else if (currentPhase == 1)
         {
