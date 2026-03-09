@@ -109,7 +109,7 @@ public class SetMazePlayerUI : MonoBehaviour
 
         //Item_List.Add("stopwatch");//temporary
         //Item_List.Add("big_nuclear_bomb_that_kills_everyone");//temporary
-        Item_List.Add("teleporter");//temporary
+        //Item_List.Add("teleporter");//temporary
         //Item_List.Add("pied_piper_pipe");//temporary
         //Item_List.Add("blindness");//temporary
         //Item_List.Add("rusty_syringe");//temporary

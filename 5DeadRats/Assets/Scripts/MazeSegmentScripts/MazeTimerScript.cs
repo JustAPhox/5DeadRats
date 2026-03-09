@@ -217,8 +217,8 @@ public class MazeTimerScript : MonoBehaviour
 
     public void openQuiz()
     {
-        P1_Script.playerConfig.winPoints = 11;
-        P2_Script.playerConfig.winPoints = 10;
+        //P1_Script.playerConfig.winPoints = 11;
+        //P2_Script.playerConfig.winPoints = 10;
 
         bool Win_Scene_Open = false;
         
