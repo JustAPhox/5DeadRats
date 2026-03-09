@@ -42,7 +42,7 @@ public class QuizScript : MonoBehaviour
     // Stores info about answers
     private int[,] givenAnswers;
     private int[] answerChanges;
-    private int correctAnswer;
+    private int[] correctAnswer;
     private int[] playerScores;
 
     private int currentPhase = 0;
@@ -72,7 +72,6 @@ public class QuizScript : MonoBehaviour
         playerScores = new int[playerCount];
 
         answerChanges = new int[5];
-
 
 
         StartQuestion();
@@ -148,13 +147,14 @@ public class QuizScript : MonoBehaviour
     private void StartQuestion()
     {
         // Get a random question and store its info
-        int[] questionCode = GetComponent<QuizQuestionPicker>().chooseFullQuestion();
+
+        GetComponent<QuizQuestionPicker>().makeQuestion(0);
 
         // Stores the correct answer
-        correctAnswer = GetComponent<QuizQuestionPicker>().giveAnswer(questionCode);
+        correctAnswer = GetComponent<QuizQuestionPicker>().getQuestion().correctAnswerPos;
 
         // Sends the questionbox the current question
-        questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion(questionCode);
+        questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion();
 
 
 
@@ -272,7 +272,7 @@ public class QuizScript : MonoBehaviour
             assignWinners();
 
 
-            Invoke(nameof(moveToItems), 5f);
+            Invoke(nameof(moveToItems), 3f);
         }
     }
 
@@ -323,12 +323,12 @@ public class QuizScript : MonoBehaviour
         for (int i = 0; i < playerCount; i++) 
         {
             // If correct in the second phase get 2 points
-            if (givenAnswers[i,1] == correctAnswer)
+            if (givenAnswers[i,1] == correctAnswer[0])
             {
                 playerScores[i] += 2;
 
                 // Get a bonus point if starts correct
-                if (givenAnswers[i, 0] == correctAnswer)
+                if (givenAnswers[i, 0] == correctAnswer[0])
                 {
                     playerScores[i] += 1;
                 }

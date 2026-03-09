@@ -28,9 +28,12 @@ public class QuizAnswerShower : MonoBehaviour
         
     }
 
-    public void setCorrectAnswer(int correctAnswer)
+    public void setCorrectAnswer(int[] correctAnswer)
     {
-        correctAnswerBox.text = correctAnswer.ToString();
+        correctAnswerBox.text = string.Join(" - ", correctAnswer);
+
+
+
         answeredBoxRound1[0].text = "0";
 
         for (int i = 0; i < 4; i++)

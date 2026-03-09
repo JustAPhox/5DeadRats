@@ -9,6 +9,10 @@ using UnityEngine;
 public class QuizQuestionPicker : MonoBehaviour
 {
 
+    private string[] categoryNames = { "Media and Entertainment", "Science and Nature", "History and the Outside World", "Our Glorious Kind", "Geography", "Bonus Round" };
+
+    private Question currentQuestion;
+
     private int[] choosenCategories = new int[6];
     private int maxChoosen;
 
@@ -52,14 +56,18 @@ public class QuizQuestionPicker : MonoBehaviour
     /// Gives a random question as an array.
     /// </summary>
     /// <returns>Random Question</returns>
-    public string[] getQuestion(int[] questionCode)
+    public Question getQuestion()
     {
-        string[,] questionList = findCategoryQuestionList(questionCode[0]);
+        return currentQuestion;
+    }
 
+    public void makeQuestion(int category)
+    {
+        Question proxyQuestion = new Question();
+        proxyQuestion.category = categoryNames[category];
+        proxyQuestion.correctAnswerPos[0] = UnityEngine.Random.Range(1, 5);
 
-        string[] questionGiven = { questionList[questionCode[1], 0], questionList[questionCode[1], 1], questionList[questionCode[1], 2], questionList[questionCode[1], 3], questionList[questionCode[1], 4], questionList[questionCode[1], 5] };
-
-        return questionGiven;
+        currentQuestion = proxyQuestion;
     }
 
 
@@ -142,13 +150,57 @@ public class QuizQuestionPicker : MonoBehaviour
         int[] questionCode = { subject, chooseQuestion(subject) };
         return questionCode;
     }
+}
 
-    public int giveAnswer(int[] questionCode)
+
+
+
+
+[System.Serializable]
+public class QuestionLists
+{
+    public QuestionLists()
     {
-        string[,] questionList = findCategoryQuestionList(questionCode[0]);
+        media = new List<Question>();
+        science = new List<Question>();
+        history = new List<Question>();
+        rats = new List<Question>();
+        geography = new List<Question>();
+        bonus = new List<Question>();
 
-
-        int correctAnswer = Convert.ToInt32(questionList[questionCode[1], 5]);
-        return correctAnswer;
     }
+    public List<Question> media;
+    public List<Question> science;
+    public List<Question> history;
+    public List<Question> rats;
+    public List<Question> geography;
+    public List<Question> bonus;
+}
+
+
+[System.Serializable]
+public class Question
+{
+    public Question()
+    {
+        question = new string[] { "Question?"};
+        correctAnswer = new string[] { "Correct" };
+        wrongAnswer = new string[] { "Wrong1", "Wrong2", "Wrong3", "Wrong4", "Wrong5" };
+        correctAnswerPos = new int[1];
+
+        emptyCorrect = false;
+        allWrong = false;
+    }
+
+
+    public string[] question;
+    public string[] correctAnswer;
+    public string[] wrongAnswer;
+    public string category;
+
+    public int[] correctAnswerPos;
+
+
+    public bool emptyCorrect;
+    public bool allWrong;
 }
