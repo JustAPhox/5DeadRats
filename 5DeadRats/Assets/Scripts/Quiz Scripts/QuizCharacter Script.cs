@@ -16,6 +16,8 @@ public class QuizCharacterScript : MonoBehaviour
 
     private int playerCharacter;
 
+    private int prevPoints = 0;
+
     [SerializeField]
     private Image ratImage;
 
@@ -89,7 +91,7 @@ public class QuizCharacterScript : MonoBehaviour
 
         ratImage.sprite = spriteMouthClose[playerCharacter - 1];
 
-        cheeseText.SetText($"Cheese: {playerConfig.winPoints}");
+        cheeseText.SetText(playerConfig.winPoints.ToString());
 
         podiumBacking.color = Color.black;
 
@@ -142,7 +144,8 @@ public class QuizCharacterScript : MonoBehaviour
 
         if (successfullyAnswered)
         {
-            // SOUND
+            audioPlayer.clip = answerSelectSFX[Random.Range(0, answerSelectSFX.Length - 1)];
+            audioPlayer.Play();
         }
 
 
@@ -152,10 +155,15 @@ public class QuizCharacterScript : MonoBehaviour
 
     public void updatePointTotal(int currentPoints)
     {
-        pointText.SetText($"Points: {currentPoints.ToString()}");
+        pointText.SetText(currentPoints.ToString());
 
-        audioPlayer.clip = pointGetSFX[Random.Range(0, pointGetSFX.Length - 1)];
-        audioPlayer.Play();
+
+        if (currentPoints > prevPoints)
+        {
+            audioPlayer.clip = pointGetSFX[Random.Range(0, pointGetSFX.Length - 1)];
+            audioPlayer.Play();
+        }
+
     }
 
 
