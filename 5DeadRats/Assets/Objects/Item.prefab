@@ -445,5 +445,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3583923bfcea25b489eac0545bcdbb03, type: 3}
   - {fileID: 21300000, guid: d8d7effb445b04645a6195c70769da11, type: 3}
   negativeItemSprites:
-  - {fileID: 21300000, guid: b2eb2fe4aaf2c1141ba1ea81149fa5d4, type: 3}
+  - {fileID: 21300000, guid: 7b0c4fd6888edc54ebe9ce8d74ccc199, type: 3}
+  - {fileID: 21300000, guid: 9276c922926743c44ab62b13febbc02c, type: 3}
+  - {fileID: 21300000, guid: b2207370dd05780438e61b6364d20930, type: 3}
+  - {fileID: 21300000, guid: 84038f742b678d64393f373b2b52f3a2, type: 3}
   itemImage: {fileID: 8861474733608408539}

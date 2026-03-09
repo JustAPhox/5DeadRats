@@ -1,15 +1,16 @@
 {
-    "itemList": [
-        {
+	"positiveItems": [
+		{
 			"name": "Cannablistic urges",
 			"code": "cannibalistic_urges",
 			"description": "Heal a quarter heart for every hit."
-        },
-        {
+		},
+		{
 			"name": "Holy Cheese",
 			"code": "holy_cheese",
 			"description": "Resurrect yourself after you die."
-        },
+
+		},
 		{
 			"name": "Overclocked pacemaker",
 			"code": "overclocked_pacemaker",
@@ -19,22 +20,25 @@
 			"speed": 3,
 			"vision": 3,
 			"crit": 3
+
 		},
 		{
 			"name": "Toothbrush",
 			"code": "toothbrush",
 			"description": "Increases damage output by 1.",
 			"damage": 1
+
 		},
 		{
 			"name": "Hearty cheese",
 			"code": "hearty_cheese",
 			"description": "Gives an extra heart quarter.",
-			"health": 0,
+			"health": 1,
 			"damage": 0,
 			"speed": 0,
 			"vision": 0,
 			"crit": 0
+
 		},
 		{
 			"name": "Name",
@@ -44,7 +48,45 @@
 			"damage": 0,
 			"speed": 0,
 			"vision": 0,
-			"crit": 0
+			"crit": 0,
+			"keepChance": 0
 		}
-    ]
+	],
+	"negativeItems": [
+		{
+			"name": "Plaque",
+			"code": "plaque",
+			"description": "Decreases damage output by 1.",
+			"damage": -1
+		},
+		{
+			"name": "Moldy cheese",
+			"code": "moldy_cheese",
+			"description": "Decreases hearts by 1 quarter.",
+			"health": -1
+		},
+		{
+			"name": "Zero-leaf clover",
+			"code": "zero_leaf_clover",
+			"description": "Gives -5% crit chance. (A crit does x3 damage).",
+			"crit": -1
+		},
+		{
+			"name": "Blindfold",
+			"code": "blindfold",
+			"description": "Decreases vision area by 1.",
+			"vision": -1
+		},
+		{
+			"name": "Name",
+			"code": "code",
+			"description": "Stuff About the Item",
+			"health": 0,
+			"damage": 0,
+			"speed": 0,
+			"vision": 0,
+			"crit": 0,
+			"keepChance":  0
+		}
+	]
 }

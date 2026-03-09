@@ -23,14 +23,9 @@ public class MenuLogic : MonoBehaviour
     [SerializeField]
     private AudioListener menuAudioListener;
 
-
-
     [SerializeField]
     private Toggle debugMode;
 
-
-    [SerializeField]
-    TextAsset jsonFile;
 
     public void startGame()
     {
@@ -67,21 +62,6 @@ public class MenuLogic : MonoBehaviour
     }
 
 
-    public void readjSON()
-    {
-
-
-        //JsonUtility.FromJson<List<ItemInfo>>(jsonFile.text);
-
-        ItemListObject itemList = itemList = JsonUtility.FromJson<ItemListObject>(jsonFile.text);
-
-
-        Debug.Log(itemList.itemList[0].name);
-
-
-
-    }
-
     public void openQuiz()
     {
         // Loads the scene
@@ -96,6 +76,11 @@ public class MenuLogic : MonoBehaviour
     }
 
 
+    public void closeGame()
+    {
+        Application.Quit();
+    }
+
 
     public void openMaze()
     {
@@ -106,41 +91,3 @@ public class MenuLogic : MonoBehaviour
 }
 
 
-[System.Serializable]
-public class ItemListObject
-{
-    public ItemListObject()
-    {
-        itemList = new List<ItemInfo>();
-    }
-    public List<ItemInfo> itemList;
-}
-
-
-[System.Serializable]
-public class ItemInfo
-{
-    public ItemInfo() 
-    {
-        name = "Name";
-        code = "code";
-        description = "Stuff About the Item";
-
-        health = 0;
-        damage = 0;
-        speed = 0;
-        vision = 0;
-        crit = 0;    
-    }  
-
-
-    public string name;
-    public string code;
-    public string description;
-
-    public int health;
-    public int damage;
-    public int speed;
-    public int vision;
-    public int crit;
-}
