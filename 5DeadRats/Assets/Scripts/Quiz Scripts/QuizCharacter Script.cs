@@ -16,8 +16,14 @@ public class QuizCharacterScript : MonoBehaviour
 
     private int playerCharacter;
 
+    private int prevPoints = 0;
+
     [SerializeField]
     private Image ratImage;
+
+
+    [SerializeField]
+    private Image podiumBacking;
 
     [SerializeField]
     private Sprite[] spriteMouthOpen;
@@ -29,13 +35,25 @@ public class QuizCharacterScript : MonoBehaviour
     private TextMeshProUGUI pointText;
 
     [SerializeField]
+    private TextMeshProUGUI cheeseText;
+
+    [SerializeField]
     private GameObject[] voteShowers;
     [SerializeField]
     private GameObject[] noVoteShowers;
 
 
-    private string[] characterNames = { "Ruby Rockethorn", "Pablo Quescobar", "Winona", "John Moviestar", "Steven Cheddarverse" };
+    [SerializeField]
+    private AudioSource audioPlayer;
 
+    [SerializeField]
+    private AudioClip[] answerChangeSFX;
+
+    [SerializeField]
+    private AudioClip[] answerSelectSFX;
+
+    [SerializeField]
+    private AudioClip[] pointGetSFX;
 
     private void Awake()
     {
@@ -72,6 +90,11 @@ public class QuizCharacterScript : MonoBehaviour
         playerConfig.playerInput.SwitchCurrentActionMap("Quiz");
 
         ratImage.sprite = spriteMouthClose[playerCharacter - 1];
+
+        cheeseText.SetText(playerConfig.winPoints.ToString());
+
+        podiumBacking.color = Color.black;
+
     }
 
     // [IMPORTANT] Triggers whenever this player does an action.
@@ -110,14 +133,37 @@ public class QuizCharacterScript : MonoBehaviour
     {
         Debug.Log($"Player {playerConfig.playerIndex} voted on {answerGiven}");
 
-        QuizMaster.GetComponent<QuizScript>().answeredReceived(answerGiven, playerConfig.playerIndex);
+        podiumBacking.color = Color.green;
+
+        bool successfullyAnswered = QuizMaster.GetComponent<QuizScript>().answeredReceived(answerGiven, playerConfig.playerIndex);
+
+        if (!successfullyAnswered) 
+        { 
+            podiumBacking.color = Color.black;
+        }
+
+        if (successfullyAnswered)
+        {
+            audioPlayer.clip = answerSelectSFX[Random.Range(0, answerSelectSFX.Length - 1)];
+            audioPlayer.Play();
+        }
+
+
     }
 
 
 
     public void updatePointTotal(int currentPoints)
     {
-        pointText.SetText($"Points: {currentPoints.ToString()}");
+        pointText.SetText(currentPoints.ToString());
+
+
+        if (currentPoints > prevPoints)
+        {
+            audioPlayer.clip = pointGetSFX[Random.Range(0, pointGetSFX.Length - 1)];
+            audioPlayer.Play();
+        }
+
     }
 
 
@@ -135,6 +181,8 @@ public class QuizCharacterScript : MonoBehaviour
     public void revealAnswer(int answer, int timesAnswered)
     {
         Debug.Log($"Show Answer for player {playerConfig.playerIndex}");
+
+        podiumBacking.color = Color.black;
 
         if (answer == 0)
         {

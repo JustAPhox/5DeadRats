@@ -73,6 +73,8 @@ public class QuizScript : MonoBehaviour
 
         answerChanges = new int[5];
 
+
+
         StartQuestion();
 
     }
@@ -134,6 +136,13 @@ public class QuizScript : MonoBehaviour
 
            playersObjects[i] = player;
         }
+
+        if (PlayerConfigManager.instance.GetDebugMode())
+        {
+            correctAnswerShower.SetActive(true);
+        }
+
+
     }
 
     private void StartQuestion()
@@ -147,8 +156,14 @@ public class QuizScript : MonoBehaviour
         // Sends the questionbox the current question
         questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion(questionCode);
 
-        // Shows the correct answer for debug info
-        correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
+
+
+
+        if (PlayerConfigManager.instance.GetDebugMode())
+        {
+            // Shows the correct answer for debug info
+            correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
+        }
 
         votingAllowed = true;
 
@@ -172,18 +187,23 @@ public class QuizScript : MonoBehaviour
     }
 
 
-    public void answeredReceived(int answerGiven, int playerNumber)
+    public bool answeredReceived(int answerGiven, int playerNumber)
     {
-        if (!votingAllowed) { return; }
+        if (!votingAllowed) { return false; }
 
         // If the person hasn't answered already don't allow it to
-        if (givenAnswers[playerNumber, currentPhase] != 0) { return; }
+        if (givenAnswers[playerNumber, currentPhase] != 0) { return true; }
 
         // Increment the number of answers
         currentAnswerCount++;
         // Store and show the answer given
         givenAnswers[playerNumber, currentPhase] = answerGiven;
-        correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentPhase, playerNumber, answerGiven);
+
+        if (PlayerConfigManager.instance.GetDebugMode())
+        {
+            correctAnswerShower.GetComponent<QuizAnswerShower>().setPlayerAnswer(currentPhase, playerNumber, answerGiven);
+
+        }
 
 
         // If everyone voted move to next phase
@@ -194,6 +214,8 @@ public class QuizScript : MonoBehaviour
 
 
         }
+
+        return true;
     }
 
 
@@ -341,31 +363,6 @@ public class QuizScript : MonoBehaviour
             PlayerConfigManager.instance.GetComponent<PlayerConfigManager>().setQuizScore(i, playerScores[i]);
         }
 
-
-        //// Add back when need to know who won
-        //int highestPoints = 0;
-
-        //// Finds heighest score
-        //for (int i = 0; i < playerCount; i++)
-        //{
-        //    if (playerScores[i] > highestPoints)
-        //    {
-        //        highestPoints = playerScores[i];
-        //    }
-        //}
-
-        //// All players with best score win
-        //for (int i = 0; i < playerCount; i++)
-        //{
-        //    if (playerScores[i] == highestPoints)
-        //    {
-        //        // They Won
-        //    }
-        //    else
-        //    {
-        //        // They Lost
-        //    }
-        //}
 
 
     }

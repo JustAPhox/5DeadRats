@@ -50,9 +50,6 @@ public class ItemLogic : MonoBehaviour
         OrderPlayers();
 
         SetUpItems();
-
-        //tempBadRewardGiver();
-        //moveToMaze();
     }
 
 
@@ -118,7 +115,7 @@ public class ItemLogic : MonoBehaviour
         Debug.Log($"Player Order: {string.Join(", ", playerOrder)}");
         Debug.Log($"Player Scores: {string.Join(", ", playerScores)}");
 
-        currentPlayerText.SetText($"{PlayerConfigManager.instance.GetPlayerCharacterName(playerOrder[0])} choose your item.");
+        currentPlayerText.SetText($"{PlayerConfigManager.instance.GetPlayerCharacterName(playerConfigs[playerOrder[0]].playerCharacter)} choose your item.");
     }
 
     private void SetUpItems()
@@ -172,7 +169,7 @@ public class ItemLogic : MonoBehaviour
     {
         if (playerIndex != playerOrder[boughtItemCount]) { return; }
 
-        string boughtItem = itemObjects[selectedItemPos].GetComponent<ItemShower>().itemBought();
+        ItemInfo boughtItem = itemObjects[selectedItemPos].GetComponent<ItemShower>().itemBought();
 
         ApplyItem(playerIndex, boughtItem);
 
@@ -182,6 +179,7 @@ public class ItemLogic : MonoBehaviour
 
         if (boughtItemCount != playerCount)
         {
+            currentPlayerText.SetText($"{PlayerConfigManager.instance.GetPlayerCharacterName(playerConfigs[playerOrder[boughtItemCount]].playerCharacter)} choose your item.");
             selectItem(playerOrder[boughtItemCount], 1);
         }
         else
@@ -192,26 +190,15 @@ public class ItemLogic : MonoBehaviour
 
     }
 
-    private void ApplyItem(int playerIndex, string boughtItem)
+    private void ApplyItem(int playerIndex, ItemInfo boughtItem)
     {
-        playerConfigs[playerIndex].playerItems.Append(boughtItem);
+        playerConfigs[playerIndex].playerItems.Append(boughtItem.code);
 
-        if (boughtItem == "overclocked_pacemaker")
-        {
-            playerConfigs[playerIndex].playerDammageStat += 1;
-            playerConfigs[playerIndex].playerHealthStat += 1;
-            playerConfigs[playerIndex].playerSpeedStat += 1;
-            playerConfigs[playerIndex].playerVisionStat += 1;
-            playerConfigs[playerIndex].playerCritStat += 1;
-        }
-        else if (boughtItem == "toothbrush")
-        {
-            playerConfigs[playerIndex].playerDammageStat += 1;
-        }
-        else if (boughtItem == "hearty_cheese")
-        {
-            playerConfigs[playerIndex].playerHealthStat += 1;
-        }
+        playerConfigs[playerIndex].playerHealthStat += boughtItem.health;
+        playerConfigs[playerIndex].playerDammageStat += boughtItem.damage;
+        playerConfigs[playerIndex].playerSpeedStat += boughtItem.speed;
+        playerConfigs[playerIndex].playerVisionStat += boughtItem.vision;
+        playerConfigs[playerIndex].playerCritStat+= boughtItem.crit;
     }
 
     public void selectItem(int playerIndex, int change)

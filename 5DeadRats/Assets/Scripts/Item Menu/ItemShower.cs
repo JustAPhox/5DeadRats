@@ -39,8 +39,9 @@ public class ItemShower : MonoBehaviour
     public void initialiseBox(int[] code)
     {
         itemCode = code;
-        itemNameBox.SetText(itemLogic.GetComponent<ItemChooser>().getItemName(itemCode));
-        itemDescriptionBox.SetText(itemLogic.GetComponent<ItemChooser>().getItemDescription(itemCode));
+        ItemInfo item = itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
+        itemNameBox.SetText(item.name);
+        itemDescriptionBox.SetText(item.description);
         if (itemCode[0] == 0)
         {
             itemImage.sprite = positiveItemSprites[itemCode[1]];
@@ -48,7 +49,6 @@ public class ItemShower : MonoBehaviour
         else
         {
             itemImage.sprite = negativeItemSprites[itemCode[1]];
-
         }
     }
 
@@ -62,10 +62,10 @@ public class ItemShower : MonoBehaviour
         gameObject.GetComponent<Image>().color = Color.white;
     }
 
-    public string itemBought()
+    public ItemInfo itemBought()
     {
         gameObject.GetComponent<Image>().color = Color.red;
-        return itemLogic.GetComponent<ItemChooser>().getItemCode(itemCode);
+        return itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
     }
 
 
