@@ -12,6 +12,8 @@ public class ItemLogic : MonoBehaviour
 
     private int playerCount;
 
+    [SerializeField]
+    private Sprite[] itemHolderSprite;
 
     [SerializeField]
     private GameObject playerPreFab;
@@ -134,6 +136,7 @@ public class ItemLogic : MonoBehaviour
 
             item.GetComponent<ItemShower>().itemLogic = gameObject;
 
+            item.GetComponent<Image>().sprite = itemHolderSprite[i];
 
             itemObjects[i] = item;
 

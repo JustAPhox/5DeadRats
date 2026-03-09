@@ -14,6 +14,9 @@ public class PlayerCharacterMenu : MonoBehaviour
     private TextMeshProUGUI joinedText;
 
     [SerializeField]
+    private Image playerNumber;
+
+    [SerializeField]
     private GameObject selectionMenu;
 
     [SerializeField]
@@ -55,7 +58,7 @@ public class PlayerCharacterMenu : MonoBehaviour
 
     public void PlayerJoined(PlayerInput input)
     {
-        joinedText.SetText($"Player {input.playerIndex + 1}");
+        joinedText.enabled = false;
 
         playerInput = input;
 
@@ -64,6 +67,8 @@ public class PlayerCharacterMenu : MonoBehaviour
         charcterText.enabled = true;
         charcterText.SetText(characterNames[0]);
         ratImage.sprite = spriteMouthClose[0];
+
+        playerNumber.enabled = true;
 
         ratImage.enabled = true;
     }
