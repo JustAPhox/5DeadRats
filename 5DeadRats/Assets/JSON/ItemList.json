@@ -14,12 +14,7 @@
 		{
 			"name": "Overclocked pacemaker",
 			"code": "overclocked_pacemaker",
-			"description": "Increase all stats by 3. Every 5 seconds there is a 1/1000 chance that you immediately die.",
-			"health": 3,
-			"damage": 3,
-			"speed": 3,
-			"vision": 3,
-			"crit": 3
+			"description": "Increase all stats by 3. Every 5 seconds there is a 1/1000 chance that you immediately die."
 
 		},
 		{
