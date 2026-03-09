@@ -23,6 +23,8 @@ public class ItemShower : MonoBehaviour
     [SerializeField]
     private GameObject itemImage;
 
+    [SerializeField]
+    private Image selectorArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -47,12 +49,12 @@ public class ItemShower : MonoBehaviour
 
     public void itemSelected()
     {
-        gameObject.GetComponent<Image>().color = Color.green;
+        selectorArrow.enabled = true;
     }
 
     public void itemUnselected()
     {
-        gameObject.GetComponent<Image>().color = Color.white;
+        selectorArrow.enabled = false;
     }
 
     public ItemInfo itemBought()
