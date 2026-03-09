@@ -59,7 +59,12 @@ public class ItemShower : MonoBehaviour
 
     public ItemInfo itemBought()
     {
-        gameObject.GetComponent<Image>().color = Color.red;
+        itemUnselected();
+
+        itemNameBox.SetText("SOLD");
+        itemDescriptionBox.SetText("You can't buy nothing");
+        itemImage.GetComponent<itemIconChooser>().itemBought();
+
         return itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
     }
 

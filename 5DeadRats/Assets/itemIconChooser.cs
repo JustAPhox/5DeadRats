@@ -8,6 +8,9 @@ public class itemIconChooser : MonoBehaviour
     [SerializeField]
     private Image itemImage;
 
+    [SerializeField]
+    private Sprite noIcon;
+
 
     [SerializeField]
     private Sprite[] mildItemSprites;    
@@ -39,6 +42,11 @@ public class itemIconChooser : MonoBehaviour
     public void updateImage(Sprite itemSprite)
     {
         itemImage.sprite = itemSprite;
+    }
+
+    public void itemBought()
+    {
+        itemImage.sprite = noIcon;
     }
 
 
