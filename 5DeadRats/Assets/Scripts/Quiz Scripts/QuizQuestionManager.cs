@@ -12,11 +12,10 @@ public class QuizQuestionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI questionTextBox;
 
+    Question question;
 
     [SerializeField]
     private TextMeshProUGUI categoryTextBox;
-
-    private string[] categoryNames = { "Media and Entertainment", "Science and Nature", "History and the Outside World", "Our Glorious Kind", "Geography", "Bonus Round" };
 
     // Shows the current answers
     [SerializeField]
@@ -29,19 +28,46 @@ public class QuizQuestionManager : MonoBehaviour
     [SerializeField]
     private GameObject quizMaster;
 
-    private int correctAnswer;
 
-    public void setCurrentQuestion(int[] questionCode)
+    public void setCurrentQuestion()
     {
-        string[] questionDetails = quizMaster.GetComponent<QuizQuestionPicker>().getQuestion(questionCode);
+        question = quizMaster.GetComponent<QuizQuestionPicker>().getQuestion();
 
-        questionTextBox.SetText(questionDetails[0]);
-        categoryTextBox.SetText(categoryNames[questionCode[0]]);
-        answerBoxText[0].SetText(questionDetails[1]);
-        answerBoxText[1].SetText(questionDetails[2]);
-        answerBoxText[2].SetText(questionDetails[3]);
-        answerBoxText[3].SetText(questionDetails[4]);
-        correctAnswer = Convert.ToInt32(questionDetails[5]);
+        questionTextBox.SetText(question.question[UnityEngine.Random.Range(0, question.question.Length)]);
+        categoryTextBox.SetText(question.category);
+
+        // Set Correct Answer Text
+
+        if (!question.allWrong)
+        {
+            answerBoxText[question.correctAnswerPos[0] - 1].SetText(question.correctAnswer[UnityEngine.Random.Range(0, question.correctAnswer.Length)]);
+        }
+
+
+        // Set Random Wrong Answers
+        bool[] wrongAnswersUsed = new bool[question.wrongAnswer.Length];
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (!question.allWrong && i == question.correctAnswerPos[0] - 1) { continue; }
+
+            int wrongAnswerIndex = UnityEngine.Random.Range(0, question.wrongAnswer.Length);
+
+            while (wrongAnswersUsed[wrongAnswerIndex] == true)
+            {
+                wrongAnswerIndex = UnityEngine.Random.Range(0, question.wrongAnswer.Length);
+            }
+
+
+            answerBoxText[i].SetText(question.wrongAnswer[wrongAnswerIndex]);
+            wrongAnswersUsed[wrongAnswerIndex] = true;
+        }
+
+
+
+
+
+
 
         for (int i = 0; i < 4; i++)
         {
@@ -58,9 +84,9 @@ public class QuizQuestionManager : MonoBehaviour
 
     public void revealCorrectAnswer()
     {
-        if (correctAnswer != 0 && correctAnswer != 5)
+        if (!question.allWrong)
         {
-            answerBox[correctAnswer - 1].GetComponent<Image>().color = Color.green;
+            answerBox[question.correctAnswerPos[0] - 1].GetComponent<Image>().color = Color.green;
         }
     }
 

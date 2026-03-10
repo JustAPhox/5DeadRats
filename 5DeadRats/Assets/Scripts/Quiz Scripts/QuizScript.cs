@@ -26,6 +26,7 @@ public class QuizScript : MonoBehaviour
     private bool timerStarted = false;
 
 
+
     // Used for inputting actions without a controller
     [SerializeField]
     private GameObject playerPreFab;
@@ -42,7 +43,9 @@ public class QuizScript : MonoBehaviour
     // Stores info about answers
     private int[,] givenAnswers;
     private int[] answerChanges;
-    private int correctAnswer;
+
+    private Question question;
+
     private int[] playerScores;
 
     private int currentPhase = 0;
@@ -72,7 +75,6 @@ public class QuizScript : MonoBehaviour
         playerScores = new int[playerCount];
 
         answerChanges = new int[5];
-
 
 
         StartQuestion();
@@ -148,13 +150,14 @@ public class QuizScript : MonoBehaviour
     private void StartQuestion()
     {
         // Get a random question and store its info
-        int[] questionCode = GetComponent<QuizQuestionPicker>().chooseFullQuestion();
 
-        // Stores the correct answer
-        correctAnswer = GetComponent<QuizQuestionPicker>().giveAnswer(questionCode);
+        GetComponent<QuizQuestionPicker>().makeQuestion();
+
+        // Stores the current question
+        question = GetComponent<QuizQuestionPicker>().getQuestion();
 
         // Sends the questionbox the current question
-        questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion(questionCode);
+        questionBox.GetComponent<QuizQuestionManager>().setCurrentQuestion();
 
 
 
@@ -162,7 +165,7 @@ public class QuizScript : MonoBehaviour
         if (PlayerConfigManager.instance.GetDebugMode())
         {
             // Shows the correct answer for debug info
-            correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(correctAnswer);
+            correctAnswerShower.GetComponent<QuizAnswerShower>().setCorrectAnswer(question);
         }
 
         votingAllowed = true;
@@ -272,7 +275,7 @@ public class QuizScript : MonoBehaviour
             assignWinners();
 
 
-            Invoke(nameof(moveToItems), 5f);
+            Invoke(nameof(moveToItems), 3f);
         }
     }
 
@@ -295,7 +298,21 @@ public class QuizScript : MonoBehaviour
     }
 
 
-
+    private bool checkVoteCorrect(int vote)
+    {
+        if (!question.allWrong && vote == question.correctAnswerPos[0])
+        {
+            return true;
+        }
+        else if (vote == 0 && question.emptyCorrect)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     private void countPoints()
@@ -323,12 +340,12 @@ public class QuizScript : MonoBehaviour
         for (int i = 0; i < playerCount; i++) 
         {
             // If correct in the second phase get 2 points
-            if (givenAnswers[i,1] == correctAnswer)
+            if (checkVoteCorrect(givenAnswers[i, 1]))
             {
                 playerScores[i] += 2;
 
                 // Get a bonus point if starts correct
-                if (givenAnswers[i, 0] == correctAnswer)
+                if (checkVoteCorrect(givenAnswers[i, 0]))
                 {
                     playerScores[i] += 1;
                 }
@@ -336,9 +353,9 @@ public class QuizScript : MonoBehaviour
 
 
             // Gain score based on the number of people who changed to your first answer
-            // Unless you didn't vote
+            // Unless you didn't vote (unless not doing so was correct.)
 
-            if (givenAnswers[i, 0] != 0)
+            if (givenAnswers[i, 0] != 0 || question.emptyCorrect)
             {
                 playerScores[i] += answerChanges[givenAnswers[i, 0]];
 
