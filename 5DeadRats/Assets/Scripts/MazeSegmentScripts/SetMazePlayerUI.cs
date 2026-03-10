@@ -142,7 +142,7 @@ public class SetMazePlayerUI : MonoBehaviour
     public void Set_Items_UI(List<string> Item_List, Vector2 Item_Pos)
     {
         //Test_Get_Item(Item_List);
-        Item_List.Add("stopwatch");//temporary
+        //Item_List.Add("stopwatch");//temporary
         //Item_List.Add("big_nuclear_bomb_that_kills_everyone");//temporary
         //Item_List.Add("teleporter");//temporary
         //Item_List.Add("pied_piper_pipe");//temporary
