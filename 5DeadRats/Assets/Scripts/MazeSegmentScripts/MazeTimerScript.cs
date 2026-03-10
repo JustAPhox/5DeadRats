@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class MazeTimerScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI Timer_Text;
-    [SerializeField] float Remaining_Time;
+    public float Remaining_Time;
     float Start_Time;
     VertexGradient Original_Gradient;
     public bool Times_Up = false;
@@ -38,6 +38,12 @@ public class MazeTimerScript : MonoBehaviour
     MazePlayerController P2_Script = null;
     MazePlayerController P3_Script = null;
     MazePlayerController P4_Script = null;
+
+    bool Sudden_Death = false;
+
+    private Coroutine Delay_Coroutine;
+
+    public bool Delay_Over = false;
 
     private void Start()
     {
@@ -210,6 +216,7 @@ public class MazeTimerScript : MonoBehaviour
                 }
 
                 End_Segement_Button.SetActive(true);
+                Call_Delay_Timer();
             }
         }
     }
@@ -224,7 +231,7 @@ public class MazeTimerScript : MonoBehaviour
         
         if (P4_Script != null)
         {
-            if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10 || P3_Script.playerConfig.winPoints >= 10 || P4_Script.playerConfig.winPoints >= 10)
+            if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5 || P3_Script.playerConfig.winPoints >= 5 || P4_Script.playerConfig.winPoints >= 5)
             {
                 if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P4_Script.playerConfig.winPoints)
                 {
@@ -241,7 +248,7 @@ public class MazeTimerScript : MonoBehaviour
 
         if (P3_Script != null)
         {
-            if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10 || P3_Script.playerConfig.winPoints >= 10)
+            if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5 || P3_Script.playerConfig.winPoints >= 5)
             {
                 if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints)
                 {
@@ -253,7 +260,7 @@ public class MazeTimerScript : MonoBehaviour
             }
         }
 
-        if (P1_Script.playerConfig.winPoints >= 10 || P2_Script.playerConfig.winPoints >= 10)
+        if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5)
         {
             if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints)
             {
@@ -297,30 +304,53 @@ public class MazeTimerScript : MonoBehaviour
         int Player2_HP = 0;
         int Player3_HP = 0;
         int Player4_HP = 0;
+        int Amount_Of_Living_Players = 0;
+
         if (Player1 != null)
         {
             MazePlayerController P1_Script = Player1.GetComponent<MazePlayerController>();
             Player1_HP = P1_Script.Current_HP;
+            if(Player1_HP > 0)
+            {
+                Amount_Of_Living_Players++;
+            }
         }
         if (Player2 != null)
         {
             MazePlayerController P2_Script = Player2.GetComponent<MazePlayerController>();
             Player2_HP = P2_Script.Current_HP;
+            if (Player2_HP > 0)
+            {
+                Amount_Of_Living_Players++;
+            }
         }
         if (Player3 != null)
         {
             MazePlayerController P3_Script = Player3.GetComponent<MazePlayerController>();
             Player3_HP = P3_Script.Current_HP;
+            if (Player3_HP > 0)
+            {
+                Amount_Of_Living_Players++;
+            }
         }
         if (Player4 != null)
         {
             MazePlayerController P4_Script = Player4.GetComponent<MazePlayerController>();
             Player4_HP = P4_Script.Current_HP;
+            if (Player1_HP > 0)
+            {
+                Amount_Of_Living_Players++;
+            }
         }
 
         if (Player1_HP == 0 && Player2_HP == 0 && Player3_HP == 0 && Player4_HP == 0)
         {
             Remaining_Time = 0;
+        }
+        else if (Amount_Of_Living_Players == 1 && Sudden_Death == false && Remaining_Time > 20)
+        {
+            Remaining_Time = 20;
+            Sudden_Death = true;
         }
     }
 
@@ -403,5 +433,16 @@ public class MazeTimerScript : MonoBehaviour
             RectTransform Rect = Current_Player_Icon.GetComponent<RectTransform>();
             Rect.anchoredPosition = Pos;
         }
+    }
+
+    public void Call_Delay_Timer()
+    {
+        Delay_Coroutine = StartCoroutine(Delay_Timer());
+    }
+
+    private IEnumerator Delay_Timer()
+    {
+        yield return new WaitForSeconds(3);
+        Delay_Over = true;
     }
 }

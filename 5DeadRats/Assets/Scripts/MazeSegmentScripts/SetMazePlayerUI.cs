@@ -48,25 +48,61 @@ public class SetMazePlayerUI : MonoBehaviour
         GameObject Player_Manager = GameObject.Find("PlayerManager");
         RatManager Script = Player_Manager.GetComponent<RatManager>();
 
-        if (Script.Player_Objects.Length > 0)
-            Player1 = Script.Player_Objects[0];
-            Player_1_UI_Pannel.SetActive(true);
-            Set_Up(Player_1_Icon, Player_1_CheeseCount, Player1.GetComponent<MazePlayerController>(), P1_Item_Pos);
+        //if (Script.Player_Objects.Length > 0)
+        //{
+            //Player1 = Script.Player_Objects[0];
+            //Player_1_UI_Pannel.SetActive(true);
+            //Set_Up(Player_1_Icon, Player_1_CheeseCount, Player1.GetComponent<MazePlayerController>(), P1_Item_Pos);
+        //}
 
-        if (Script.Player_Objects.Length > 0)
-            Player2 = Script.Player_Objects[1];
-            Player_2_UI_Pannel.SetActive(true);
-            Set_Up(Player_2_Icon, Player_2_CheeseCount, Player2.GetComponent<MazePlayerController>(), P2_Item_Pos);
+        //if (Script.Player_Objects.Length > 1)
+        //{
+            //Debug.Log("2 players");
+            //Player2 = Script.Player_Objects[1];
+            //Player_2_UI_Pannel.SetActive(true);
+            //Set_Up(Player_2_Icon, Player_2_CheeseCount, Player2.GetComponent<MazePlayerController>(), P2_Item_Pos);
+        //}
 
-        if (Script.Player_Objects.Length > 1)
-            Player3 = Script.Player_Objects[2];
-            Player_3_UI_Pannel.SetActive(true);
-            Set_Up(Player_3_Icon, Player_3_CheeseCount, Player3.GetComponent<MazePlayerController>(), P3_Item_Pos);
+        //if (Script.Player_Objects.Length > 2)
+        //{
+            //Player3 = Script.Player_Objects[2];
+            //Player_3_UI_Pannel.SetActive(true);
+            //Set_Up(Player_3_Icon, Player_3_CheeseCount, Player3.GetComponent<MazePlayerController>(), P3_Item_Pos);
 
-        if (Script.Player_Objects.Length > 2)
-            Player4 = Script.Player_Objects[3];
-            Player_4_UI_Pannel.SetActive(true);
-            Set_Up(Player_4_Icon, Player_4_CheeseCount, Player4.GetComponent<MazePlayerController>(), P4_Item_Pos);
+        //if (Script.Player_Objects.Length > 3)
+        //{
+            //Player4 = Script.Player_Objects[3];
+            //Player_4_UI_Pannel.SetActive(true);
+            //Set_Up(Player_4_Icon, Player_4_CheeseCount, Player4.GetComponent<MazePlayerController>(), P4_Item_Pos);
+        //}
+
+        int Cycle = 0;
+        foreach(GameObject Player in Script.Player_Objects)
+        {
+            if (Cycle == 0)
+            {
+                Player_1_UI_Pannel.SetActive(true);
+                Set_Up(Player_1_Icon, Player_1_CheeseCount, Player.GetComponent<MazePlayerController>(), P1_Item_Pos);
+            }
+            else if (Cycle == 1)
+            {
+                Debug.Log("2 players");
+                Player_2_UI_Pannel.SetActive(true);
+                Set_Up(Player_2_Icon, Player_2_CheeseCount, Player.GetComponent<MazePlayerController>(), P2_Item_Pos);
+            }
+            else if (Cycle == 2)
+            {
+                Player_3_UI_Pannel.SetActive(true);
+                Set_Up(Player_3_Icon, Player_3_CheeseCount, Player.GetComponent<MazePlayerController>(), P3_Item_Pos);
+            }
+            else if (Cycle == 3)
+            {
+                Player_4_UI_Pannel.SetActive(true);
+                Set_Up(Player_4_Icon, Player_4_CheeseCount, Player.GetComponent<MazePlayerController>(), P4_Item_Pos);
+            }
+
+            Cycle++;
+        }
     }
 
     void Set_Up(GameObject Icon, GameObject Cheese_Count, MazePlayerController Script, Vector2 Item_Pos)
@@ -106,13 +142,13 @@ public class SetMazePlayerUI : MonoBehaviour
     public void Set_Items_UI(List<string> Item_List, Vector2 Item_Pos)
     {
         //Test_Get_Item(Item_List);
-        //Item_List.Add("stopwatch");//temporary
+        Item_List.Add("stopwatch");//temporary
         //Item_List.Add("big_nuclear_bomb_that_kills_everyone");//temporary
         //Item_List.Add("teleporter");//temporary
         //Item_List.Add("pied_piper_pipe");//temporary
         //Item_List.Add("blindness");//temporary
         //Item_List.Add("rusty_syringe");//temporary
-        Item_List.Add("cannibalistic_urges");//temporary
+        //Item_List.Add("overclocked_pacemaker");//temporary
 
         Debug.Log(Item_List[0]);
 

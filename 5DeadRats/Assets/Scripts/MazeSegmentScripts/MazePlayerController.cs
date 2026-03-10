@@ -72,6 +72,10 @@ public class MazePlayerController : MonoBehaviour
 
     private bool Used_Active = false;
 
+    private Canvas This_Canvas;
+    public GameObject Explosion_UI;
+    public Vector2 Zero_Zero;
+
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
@@ -103,7 +107,7 @@ public class MazePlayerController : MonoBehaviour
 
         if (Can_Have_Heart_Attack == true && Current_HP > 0)
         {
-            if (Random.Range(0, 1000) <= Heart_Attack_Value)
+            if (Random.Range(0, 250) <= Heart_Attack_Value)
             {
                 Take_Dammage(Current_HP);
                 Call_Stun_Frames();
@@ -166,6 +170,8 @@ public class MazePlayerController : MonoBehaviour
 
     public void Start()
     {
+        This_Canvas = FindAnyObjectByType<Canvas>();
+        
         if (playerConfig.playerItems.IndexOf("holy_cheese") != -1)
         {
             foreach (string Item in playerConfig.playerItems)
@@ -408,7 +414,50 @@ public class MazePlayerController : MonoBehaviour
                 }
             }
 
-            Used_Active = true;
+            if (playerConfig.playerItems.IndexOf("big_nuclear_bomb_that_kills_everyone") != -1)
+            {
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "big_nuclear_bomb_that_kills_everyone")
+                    {
+                        GameObject Player_Manager = GameObject.Find("PlayerManager");
+                        RatManager Script = Player_Manager.GetComponent<RatManager>();
+
+                        foreach (GameObject Rat in Script.Player_Objects)
+                        {
+                            MazePlayerController Player_Script = Rat.GetComponent<MazePlayerController>();
+                            Player_Script.Play_Sound_From_Array(Ouch_Noises, 0.7f, 1f);
+                            Player_Script.Take_Dammage(Player_Script.Current_HP);
+                            Player_Script.Call_Stun_Frames();
+                            Player_Script.Call_Dammage_Flash(Flash_Colour);
+                            Player_Script.Call_Invincibilty_Frames();
+                            Player_Script.Spawn_Hurt_Particles();
+                        }
+                        GameObject Explosion = Instantiate(Explosion_UI, This_Canvas.transform);
+                        RectTransform Rect = Explosion.GetComponent<RectTransform>();
+                        Rect.anchoredPosition = Zero_Zero;
+                    }
+                }
+
+                playerConfig.playerItems.RemoveAll(i => i == "big_nuclear_bomb_that_kills_everyone");
+            }
+
+            if (playerConfig.playerItems.IndexOf("stopwatch") != -1)
+            {
+                int Count = 0;
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "stopwatch")
+                    {
+                        This_Canvas.GetComponent<MazeTimerScript>().Remaining_Time = 1;
+                        break;
+                    }
+                    Count++;
+                }
+                playerConfig.playerItems.RemoveAt(Count);
+            }
+
+                Used_Active = true;
         }
     }
 
@@ -521,7 +570,7 @@ public class MazePlayerController : MonoBehaviour
 
         GameObject Canvas = GameObject.Find("Canvas");
         MazeTimerScript Timer_Script = Canvas.GetComponent<MazeTimerScript>();
-        if(Timer_Script.Times_Up == true)
+        if(Timer_Script.Delay_Over == true)
         {
             Timer_Script.openQuiz();
         }
@@ -572,7 +621,16 @@ public class MazePlayerController : MonoBehaviour
             else
             {
                 Revives = Revives - 1;
-                
+                int Count = 0;
+                foreach (string Item in playerConfig.playerItems)
+                {
+                    if (Item == "holy_cheese")
+                    {
+                        playerConfig.playerItems.RemoveAt(Count);
+                        break;
+                    }
+                    Count++;
+                }
                 Current_HP = Max_HP;
             }
         }

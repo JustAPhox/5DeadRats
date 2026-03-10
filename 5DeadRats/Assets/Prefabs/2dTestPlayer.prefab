@@ -3309,6 +3309,7 @@ MonoBehaviour:
   Is_Speed_Buffed: 0
   Is_Dammage_Buffed: 0
   Crit_Chance: 0
+  Explosion_UI: {fileID: 1919590571502291617, guid: ce6a7d95fc76e614da217968970ec97d, type: 3}
 --- !u!58 &1305701098349594098
 CircleCollider2D:
   m_ObjectHideFlags: 0
