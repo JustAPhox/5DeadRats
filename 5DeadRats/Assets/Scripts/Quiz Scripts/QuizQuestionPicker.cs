@@ -9,86 +9,70 @@ using UnityEngine;
 public class QuizQuestionPicker : MonoBehaviour
 {
 
-    private int[] choosenCategories = new int[6];
-    private int maxChoosen;
+    private string[] categoryNames = { "Media and Entertainment", "Science and Nature", "History and the Outside World", "Our Glorious Kind", "Geography", "Bonus Round" };
 
-    // Okay this should be better but like no
-    //2d array of questions
-    string[,] mediaQuestions = {
-    { "What is the name of the monkey who played Dexter in Night at the Museum?", "Peggy", "Crystal", "Bonzo", "Belle", "2" },
-    { "What is the name of Patty and Selma’s lizard from The Simpsons?", "Jub-Jub", "Chirpy Boy", "Mojo", "Raymond", "1" },
-    { "Which of these events have NOT been featured in the Olympic Games?", "Steeplechase", "Basque Pelota", "Korfball", "Tejo", "4" },
-    { "By how many pixels is the Minecraft toolbar off centre by in bedrock edition?", "2 pixels", "A single pixel", "Over 10 pixels", "Trick question, it’s on center", "2" }
-    };
+    [SerializeField]
+    private TextAsset itemJSON;
 
-    string[,] scienceQuestions = {
-    { "What is the diameter of the planet Pluto in inches?", "93.56 million", "2.1 billion", "44.32 million", "9.1 billion", "1" },
-    { "How many species of fly are there in the UK?", "Around 1,000", "Around 7,000", "Around 150,000", "Around 4,500", "2" }
-    };
+    private QuestionLists questionLists;
 
-    string[,] historyQuestions = {
-    { "Who designed the Indian palace Malik Bagh?", "Eckart Muthesius", "Ickbar Bigglestein", "Jacob Burckhardt", "Datheid Bluterost", "1" },
-    { "Which one of Stalin’s opponents in the power struggle died from an icepick to the head?", "Lev Kamenev", "Grigory Zinoviev", "Leon Trotsky", "Nikolai Bukharin", "3" }
-    };
+    private Question currentQuestion;
 
-    string[,] ratQuestions = {
-    { "What is the name of the first rat to go to space?", "Hector", "Splinter", "Victor", "Mickey", "1" },
-    { "On average, how close are you to a rat right this second?", "One mile", "Six feet", "Nine metres", "FIfteen centimetres", "2" }
-
-    };
-
-    string[,] geographyQuestions = {
-    { "How many states does Brazil have?", "26", "29", "35", "42", "1" },
-    { "If the U.S. states were to be listed alphabetically, which would be listed 26th?", "Missouri", "Montana", "Nebraska", "Mississippi", "2" }
-    };
-
-    string[,] bonusQuestions = {
-    { "Why are my parents arguing?", "It’s your fault", "It’s my fault", "Political disagreement", "Don’t worry about it", "4" },
-    { "What number am I thinking of?", "23", "91", "68", "3889", "5" }
-    };
+    private int prevCategory;
 
 
-    /// <summary>
-    /// Gives a random question as an array.
-    /// </summary>
-    /// <returns>Random Question</returns>
-    public string[] getQuestion(int[] questionCode)
+    private void Awake()
     {
-        string[,] questionList = findCategoryQuestionList(questionCode[0]);
-
-
-        string[] questionGiven = { questionList[questionCode[1], 0], questionList[questionCode[1], 1], questionList[questionCode[1], 2], questionList[questionCode[1], 3], questionList[questionCode[1], 4], questionList[questionCode[1], 5] };
-
-        return questionGiven;
+        questionLists = JsonUtility.FromJson<QuestionLists>(itemJSON.text);
     }
 
 
-    private string[,] findCategoryQuestionList(int category)
+    public Question getQuestion()
     {
-        switch (category)
+        return currentQuestion;
+    }
+
+    public void makeQuestion()
+    {
+        List<int[]> seenQuestions = PlayerConfigManager.instance.getSeenQuestions();
+
+        int randomCategory = UnityEngine.Random.Range(0, 6);
+        
+        // Rerolls category if its the same as the last one
+        while (randomCategory == prevCategory)
         {
-            case 0:
-                return mediaQuestions;
-            case 1:
-                return scienceQuestions;
-            case 2:
-                return historyQuestions;
-            case 3:
-                return ratQuestions;
-            case 4:
-                return geographyQuestions;
-            case 5:
-                return bonusQuestions;
-            default:
-                return mediaQuestions;
+            randomCategory = UnityEngine.Random.Range(0, 6);
+        }
+
+        // THe list of questions from the category being used
+        List<Question> randomQuestionList = questionLists.ProvideQuestionList(randomCategory);
+
+
+        int questionIndex = 0;
+
+        bool newQuestionFound = false;
+
+        int attempts = 0;
+
+        while (!newQuestionFound) {
+            questionIndex = UnityEngine.Random.Range(0, randomQuestionList.Count);
+
+            newQuestionFound = !seenQuestions.Contains(new int[] { randomCategory, questionIndex });
+
+            attempts++;
+
+            if (attempts > 10)
+            {
+                newQuestionFound = true;
+            }
         }
 
 
-    }
+        currentQuestion = randomQuestionList[questionIndex];
+
+        PlayerConfigManager.instance.AddSeenQuestion(new int[2]{randomCategory, questionIndex});
 
 
-    private int chooseCategory()
-    {
         // 0 = Media and Entertainment
         // 1 = Science and Nature
         // 2 = History and the Outside World
@@ -96,59 +80,88 @@ public class QuizQuestionPicker : MonoBehaviour
         // 4 = Geography
         // 5 = Bonus Round
 
+        currentQuestion.category = categoryNames[randomCategory];
 
-        // If all at the max times choosen increment
-        bool allMaxxed = true;
-
-        foreach (var item in choosenCategories)
+        if (!currentQuestion.allWrong)
         {
-            if (item != maxChoosen) 
-            {
-                allMaxxed = false;
-            }
+            currentQuestion.correctAnswerPos[0] = UnityEngine.Random.Range(1, 5);
+        }
+    }
+}
+
+
+
+
+
+[System.Serializable]
+public class QuestionLists
+{
+    public QuestionLists()
+    {
+        media = new List<Question>();
+        science = new List<Question>();
+        history = new List<Question>();
+        rats = new List<Question>();
+        geography = new List<Question>();
+        bonus = new List<Question>();
+
+    }
+    public List<Question> media;
+    public List<Question> science;
+    public List<Question> history;
+    public List<Question> rats;
+    public List<Question> geography;
+    public List<Question> bonus;
+
+
+    public List<Question> ProvideQuestionList(int wantedCategory)
+    {
+        switch (wantedCategory)
+        {
+            case 0:
+                return media;
+            case 1:
+                return science;
+            case 2:
+                return history;
+            case 3:
+                return rats;
+            case 4:
+                return geography;
+            case 5:
+                return bonus;
         }
 
-        if (allMaxxed == true)
-        {
-            maxChoosen++;
-        }
 
-        int wantedCategorey = UnityEngine.Random.Range(0, 6);
-
-        // If at max times choosen reroll
-        while (choosenCategories[wantedCategorey] == maxChoosen)
-        {
-            wantedCategorey = UnityEngine.Random.Range(0, 6);
-        }
-
-
-
-         return wantedCategorey;
+        return media;
     }
 
-    private int chooseQuestion(int subject)
+}
+
+
+[System.Serializable]
+public class Question
+{
+    public Question()
     {
-        string[,] questionList = findCategoryQuestionList(subject);
+        question = new string[] { "Question?"};
+        correctAnswer = new string[] { "Correct" };
+        wrongAnswer = new string[] { "Wrong1", "Wrong2", "Wrong3", "Wrong4", "Wrong5" };
+        correctAnswerPos = new int[1];
 
-
-        int questionCode = UnityEngine.Random.Range(0, questionList.GetLength(0)) ;
-        return questionCode;
+        emptyCorrect = false;
+        allWrong = false;
     }
 
 
-    public int[] chooseFullQuestion()
-    {
-        int subject = chooseCategory();
-        int[] questionCode = { subject, chooseQuestion(subject) };
-        return questionCode;
-    }
+    public string[] question;
+    public string[] correctAnswer;
+    public string[] wrongAnswer;
+    public string category;
 
-    public int giveAnswer(int[] questionCode)
-    {
-        string[,] questionList = findCategoryQuestionList(questionCode[0]);
+    public int[] correctAnswerPos;
 
 
-        int correctAnswer = Convert.ToInt32(questionList[questionCode[1], 5]);
-        return correctAnswer;
-    }
+    public bool emptyCorrect;
+    public bool allWrong;
 }
