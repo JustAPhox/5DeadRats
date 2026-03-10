@@ -13,9 +13,6 @@ public class ItemLogic : MonoBehaviour
     private int playerCount;
 
     [SerializeField]
-    private Sprite[] itemHolderSprite;
-
-    [SerializeField]
     private GameObject playerPreFab;
 
     [SerializeField]
@@ -135,8 +132,6 @@ public class ItemLogic : MonoBehaviour
             item.transform.SetParent(itemSpace.transform);
 
             item.GetComponent<ItemShower>().itemLogic = gameObject;
-
-            item.GetComponent<Image>().sprite = itemHolderSprite[i];
 
             itemObjects[i] = item;
 
