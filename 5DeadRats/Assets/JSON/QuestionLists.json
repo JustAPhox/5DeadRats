@@ -38,6 +38,32 @@
                 "Basque Pelota",
                 "Korfball"
             ]
+        },
+        {
+            "question": [
+                "By how many pixels is the Minecraft toolbar off centre by in bedrock edition?"
+            ],
+            "correctAnswer": [
+                "A single pixel"
+            ],
+            "wrongAnswer": [
+                "2 pixels",
+                "Over 10 pixels",
+                "Trick question, it’s on center"
+            ]
+        },
+        {
+            "question": [
+                "What Pokemon is number 392 in the national dex?"
+            ],
+            "correctAnswer": [
+                "Infernape"
+            ],
+            "wrongAnswer": [
+                "Lilligant",
+                "Latias",
+                "Pachirisu"
+            ]
         }
     ],
     "science": [
@@ -78,6 +104,32 @@
                 "As much as a bowling ball",
                 "As much as a basket ball",
                 "As much as a ping pong ball"
+            ]
+        },
+        {
+            "question": [
+                "Where do grasshoppers have ears?"
+            ],
+            "correctAnswer": [
+                "Their stomach"
+            ],
+            "wrongAnswer": [
+                "Their legs",
+                "Their antenna",
+                "Their back"
+            ]
+        },
+        {
+            "question": [
+                "Which of these nuts aren’t actually a nut?"
+            ],
+            "correctAnswer": [
+                "Peanuts"
+            ],
+            "wrongAnswer": [
+                "Hazelnuts",
+                "Cashews",
+                "Pistachios"
             ]
         }
     ],
@@ -120,7 +172,33 @@
                 "Arisen",
                 "Aerial"
             ]
-        }
+        },
+        {
+            "question": [
+                "When were post-it notes invented?"
+            ],
+            "correctAnswer": [
+                "1968"
+            ],
+            "wrongAnswer": [
+                "1980",
+                "1946",
+                "1953"
+            ]
+        },
+        {
+            "question": [
+                "When were passports invented?"
+            ],
+            "correctAnswer": [
+                "1414"
+            ],
+            "wrongAnswer": [
+                "1921",
+                "1892",
+                "1505"
+            ]
+        },
     ],
     "rats": [
         {
@@ -161,7 +239,33 @@
                 "Eye boggle",
                 "Sneeze"
             ]
-        }
+        },
+        {
+            "question": [
+                "What is the name of the rat in Horrible Histories?"
+            ],
+            "correctAnswer": [
+                "Rattus Rattus"
+            ],
+            "wrongAnswer": [
+                "Ratthew T. Rat",
+                "Ratta Tatta",
+                "He doesn’t have a name"
+            ]
+        },
+        {
+            "question": [
+                "What is the average length of a rat tail?"
+            ],
+            "correctAnswer": [
+                "Six inches"
+            ],
+            "wrongAnswer": [
+                "Nine inches",
+                "Three inches",
+                "Eight inches"
+            ]
+        },
     ],
     "geography": [
         {
@@ -202,7 +306,33 @@
                 "Russia",
                 "Mongolia"
             ]
-        }
+        },
+        {
+            "question": [
+                "What’s the maximum temperature that the hottest part of the Amazon river can get?"
+            ],
+            "correctAnswer": [
+                "99.1 ℃"
+            ],
+            "wrongAnswer": [
+                "102.9 ℃",
+                "198.5 ℃",
+                "198.5 °F"
+            ]
+        },
+        {
+            "question": [
+                "Where is the city where everyone lives under one roof located?"
+            ],
+            "correctAnswer": [
+                "Alaska"
+            ],
+            "wrongAnswer": [
+                "Croatia",
+                "Belgium",
+                "Monaco"
+            ]
+        },
     ],
     "bonus": [
         {
@@ -242,6 +372,123 @@
                 "100% absolutely!",
                 "Can I go home now"
             ]
-        }
+        },
+        {
+            "question": [
+                "What is our artist eating as we write these questions?"
+            ],
+            "correctAnswer": [
+                "Noodles"
+            ],
+            "wrongAnswer": [
+                "Pasta",
+                "Cookie",
+                "Sandwich"
+            ]
+        },
+        {
+            "question": [
+                "What is the Tower of Babel?"
+            ],
+            "correctAnswer": [
+                "Wanpela taua ol i wokim bilong go antap long heven"
+            ],
+            "wrongAnswer": [
+                "Sijiui",
+                "मला माहित नाही",
+                "Ndaikuaái"
+            ]
+        },
+        {
+            "question": [
+                "How many wheels does an 18-wheeler have?"
+            ],
+            "correctAnswer": [
+                "19"
+            ],
+            "wrongAnswer": [
+                "18",
+                "17",
+                "4"
+            ]
+        },
+        {
+            "question": [
+                "Should you start a podcast?"
+            ],
+            "correctAnswer": [
+                "No"
+            ],
+            "wrongAnswer": [
+                "Yes",
+                "Unsure",
+                "What’s a podcast"
+            ]
+        },
+        {
+            "question": [
+                "Witch pf teh fullowing werds iz spalt corectly?"
+            ],
+            "correctAnswer": [
+                "Corectly"
+            ],
+            "wrongAnswer": [
+                "Incorrecyly",
+                "Supercalifragilisticexpialidocious",
+                "Correctly"
+            ]
+        },
+        {
+            "question": [
+                "Hi"
+            ],
+            "correctAnswer": [
+                "This is not a question"
+            ],
+            "wrongAnswer": [
+                "Hello",
+                "B",
+                "Hi"
+            ]
+        },
+        {
+            "question": [
+                "I have a face and yet can not see, hear, talk, or taste. I have 2 hands and yet cannot hold things. I keep track of something that I personally do not know. What am I?"
+            ],
+            "correctAnswer": [
+                "A really &%$# up man."
+            ],
+            "wrongAnswer": [
+                "A River",
+                "Nature",
+                "A Clock"
+            ]
+        },
+        {
+            "question": [
+                "Which of these questions is real?"
+            ],
+            "correctAnswer": [
+                "Can a match box?"
+            ],
+            "wrongAnswer": [
+                "If a woodpecker wood pecked wood, would the pecker wood be pecked?",
+                "What is MXXXVII+𝋲?",
+                "What is the best game ever?"
+            ]
+        },
+        {
+            "question": [
+                "I need to go for this round. Please don’t do anything."
+            ],
+            "wrongAnswer": [
+                "Eat the cheese",
+                "Escape",
+                "Run a mini gameshow",
+                "Stay and sit still",
+            ],
+            "allWrong":  true,
+            "emptyCorrect": true;
+        },
     ]
 }
