@@ -18,6 +18,7 @@ public class QuizQuestionPicker : MonoBehaviour
 
     private Question currentQuestion;
 
+    private int prevCategory;
 
 
     private void Awake()
@@ -33,10 +34,44 @@ public class QuizQuestionPicker : MonoBehaviour
 
     public void makeQuestion()
     {
+        List<int[]> seenQuestions = PlayerConfigManager.instance.getSeenQuestions();
+
         int randomCategory = UnityEngine.Random.Range(0, 6);
+        
+        // Rerolls category if its the same as the last one
+        while (randomCategory == prevCategory)
+        {
+            randomCategory = UnityEngine.Random.Range(0, 6);
+        }
+
+        // THe list of questions from the category being used
         List<Question> randomQuestionList = questionLists.ProvideQuestionList(randomCategory);
 
-        currentQuestion = randomQuestionList[UnityEngine.Random.Range(0, randomQuestionList.Count)];
+
+        int questionIndex = 0;
+
+        bool newQuestionFound = false;
+
+        int attempts = 0;
+
+        while (!newQuestionFound) {
+            questionIndex = UnityEngine.Random.Range(0, randomQuestionList.Count);
+
+            newQuestionFound = !seenQuestions.Contains(new int[] { randomCategory, questionIndex });
+
+            attempts++;
+
+            if (attempts > 10)
+            {
+                newQuestionFound = true;
+            }
+        }
+
+
+        currentQuestion = randomQuestionList[questionIndex];
+
+        PlayerConfigManager.instance.AddSeenQuestion(new int[2]{randomCategory, questionIndex});
+
 
         // 0 = Media and Entertainment
         // 1 = Science and Nature

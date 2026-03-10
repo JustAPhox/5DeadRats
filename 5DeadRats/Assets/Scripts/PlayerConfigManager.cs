@@ -27,6 +27,7 @@ public class PlayerConfigManager : MonoBehaviour
 
     private bool debugModeOn = false;
 
+    private List<int[]> seenQuestions = new List<int[]>();
 
 
     private void Awake()
@@ -51,6 +52,18 @@ public class PlayerConfigManager : MonoBehaviour
     {
         return playerConfigList;
     }
+
+
+    public void AddSeenQuestion(int[] questionCode)
+    {
+        seenQuestions.Add(questionCode);
+    }
+
+    public List<int[]> getSeenQuestions()
+    {
+        return seenQuestions;
+    }
+
 
 
     public void SetDebugMode(bool newState)
