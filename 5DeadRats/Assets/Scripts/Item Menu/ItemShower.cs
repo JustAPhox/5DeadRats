@@ -16,11 +16,6 @@ public class ItemShower : MonoBehaviour
     private int[] itemCode;
 
     [SerializeField]
-    private Sprite[] positiveItemSprites;
-    [SerializeField]
-    private Sprite[] negativeItemSprites;
-
-    [SerializeField]
     private GameObject itemImage;
 
     [SerializeField]

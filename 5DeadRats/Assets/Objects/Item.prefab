@@ -68,15 +68,15 @@ MonoBehaviour:
   m_text: This is a fine placeholder. It has been used in many games such as 5 dead
     rats
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
+  m_sharedMaterial: {fileID: 8805817490618045699, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -244,7 +244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25333333, y: 0.818}
   m_AnchorMax: {x: 0.7916667, y: 0.9016667}
-  m_AnchoredPosition: {x: -0.09500122, y: 0.5385895}
+  m_AnchoredPosition: {x: -0.09500122, y: 0.5385742}
   m_SizeDelta: {x: -3.645996, y: 2.5999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7079444677299021822
@@ -277,15 +277,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cool Item Stuff
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
+  m_sharedMaterial: {fileID: 8805817490618045699, guid: d3f4f3d8730f56c4dbb68cacd7d55c8c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 116b7d5795d810545a79c67f81d7e2b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00413f3c69b7a9b4fb34eb71cac8eac8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -439,17 +439,6 @@ MonoBehaviour:
   itemNameBox: {fileID: 2895815136340156311}
   itemDescriptionBox: {fileID: 79946743091389927}
   itemLogic: {fileID: 0}
-  positiveItemSprites:
-  - {fileID: 21300000, guid: eaa5fbe245325434982395a84144ff80, type: 3}
-  - {fileID: 21300000, guid: b2eb2fe4aaf2c1141ba1ea81149fa5d4, type: 3}
-  - {fileID: 21300000, guid: f283f34ae16672e4fb9a1948dbc3072c, type: 3}
-  - {fileID: 21300000, guid: 3583923bfcea25b489eac0545bcdbb03, type: 3}
-  - {fileID: 21300000, guid: d8d7effb445b04645a6195c70769da11, type: 3}
-  negativeItemSprites:
-  - {fileID: 21300000, guid: 7b0c4fd6888edc54ebe9ce8d74ccc199, type: 3}
-  - {fileID: 21300000, guid: 9276c922926743c44ab62b13febbc02c, type: 3}
-  - {fileID: 21300000, guid: b2207370dd05780438e61b6364d20930, type: 3}
-  - {fileID: 21300000, guid: 84038f742b678d64393f373b2b52f3a2, type: 3}
   itemImage: {fileID: 4944047164089412681}
   selectorArrow: {fileID: 8971336676554905419}
 --- !u!1001 &933611353479346653
@@ -526,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862634254548309356, guid: d8034aaeee199fa4bbe50d209ac959a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.1063004
+      value: 1.1062927
       objectReference: {fileID: 0}
     - target: {fileID: 7862634254548309356, guid: d8034aaeee199fa4bbe50d209ac959a2, type: 3}
       propertyPath: m_AnchoredPosition.y
