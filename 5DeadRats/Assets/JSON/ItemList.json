@@ -17,7 +17,7 @@
 			"name": "Adrenalin shot",
 			"code": "adrenaline",
 			"description": "Increases speed by 1",
-			"damage": 1
+			"speed": 1
 		},
 		{
 			"name": "Four-leaf clover",

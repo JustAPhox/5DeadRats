@@ -231,7 +231,7 @@ public class MazeTimerScript : MonoBehaviour
         
         if (P4_Script != null)
         {
-            if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5 || P3_Script.playerConfig.winPoints >= 5 || P4_Script.playerConfig.winPoints >= 5)
+            if (P1_Script.playerConfig.winPoints >= 3 || P2_Script.playerConfig.winPoints >= 3 || P3_Script.playerConfig.winPoints >= 3 || P4_Script.playerConfig.winPoints >= 3)
             {
                 if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P4_Script.playerConfig.winPoints)
                 {
@@ -248,7 +248,7 @@ public class MazeTimerScript : MonoBehaviour
 
         if (P3_Script != null)
         {
-            if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5 || P3_Script.playerConfig.winPoints >= 5)
+            if (P1_Script.playerConfig.winPoints >= 3 || P2_Script.playerConfig.winPoints >= 3 || P3_Script.playerConfig.winPoints >= 3)
             {
                 if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints && P1_Script.playerConfig.winPoints != P3_Script.playerConfig.winPoints)
                 {
@@ -260,7 +260,7 @@ public class MazeTimerScript : MonoBehaviour
             }
         }
 
-        if (P1_Script.playerConfig.winPoints >= 5 || P2_Script.playerConfig.winPoints >= 5)
+        if (P1_Script.playerConfig.winPoints >= 3 || P2_Script.playerConfig.winPoints >= 3)
         {
             if (P1_Script.playerConfig.winPoints != P2_Script.playerConfig.winPoints)
             {
