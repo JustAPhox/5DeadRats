@@ -8,13 +8,13 @@ using UnityEngine.InputSystem;
 public class ItemChooser : MonoBehaviour
 {
     [SerializeField]
-    TextAsset itemJSON;
+    private TextAsset itemJSON;
 
-    List<ItemInfo> mildItems;
-    List<ItemInfo> matureItems;
-    List<ItemInfo> stinkyItems;
-    List<ItemInfo> blueItems;
-    List<ItemInfo> moldyItems;
+    private List<ItemInfo> mildItems;
+    private List<ItemInfo> matureItems;
+    private List<ItemInfo> stinkyItems;
+    private List<ItemInfo> blueItems;
+    private List<ItemInfo> moldyItems;
 
 
 

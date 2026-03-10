@@ -9,6 +9,7 @@ public class QuizCharacterScript : MonoBehaviour
     //Set via code when created
     public GameObject QuizMaster;
 
+    private float voteDelayEnd;
 
     private PlayerConfig playerConfig;
 
@@ -59,6 +60,7 @@ public class QuizCharacterScript : MonoBehaviour
     {
         // [IMPORTANT] Gets the controlls and changes the action map
         controls = new PlayerControls();
+        voteDelayEnd = Time.time + 0.5f;
 
     }
 
@@ -131,6 +133,11 @@ public class QuizCharacterScript : MonoBehaviour
     //Tells QuizScript a player voted
     public void questionAnswered(int answerGiven)
     {
+
+        if (voteDelayEnd > Time.time) { Debug.Log($"Player {playerConfig.playerIndex} voted too early"); return; }
+
+        voteDelayEnd = Time.time + 0.5f;
+
         Debug.Log($"Player {playerConfig.playerIndex} voted on {answerGiven}");
 
         podiumBacking.color = Color.green;

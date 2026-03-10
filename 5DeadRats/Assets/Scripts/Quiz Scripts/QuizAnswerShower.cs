@@ -28,13 +28,35 @@ public class QuizAnswerShower : MonoBehaviour
         
     }
 
-    public void setCorrectAnswer(int[] correctAnswer)
+    public void setCorrectAnswer(Question question)
     {
-        correctAnswerBox.text = string.Join(" - ", correctAnswer);
+        string correctAnswerText = "";
+
+        if (question.emptyCorrect)
+        {
+            correctAnswerText += "0";
+        }
+
+        if (!question.allWrong)
+        {
+            if (correctAnswerText.Length > 0)
+            {
+                correctAnswerText += " - ";
+            }
+
+            correctAnswerText += string.Join(" - ", question.correctAnswerPos);
+        }
+
+
+        if (correctAnswerText.Length == 0)
+        {
+            correctAnswerText = "None";
+        }
+
+        correctAnswerBox.text = correctAnswerText;
 
 
 
-        answeredBoxRound1[0].text = "0";
 
         for (int i = 0; i < 4; i++)
         {
