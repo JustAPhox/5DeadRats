@@ -33,14 +33,14 @@ public class QuizQuestionManager : MonoBehaviour
     {
         question = quizMaster.GetComponent<QuizQuestionPicker>().getQuestion();
 
-        questionTextBox.SetText(question.question[0]);
+        questionTextBox.SetText(question.question[UnityEngine.Random.Range(0, question.question.Length)]);
         categoryTextBox.SetText(question.category);
 
         // Set Correct Answer Text
 
         if (!question.allWrong)
         {
-            answerBoxText[question.correctAnswerPos[0] - 1].SetText(question.correctAnswer[0]);
+            answerBoxText[question.correctAnswerPos[0] - 1].SetText(question.correctAnswer[UnityEngine.Random.Range(0, question.correctAnswer.Length)]);
         }
 
 
