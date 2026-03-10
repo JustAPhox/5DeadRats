@@ -21,8 +21,10 @@ public class ItemShower : MonoBehaviour
     private Sprite[] negativeItemSprites;
 
     [SerializeField]
-    private Image itemImage;
+    private GameObject itemImage;
 
+    [SerializeField]
+    private Image selectorArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -42,29 +44,27 @@ public class ItemShower : MonoBehaviour
         ItemInfo item = itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
         itemNameBox.SetText(item.name);
         itemDescriptionBox.SetText(item.description);
-        if (itemCode[0] == 0)
-        {
-            itemImage.sprite = positiveItemSprites[itemCode[1]];
-        }
-        else
-        {
-            itemImage.sprite = negativeItemSprites[itemCode[1]];
-        }
+        itemImage.GetComponent<itemIconChooser>().showItem(code);
     }
 
     public void itemSelected()
     {
-        gameObject.GetComponent<Image>().color = Color.green;
+        selectorArrow.enabled = true;
     }
 
     public void itemUnselected()
     {
-        gameObject.GetComponent<Image>().color = Color.white;
+        selectorArrow.enabled = false;
     }
 
     public ItemInfo itemBought()
     {
-        gameObject.GetComponent<Image>().color = Color.red;
+        itemUnselected();
+
+        itemNameBox.SetText("SOLD");
+        itemDescriptionBox.SetText("You can't buy nothing");
+        itemImage.GetComponent<itemIconChooser>().itemBought();
+
         return itemLogic.GetComponent<ItemChooser>().getItemInfo(itemCode);
     }
 

@@ -10,8 +10,11 @@ public class ItemChooser : MonoBehaviour
     [SerializeField]
     TextAsset itemJSON;
 
-    List<ItemInfo> positiveItems;
-    List<ItemInfo> negativeItems;
+    List<ItemInfo> mildItems;
+    List<ItemInfo> matureItems;
+    List<ItemInfo> stinkyItems;
+    List<ItemInfo> blueItems;
+    List<ItemInfo> moldyItems;
 
 
 
@@ -30,12 +33,14 @@ public class ItemChooser : MonoBehaviour
 
         ItemListObject itemList = JsonUtility.FromJson<ItemListObject>(itemJSON.text);
 
-        positiveItems = itemList.positiveItems;
-        negativeItems = itemList.negativeItems;
+        mildItems = itemList.mildItems;
+        matureItems = itemList.matureItems;
+        stinkyItems = itemList.stinkyItems;
+        blueItems = itemList.blueItems;
+        moldyItems = itemList.negativeItems;
 
 
-        Debug.Log(itemList.positiveItems[0].name);
-        Debug.Log(itemList.negativeItems[0].name);
+
 
     }
 
@@ -56,11 +61,23 @@ public class ItemChooser : MonoBehaviour
         {
             if (wantedItemList == 0)
             {
-                itemCode[1] = UnityEngine.Random.Range(0, positiveItems.Count);
+                itemCode[1] = UnityEngine.Random.Range(0, mildItems.Count);
             }
             else if (wantedItemList == 1)
             {
-                itemCode[1] = UnityEngine.Random.Range(0, negativeItems.Count);
+                itemCode[1] = UnityEngine.Random.Range(0, matureItems.Count);
+            }
+            else if (wantedItemList == 2)
+            {
+                itemCode[1] = UnityEngine.Random.Range(0, stinkyItems.Count);
+            }
+            else if (wantedItemList == 3)
+            {
+                itemCode[1] = UnityEngine.Random.Range(0, blueItems.Count);
+            }
+            else if (wantedItemList == 4)
+            {
+                itemCode[1] = UnityEngine.Random.Range(0, moldyItems.Count);
             }
             else
             {
@@ -80,36 +97,61 @@ public class ItemChooser : MonoBehaviour
 
     public int[] GivePositiveItem()
     {
-        return GiveItem(0);
+        float randomItemValue = UnityEngine.Random.value;
+
+        if (randomItemValue <= 0.5)
+        {
+            return GiveItem(0);
+        }
+        else if (randomItemValue <= 0.8)
+        {
+            return GiveItem(1);
+        }
+        else if (randomItemValue <= 0.95)
+        {
+            return GiveItem(2);
+        }
+        else
+        {
+            return GiveItem(3);
+        }
+
+
+
     }
 
 
     public int[] GiveNegativeItem()
     {
-        return GiveItem(1);
-    }
-
-    public int[] GiveRandomItem()
-    {
-        if (UnityEngine.Random.value > 0.25)
-        {
-            return GivePositiveItem();
-        }
-        else
-        {
-            return GiveNegativeItem();
-        }
+        return GiveItem(4);
     }
 
     public ItemInfo getItemInfo(int[] itemCode)
     {
         if (itemCode[0] == 0)
         {
-            return positiveItems[itemCode[1]];
+            return mildItems[itemCode[1]];
+        }
+        else if (itemCode[0] == 1)
+        {
+            return matureItems[itemCode[1]];
+        }
+        else if (itemCode[0] == 2)
+        {
+            return stinkyItems[itemCode[1]];
+        }
+        else if (itemCode[0] == 3)
+        {
+            return blueItems[itemCode[1]];
+        }
+        else if (itemCode[0] == 4)
+        {
+            return moldyItems[itemCode[1]];
         }
         else
         {
-            return negativeItems[itemCode[1]];
+            Debug.Log("Get Item Info Given wrong item code");
+            return mildItems[0];
         }
     }
 }
@@ -119,10 +161,17 @@ public class ItemListObject
 {
     public ItemListObject()
     {
-        positiveItems = new List<ItemInfo>();
+        mildItems = new List<ItemInfo>();
+        matureItems = new List<ItemInfo>();
+        stinkyItems = new List<ItemInfo>();
+        blueItems = new List<ItemInfo>();
         negativeItems = new List<ItemInfo>();
+
     }
-    public List<ItemInfo> positiveItems;
+    public List<ItemInfo> mildItems;
+    public List<ItemInfo> matureItems;
+    public List<ItemInfo> stinkyItems;
+    public List<ItemInfo> blueItems;
     public List<ItemInfo> negativeItems;
 }
 

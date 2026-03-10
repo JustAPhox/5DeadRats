@@ -227,6 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e750b6c7ac95cf2458f10943106bf3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemHolderSprite:
+  - {fileID: 21300000, guid: 116b7d5795d810545a79c67f81d7e2b6, type: 3}
+  - {fileID: 21300000, guid: 44d9a2dbe9d27184c81b51259b71e8f0, type: 3}
+  - {fileID: 21300000, guid: 4bcc947da6ee44b4aab0872005d93b43, type: 3}
+  - {fileID: 21300000, guid: c1d3c669bb0286b42b15b77f46693b80, type: 3}
   playerPreFab: {fileID: 2259985678724203316, guid: 50bbdaa5a0282874aa3175dfd89ea3d9, type: 3}
   itemPreFab: {fileID: 6277611732707199846, guid: f951794b0dcccea4d841c0ff4b8d6cba, type: 3}
   itemSpace: {fileID: 1100219029}
@@ -510,12 +515,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: -60
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: -120
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
