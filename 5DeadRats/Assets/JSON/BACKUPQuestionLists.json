@@ -810,7 +810,7 @@
                 "Eat the cheese",
                 "Escape",
                 "Run a mini gameshow",
-                "Stay and sit still"
+                "Stay and sit still",
             ],
             "allWrong":  true,
             "emptyCorrect": true
