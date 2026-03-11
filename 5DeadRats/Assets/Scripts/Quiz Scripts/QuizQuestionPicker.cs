@@ -61,7 +61,7 @@ public class QuizQuestionPicker : MonoBehaviour
 
             attempts++;
 
-            if (attempts > 10)
+            if (attempts > 100)
             {
                 newQuestionFound = true;
             }

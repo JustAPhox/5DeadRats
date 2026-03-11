@@ -104,6 +104,32 @@
                 "Fullmetal Alchemist: Brotherhood"
             ]
         },
+        {
+            "question": [
+                "Which of these is not an actual character in the Five Nights at Freddy’s franchise?"
+            ],
+            "correctAnswer": [
+                "Puppet Freddy"
+            ],
+            "wrongAnswer": [
+                "Virtua Freddy",
+                "Great Escape Golden Freddy",
+                "Baron Von Bear"
+            ]
+        },
+        {
+            "question": [
+                "What is the name of the main Caucasian character in the movie Black Panther?"
+            ],
+            "correctAnswer": [
+                "Everett K. Ross"
+            ],
+            "wrongAnswer": [
+                "Dane Whitman",
+                "Franklin Richards",
+                "Nathan Garrett"
+            ]
+        }
     ],
     "science": [
         {
@@ -210,6 +236,32 @@
                 "Komodo dragon"
             ]
         },
+        {
+            "question": [
+                "How long will it take for Asia and America to collide into one continent?"
+            ],
+            "correctAnswer": [
+                "200 million years"
+            ],
+            "wrongAnswer": [
+                "500 billion years",
+                "700 trillion years",
+                "1 quadrillion years"
+            ]
+        },
+        {
+            "question": [
+                "Which of the following cannot be seen from space?"
+            ],
+            "correctAnswer": [
+                "The pyramids of Giza"
+            ],
+            "wrongAnswer": [
+                "The green houses of Almeria",
+                "The Corn mazes from Minnesota",
+                "The Cooling Pond of Chernobyl"
+            ]
+        }
     ],
     "history": [
         {
@@ -314,6 +366,32 @@
                 "A bison",
                 "A wolf",
                 "A white-tailed eagle"
+            ]
+        },
+        {
+            "question": [
+                "How long did Queen Jane Grey rule England for?"
+            ],
+            "correctAnswer": [
+                "9 days"
+            ],
+            "wrongAnswer": [
+                "34 days",
+                "53 days",
+                "1 day"
+            ]
+        },
+        {
+            "question": [
+                "Which of these substances was never used as medicine?"
+            ],
+            "correctAnswer": [
+                "Mayonnaise"
+            ],
+            "wrongAnswer": [
+                "Ketchup",
+                "Chili sauce",
+                "Soy sauce"
             ]
         }
     ],
@@ -420,6 +498,32 @@
                 "Rat",
                 "Tar",
                 "Mai"
+            ]
+        },
+        {
+            "question": [
+                "Which of these years was the Chinese Year of the Rat?"
+            ],
+            "correctAnswer": [
+                "2020"
+            ],
+            "wrongAnswer": [
+                "2018",
+                "2017",
+                "2024"
+            ]
+        },
+        {
+            "question": [
+                "“Ratman’s Notebooks” is a short horror novel written by Stephen Gilbert, an author from which country?"
+            ],
+            "correctAnswer": [
+                "United Kingdom"
+            ],
+            "wrongAnswer": [
+                "U.S.A",
+                "Greece",
+                "Hungary"
             ]
         }
     ],
@@ -528,6 +632,32 @@
                 "Tuvalu"
             ]
         },
+        {
+            "question": [
+                "Which of these natural disasters is least likely to happen on the equator?"
+            ],
+            "correctAnswer": [
+                "Tornado"
+            ],
+            "wrongAnswer": [
+                "Drought",
+                "Flash flood",
+                "Earthquakes"
+            ]
+        },
+        {
+            "question": [
+                "What’s the longest underground river?"
+            ],
+            "correctAnswer": [
+                "Puerto Princesa in Philippines"
+            ],
+            "wrongAnswer": [
+                "Cenote Angelita in Mexico",
+                "Submarine Channel in the Black Sea",
+                "Phong Nha River in Vietnam"
+            ]
+        }
     ],
     "bonus": [
         {
