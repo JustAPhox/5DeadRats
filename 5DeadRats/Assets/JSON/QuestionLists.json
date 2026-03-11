@@ -64,7 +64,46 @@
                 "Latias",
                 "Pachirisu"
             ]
-        }
+        },
+        {
+            "question": [
+                "What’s the code name of the game Riot Games revealed in October 2019?"
+            ],
+            "correctAnswer": [
+                "Project F, a possible RPG"
+            ],
+            "wrongAnswer": [
+                "Project A, a possible FPS",
+                "Project B, a possible card game",
+                "Project L, a possible fighting game"
+            ]
+        },
+        {
+            "question": [
+                "What level is the Ukiki enemy found in Super Mario 64?"
+            ],
+            "correctAnswer": [
+                "Tall, Tall Mountain"
+            ],
+            "wrongAnswer": [
+                "Hazy Maze Cave",
+                "Tick Tock Clock",
+                "Big Boo’s Haunt"
+            ]
+        },
+        {
+            "question": [
+                "What is the most watched anime in the UK as of 2023?"
+            ],
+            "correctAnswer": [
+                "Attack on Titan"
+            ],
+            "wrongAnswer": [
+                "Death Note",
+                "Demon Slayer: Kimetsu No Yaiba",
+                "Fullmetal Alchemist: Brotherhood"
+            ]
+        },
     ],
     "science": [
         {
@@ -131,7 +170,46 @@
                 "Cashews",
                 "Pistachios"
             ]
-        }
+        },
+        {
+            "question": [
+                "What’s the name for hibernating through the summer?"
+            ],
+            "correctAnswer": [
+                "Aestivation"
+            ],
+            "wrongAnswer": [
+                "Hybernation",
+                "Brumation",
+                "Diapause"
+            ]
+        },
+        {
+            "question": [
+                "Which of these is not a real scientific name?"
+            ],
+            "correctAnswer": [
+                "Horse Horse Horse"
+            ],
+            "wrongAnswer": [
+                "Gorilla Gorilla Gorilla",
+                "Giraffa Giraffa Giraffa",
+                "Lynx Lynx Lynx"
+            ]
+        },
+        {
+            "question": [
+                "Which of these reptiles is more closely related to birds than lizards?"
+            ],
+            "correctAnswer": [
+                "Crocodile"
+            ],
+            "wrongAnswer": [
+                "Chameleon",
+                "Iguana",
+                "Komodo dragon"
+            ]
+        },
     ],
     "history": [
         {
@@ -199,6 +277,45 @@
                 "1505"
             ]
         },
+        {
+            "question": [
+                "How many highways are there in the world numbered 252?"
+            ],
+            "correctAnswer": [
+                "28"
+            ],
+            "wrongAnswer": [
+                "30",
+                "12",
+                "25"
+            ]
+        },
+        {
+            "question": [
+                "What are the three treasures of Taoism?"
+            ],
+            "correctAnswer": [
+                "Compassion, frugality, and humility"
+            ],
+            "wrongAnswer": [
+                "Courage, wisdom, and kindness",
+                "Willpower, hope, and love",
+                "Self-improvement, respect, and politeness"
+            ]
+        },
+        {
+            "question": [
+                "What animal did the Polish enlist as a soldier during World War II?"
+            ],
+            "correctAnswer": [
+                "A bear"
+            ],
+            "wrongAnswer": [
+                "A bison",
+                "A wolf",
+                "A white-tailed eagle"
+            ]
+        }
     ],
     "rats": [
         {
@@ -266,6 +383,45 @@
                 "Eight inches"
             ]
         },
+        {
+            "question": [
+                "What is the scientific name for “rat”?"
+            ],
+            "correctAnswer": [
+                "Rattus"
+            ],
+            "wrongAnswer": [
+                "Rattas",
+                "Rattata",
+                "Rattaelada"
+            ]
+        },
+        {
+            "question": [
+                "How many bones does a rat have?"
+            ],
+            "correctAnswer": [
+                "223"
+            ],
+            "wrongAnswer": [
+                "206",
+                "142",
+                "91"
+            ]
+        },
+        {
+            "question": [
+                "What is “rat” in Chinese?"
+            ],
+            "correctAnswer": [
+                "Shu"
+            ],
+            "wrongAnswer": [
+                "Rat",
+                "Tar",
+                "Mai"
+            ]
+        }
     ],
     "geography": [
         {
@@ -331,6 +487,45 @@
                 "Croatia",
                 "Belgium",
                 "Monaco"
+            ]
+        },
+        {
+            "question": [
+                "Which country is not connected to Namibia on the map?"
+            ],
+            "correctAnswer": [
+                "Zimbabwe"
+            ],
+            "wrongAnswer": [
+                "Botswana",
+                "South Africa",
+                "Angola"
+            ]
+        },
+        {
+            "question": [
+                "How many time zones does Russia cover?"
+            ],
+            "correctAnswer": [
+                "11"
+            ],
+            "wrongAnswer": [
+                "9",
+                "14",
+                "7"
+            ]
+        },
+        {
+            "question": [
+                "What’s the flattest country on the planet?"
+            ],
+            "correctAnswer": [
+                "The Maldives"
+            ],
+            "wrongAnswer": [
+                "Vatican City",
+                "Nauru",
+                "Tuvalu"
             ]
         },
     ],
