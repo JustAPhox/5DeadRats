@@ -855,6 +855,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""PauseSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed12e198-a1a7-4f6d-862f-5224ac34bb5d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""4eba7e95-b3f5-4fec-ba4c-c1bf2bfa1148"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ceb3ef8-1707-4db8-94ca-2e4d52d7bcbd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""7dc68073-4063-486c-8bc4-137c3ae47235"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""ec531dbf-49ee-463c-bc2b-caede04212bd"",
@@ -1030,6 +1066,116 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5b44ae55-18d0-44ca-af2e-930a18323e74"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b0b9531-4639-4274-8ead-c00f27191b10"",
+                    ""path"": ""<SwitchProControllerHID>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""301b2f94-7e8d-42bd-9ad9-aee41383aa32"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""598bb219-feed-47f5-928d-7e19fba0ce63"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""422ff596-f81a-4b86-9774-f472673da2e7"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af16348c-a7ed-4ee6-89c1-6b0c1ea85f83"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0469b786-118d-4660-b186-bcaa0c0584ef"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ebaaa91-80bd-4ebf-9f28-ec94366ac11a"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c4424b0-96f3-492c-8656-f40a424d49d5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b6bf32d-5201-45cd-8a36-3d371308c540"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""cefffe71-893f-4246-9dcd-9329181c9851"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -1101,6 +1247,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Maze
         m_Maze = asset.FindActionMap("Maze", throwIfNotFound: true);
         m_Maze_Move = m_Maze.FindAction("Move", throwIfNotFound: true);
+        m_Maze_PauseSelect = m_Maze.FindAction("PauseSelect", throwIfNotFound: true);
+        m_Maze_PauseDown = m_Maze.FindAction("PauseDown", throwIfNotFound: true);
+        m_Maze_PauseUp = m_Maze.FindAction("PauseUp", throwIfNotFound: true);
+        m_Maze_Pause = m_Maze.FindAction("Pause", throwIfNotFound: true);
         m_Maze_Attack = m_Maze.FindAction("Attack", throwIfNotFound: true);
         m_Maze_Active = m_Maze.FindAction("Active", throwIfNotFound: true);
     }
@@ -1607,6 +1757,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Maze;
     private List<IMazeActions> m_MazeActionsCallbackInterfaces = new List<IMazeActions>();
     private readonly InputAction m_Maze_Move;
+    private readonly InputAction m_Maze_PauseSelect;
+    private readonly InputAction m_Maze_PauseDown;
+    private readonly InputAction m_Maze_PauseUp;
+    private readonly InputAction m_Maze_Pause;
     private readonly InputAction m_Maze_Attack;
     private readonly InputAction m_Maze_Active;
     /// <summary>
@@ -1624,6 +1778,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Maze/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Maze_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/PauseSelect".
+        /// </summary>
+        public InputAction @PauseSelect => m_Wrapper.m_Maze_PauseSelect;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/PauseDown".
+        /// </summary>
+        public InputAction @PauseDown => m_Wrapper.m_Maze_PauseDown;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/PauseUp".
+        /// </summary>
+        public InputAction @PauseUp => m_Wrapper.m_Maze_PauseUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Maze/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Maze_Pause;
         /// <summary>
         /// Provides access to the underlying input action "Maze/Attack".
         /// </summary>
@@ -1661,6 +1831,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @PauseSelect.started += instance.OnPauseSelect;
+            @PauseSelect.performed += instance.OnPauseSelect;
+            @PauseSelect.canceled += instance.OnPauseSelect;
+            @PauseDown.started += instance.OnPauseDown;
+            @PauseDown.performed += instance.OnPauseDown;
+            @PauseDown.canceled += instance.OnPauseDown;
+            @PauseUp.started += instance.OnPauseUp;
+            @PauseUp.performed += instance.OnPauseUp;
+            @PauseUp.canceled += instance.OnPauseUp;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -1681,6 +1863,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @PauseSelect.started -= instance.OnPauseSelect;
+            @PauseSelect.performed -= instance.OnPauseSelect;
+            @PauseSelect.canceled -= instance.OnPauseSelect;
+            @PauseDown.started -= instance.OnPauseDown;
+            @PauseDown.performed -= instance.OnPauseDown;
+            @PauseDown.canceled -= instance.OnPauseDown;
+            @PauseUp.started -= instance.OnPauseUp;
+            @PauseUp.performed -= instance.OnPauseUp;
+            @PauseUp.canceled -= instance.OnPauseUp;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -1863,6 +2057,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseSelect" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

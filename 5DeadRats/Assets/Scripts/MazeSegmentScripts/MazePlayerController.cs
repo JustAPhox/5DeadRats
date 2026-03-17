@@ -75,6 +75,8 @@ public class MazePlayerController : MonoBehaviour
     public GameObject Explosion_UI;
     public Vector2 Zero_Zero;
 
+    public GameObject Pause_Menu;
+
 
     RaycastHit2D[] Hit_Buffer = new RaycastHit2D[16];// this is the number things that can be hit by the attack raycast in 1 attack
 
@@ -209,17 +211,43 @@ public class MazePlayerController : MonoBehaviour
 
     private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
     {
-        if(context.action.name == controls.Maze.Attack.name)
+        if(context.action.actionMap.name != "Maze") { return; }
+        
+        if(context.action.name == controls.Maze.Pause.name)
         {
-            OnAttack(context);
+            Pause_Menu.GetComponent<PauseLogic>().TogglePause();
         }
-        else if (context.action.name == controls.Maze.Move.name)
+
+        if (Time.timeScale == 0)
         {
-            OnMove(context);
+            if(context.action.name == controls.Maze.PauseSelect.name)
+            {
+                Pause_Menu.GetComponent<PauseLogic>().selectSelection();
+            }
+            else if (context.action.name == controls.Maze.PauseUp.name)
+            {
+                Pause_Menu.GetComponent<PauseLogic>().changeSelection();
+            }
+            else if (context.action.name == controls.Maze.PauseDown.name)
+            {
+                Pause_Menu.GetComponent<PauseLogic>().changeSelection();
+            }
         }
-        else if(context.action.name == controls.Maze.Active.name)
+
+        else
         {
-            OnActive(context);
+            if (context.action.name == controls.Maze.Attack.name)
+            {
+                OnAttack(context);
+            }
+            else if (context.action.name == controls.Maze.Move.name)
+            {
+                OnMove(context);
+            }
+            else if (context.action.name == controls.Maze.Active.name)
+            {
+                OnActive(context);
+            }
         }
     }
 
