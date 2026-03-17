@@ -25,7 +25,8 @@ public class QuizScript : MonoBehaviour
     private float timerEndTime;
     private bool timerStarted = false;
 
-
+    [SerializeField]
+    private GameObject pauseMenu;
 
     // Used for inputting actions without a controller
     [SerializeField]
@@ -187,6 +188,20 @@ public class QuizScript : MonoBehaviour
     {
         timerText.SetText($"00:00");
         timerStarted = false;
+    }
+
+
+    public void togglePause()
+    {
+        pauseMenu.GetComponent<PauseLogic>().TogglePause();
+    }    
+    public void pauseSelect()
+    {
+        pauseMenu.GetComponent<PauseLogic>().selectSelection();
+    }    
+    public void pauseChange()
+    {
+        pauseMenu.GetComponent<PauseLogic>().changeSelection();
     }
 
 

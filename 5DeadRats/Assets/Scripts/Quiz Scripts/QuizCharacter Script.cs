@@ -102,30 +102,55 @@ public class QuizCharacterScript : MonoBehaviour
     // [IMPORTANT] Triggers whenever this player does an action.
     private void PlayerInput_onActionTriggered(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (obj.action.actionMap.name != "Quiz") { return; }
+
         // Checks if the action was specifically performed (and not one of 2 other stages that can also fire and mess things up. Def needed for things you want triggered once. Don't know about movement.)
         if (obj.performed)
         {
-            // Checks if action performed is the same as a cirtain action and if so does that function.
-            if (obj.action.name == controls.Quiz.Answer1.name)
+            if (obj.action.name == controls.Quiz.Pause.name)
             {
-                questionAnswered(1);
+                QuizMaster.GetComponent<QuizScript>().togglePause();
             }
-            else if (obj.action.name == controls.Quiz.Answer2.name)
+
+            if (Time.timeScale == 0)
             {
-                questionAnswered(2);
+                if (obj.action.name == controls.Quiz.PauseSelect.name)
+                {
+                    QuizMaster.GetComponent<QuizScript>().pauseSelect();
+                }
+                else if (obj.action.name == controls.Quiz.PauseUp.name)
+                {
+                    QuizMaster.GetComponent<QuizScript>().pauseChange();
+                }
+                else if (obj.action.name == controls.Quiz.PauseDown.name)
+                {
+                    QuizMaster.GetComponent<QuizScript>().pauseChange();
+                }
             }
-            else if (obj.action.name == controls.Quiz.Answer3.name)
+            else
             {
-                questionAnswered(3);
+                // Checks if action performed is the same as a cirtain action and if so does that function.
+                if (obj.action.name == controls.Quiz.Answer1.name)
+                {
+                    questionAnswered(1);
+                }
+                else if (obj.action.name == controls.Quiz.Answer2.name)
+                {
+                    questionAnswered(2);
+                }
+                else if (obj.action.name == controls.Quiz.Answer3.name)
+                {
+                    questionAnswered(3);
+                }
+                else if (obj.action.name == controls.Quiz.Answer4.name)
+                {
+                    questionAnswered(4);
+                }
             }
-            else if (obj.action.name == controls.Quiz.Answer4.name)
-            {
-                questionAnswered(4);
-            }
+
+          
         }
     }
-
-
 
 
 
