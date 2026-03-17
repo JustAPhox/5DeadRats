@@ -3280,9 +3280,9 @@ MonoBehaviour:
   Base_Dammage: 1
   Flash_Colour: {r: 8.47419, g: 0, b: 0.08873497, a: 1}
   Flash_Swap_Colour: {r: 8.474191, g: 8.474191, b: 8.474191, a: 1}
-  Ruby_Colour: {r: 0.93792105, g: 0, b: 1, a: 0}
+  Ruby_Colour: {r: 0.5557163, g: 0, b: 0.93962264, a: 0}
   Pablo_Colour: {r: 0.31495833, g: 0.6666667, b: 0, a: 0}
-  Winona_Colour: {r: 1, g: 0.4509434, b: 0.69803923, a: 0}
+  Winona_Colour: {r: 1, g: 0.6320754, b: 0.79812986, a: 0}
   John_Colour: {r: 0, g: 0.45180893, b: 1, a: 0}
   Steven_Colour: {r: 1, g: 0.5704299, b: 0, a: 0}
   Flash_Heal_Colour: {r: 0, g: 11.313708, b: 0, a: 1}
@@ -3310,6 +3310,7 @@ MonoBehaviour:
   Is_Dammage_Buffed: 0
   Crit_Chance: 0
   Explosion_UI: {fileID: 1919590571502291617, guid: ce6a7d95fc76e614da217968970ec97d, type: 3}
+  Zero_Zero: {x: 0, y: 0}
 --- !u!58 &1305701098349594098
 CircleCollider2D:
   m_ObjectHideFlags: 0
