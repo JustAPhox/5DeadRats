@@ -22,6 +22,9 @@ public class ItemLogic : MonoBehaviour
     private GameObject itemSpace;
 
     [SerializeField]
+    private GameObject pauseMenu;
+
+    [SerializeField]
     private TextMeshProUGUI currentPlayerText;
 
     private PlayerConfig[] playerConfigs;
@@ -116,6 +119,21 @@ public class ItemLogic : MonoBehaviour
 
         currentPlayerText.SetText($"{PlayerConfigManager.instance.GetPlayerCharacterName(playerConfigs[playerOrder[0]].playerCharacter)} choose your item.");
     }
+
+
+    public void togglePause()
+    {
+        pauseMenu.GetComponent<PauseLogic>().TogglePause();
+    }
+    public void pauseSelect()
+    {
+        pauseMenu.GetComponent<PauseLogic>().selectSelection();
+    }
+    public void pauseChange()
+    {
+        pauseMenu.GetComponent<PauseLogic>().changeSelection();
+    }
+
 
     private void SetUpItems()
     {
