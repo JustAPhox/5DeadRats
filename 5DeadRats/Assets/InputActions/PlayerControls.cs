@@ -415,6 +415,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4932a2ff-acb8-4b70-a7ec-c12696de8655"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""9921a2bb-7714-4235-9a89-c72d50f1e1a7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""45c707c9-a16f-4d6a-8688-cd742f6f3133"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -448,6 +475,72 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""BuyItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""516070a4-f43b-4198-b1d3-cf919b2a0a7b"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56b7e295-a35f-4820-a1f8-eb98c70d7cdf"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0df1435-79c0-417d-acb3-509d40f59c8a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85b0980c-5085-4aa5-92e7-4e14d58b9411"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""100ef5e1-55c1-4cee-a471-41ffc2a58453"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa516389-a920-4dcb-9373-a5af3ac2a978"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1088,6 +1181,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Items_BuyItem = m_Items.FindAction("BuyItem", throwIfNotFound: true);
         m_Items_ItemLeft = m_Items.FindAction("ItemLeft", throwIfNotFound: true);
         m_Items_ItemRight = m_Items.FindAction("ItemRight", throwIfNotFound: true);
+        m_Items_Pause = m_Items.FindAction("Pause", throwIfNotFound: true);
+        m_Items_PauseUp = m_Items.FindAction("PauseUp", throwIfNotFound: true);
+        m_Items_PauseDown = m_Items.FindAction("PauseDown", throwIfNotFound: true);
         // Quiz
         m_Quiz = asset.FindActionMap("Quiz", throwIfNotFound: true);
         m_Quiz_Answer1 = m_Quiz.FindAction("Answer 1", throwIfNotFound: true);
@@ -1318,6 +1414,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Items_BuyItem;
     private readonly InputAction m_Items_ItemLeft;
     private readonly InputAction m_Items_ItemRight;
+    private readonly InputAction m_Items_Pause;
+    private readonly InputAction m_Items_PauseUp;
+    private readonly InputAction m_Items_PauseDown;
     /// <summary>
     /// Provides access to input actions defined in input action map "Items".
     /// </summary>
@@ -1341,6 +1440,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Items/ItemRight".
         /// </summary>
         public InputAction @ItemRight => m_Wrapper.m_Items_ItemRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Items/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Items_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Items/PauseUp".
+        /// </summary>
+        public InputAction @PauseUp => m_Wrapper.m_Items_PauseUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Items/PauseDown".
+        /// </summary>
+        public InputAction @PauseDown => m_Wrapper.m_Items_PauseDown;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1376,6 +1487,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ItemRight.started += instance.OnItemRight;
             @ItemRight.performed += instance.OnItemRight;
             @ItemRight.canceled += instance.OnItemRight;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @PauseUp.started += instance.OnPauseUp;
+            @PauseUp.performed += instance.OnPauseUp;
+            @PauseUp.canceled += instance.OnPauseUp;
+            @PauseDown.started += instance.OnPauseDown;
+            @PauseDown.performed += instance.OnPauseDown;
+            @PauseDown.canceled += instance.OnPauseDown;
         }
 
         /// <summary>
@@ -1396,6 +1516,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ItemRight.started -= instance.OnItemRight;
             @ItemRight.performed -= instance.OnItemRight;
             @ItemRight.canceled -= instance.OnItemRight;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @PauseUp.started -= instance.OnPauseUp;
+            @PauseUp.performed -= instance.OnPauseUp;
+            @PauseUp.canceled -= instance.OnPauseUp;
+            @PauseDown.started -= instance.OnPauseDown;
+            @PauseDown.performed -= instance.OnPauseDown;
+            @PauseDown.canceled -= instance.OnPauseDown;
         }
 
         /// <summary>
@@ -1784,6 +1913,27 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnItemRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseDown(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Quiz" which allows adding and removing callbacks.
