@@ -3259,7 +3259,8 @@ MonoBehaviour:
   menuCamera: {fileID: 260475390}
   menuAudioListener: {fileID: 260475389}
   debugMode: {fileID: 327962438}
-  startButton: {fileID: 64517323}
+  startButton: {fileID: 64517321}
+  exitButton: {fileID: 1840353067}
 --- !u!4 &2134601339
 Transform:
   m_ObjectHideFlags: 0

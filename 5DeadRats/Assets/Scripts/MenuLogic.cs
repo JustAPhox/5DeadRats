@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,11 +27,23 @@ public class MenuLogic : MonoBehaviour
     private Toggle debugMode;
 
     [SerializeField]
-    private Button startButton;
+    private GameObject startButton;
+
+    [SerializeField]
+    private GameObject exitButton;
 
     private void Start()
     {
-        startButton.Select();
+        startButton.GetComponent<Button>().Select();
+    }
+
+
+    private void Update()
+    {
+        if(EventSystem.current.currentSelectedGameObject != startButton  && EventSystem.current.currentSelectedGameObject != exitButton)
+        {
+            startButton.GetComponent<Button>().Select();
+        }
     }
 
 
