@@ -16,7 +16,11 @@ public class PauseLogic : MonoBehaviour
     [SerializeField]
     private Image[] buttons;
 
+    [SerializeField]
+    private Sprite[] selectedButtons;
 
+    [SerializeField]
+    private Sprite[] unselectedButtons;
 
     void Start()
     {
@@ -36,7 +40,7 @@ public class PauseLogic : MonoBehaviour
         {
             Time.timeScale = 1;
             
-            buttons[selection].color = Color.white;
+            buttons[selection].sprite = unselectedButtons[selection];
 
 
             backing.SetActive(false);
@@ -46,7 +50,7 @@ public class PauseLogic : MonoBehaviour
             Time.timeScale = 0;
 
 
-            buttons[selection].color = Color.red;
+            buttons[selection].sprite = selectedButtons[selection];
             selection = 0;
 
             backing.SetActive(true);
@@ -56,7 +60,7 @@ public class PauseLogic : MonoBehaviour
 
     public void changeSelection()
     {
-        buttons[selection].color = Color.white;
+        buttons[selection].sprite = unselectedButtons[selection];
 
 
         if (selection == 0)
@@ -68,7 +72,8 @@ public class PauseLogic : MonoBehaviour
             selection = 0;
         }
 
-        buttons[selection].color = Color.red;
+        buttons[selection].sprite = selectedButtons[selection];
+
 
     }
 
