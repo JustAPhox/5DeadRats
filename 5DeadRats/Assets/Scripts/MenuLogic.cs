@@ -25,6 +25,14 @@ public class MenuLogic : MonoBehaviour
     [SerializeField]
     private Toggle debugMode;
 
+    [SerializeField]
+    private Button startButton;
+
+    private void Start()
+    {
+        startButton.Select();
+    }
+
 
     public void startGame()
     {

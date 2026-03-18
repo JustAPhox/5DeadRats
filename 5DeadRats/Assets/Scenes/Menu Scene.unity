@@ -425,12 +425,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1840353069}
+    m_SelectOnRight: {fileID: 1840353069}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -441,9 +441,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 549f4c7355875274d81544bfcd4bc409, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: bed3db0c1ddf4774e9a710ce27abb5af, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: bed3db0c1ddf4774e9a710ce27abb5af, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 549f4c7355875274d81544bfcd4bc409, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: bed3db0c1ddf4774e9a710ce27abb5af, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -780,7 +780,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.77949995, y: 0.5}
   m_AnchorMax: {x: 0.99060416, y: 0.551}
-  m_AnchoredPosition: {x: 1.3400269, y: -1.5499992}
+  m_AnchoredPosition: {x: 1.3400879, y: -1.5499992}
   m_SizeDelta: {x: 9.2039795, y: -3.0994987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &327962438
@@ -1380,7 +1380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.79725, y: 0.27774072}
   m_AnchorMax: {x: 0.96429163, y: 0.36114815}
-  m_AnchoredPosition: {x: 8.840027, y: -3}
+  m_AnchoredPosition: {x: 8.840088, y: -3}
   m_SizeDelta: {x: -12.598022, y: -26.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &737179603
@@ -2764,7 +2764,7 @@ GameObject:
   - component: {fileID: 1840353070}
   - component: {fileID: 1840353069}
   m_Layer: 5
-  m_Name: Start Game Button (1)
+  m_Name: Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2802,12 +2802,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 64517323}
+    m_SelectOnRight: {fileID: 64517323}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2818,9 +2818,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 48b795baea34cef44ace08eed2f55e19, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 266af06725fcb0b49a00644730bb1272, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 266af06725fcb0b49a00644730bb1272, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 48b795baea34cef44ace08eed2f55e19, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 266af06725fcb0b49a00644730bb1272, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3158,7 +3158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
-  m_AllowJoining: 0
+  m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
@@ -3259,6 +3259,7 @@ MonoBehaviour:
   menuCamera: {fileID: 260475390}
   menuAudioListener: {fileID: 260475389}
   debugMode: {fileID: 327962438}
+  startButton: {fileID: 64517323}
 --- !u!4 &2134601339
 Transform:
   m_ObjectHideFlags: 0
