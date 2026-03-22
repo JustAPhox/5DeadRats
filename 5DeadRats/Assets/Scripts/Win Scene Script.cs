@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinSceneScript : MonoBehaviour
 {
@@ -62,11 +63,18 @@ public class WinSceneScript : MonoBehaviour
             RectTransform Rect = Winner_Icon.GetComponent<RectTransform>();
             Rect.anchoredPosition = Placement_Position;
         }
+
+        Call_The_End_Times();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Call_The_End_Times()
     {
-        
+        StartCoroutine(The_End_Times());
+    }
+
+    private IEnumerator The_End_Times()
+    {
+        yield return new WaitForSeconds(15);
+        SceneManager.LoadScene("Menu Scene", LoadSceneMode.Single);
     }
 }

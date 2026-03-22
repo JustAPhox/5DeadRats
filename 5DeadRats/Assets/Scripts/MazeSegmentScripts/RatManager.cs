@@ -16,6 +16,8 @@ public class RatManager : MonoBehaviour
     private Transform Spawn_Location;
 
     private List<Transform> Selected_Spawn_Points = new List<Transform>();
+    [SerializeField]
+    private GameObject Pause_Menu;
     
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,7 @@ public class RatManager : MonoBehaviour
                 Spawn_Location.rotation
             );
 
+            player.GetComponent<MazePlayerController>().Pause_Menu = Pause_Menu;
             player.GetComponent<MazePlayerController>().intitialisePlayer(PlayerConfigs[i]);
 
             Player_Objects[i] = player;
